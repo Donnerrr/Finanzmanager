@@ -1,7 +1,7 @@
 let currentPersonId = null; // Globale Variable, um die aktuelle Person zu speichern
 let currentPersonName = null; // Globale Variable, um den aktuellen Personennamen zu speichern
 let currentDebtId = null; // Globale Variable, um die aktuelle Schuld zu speichern
-const API_BASE = "https://finanzen.pottanker.de";
+const API_BASE = "https://api.pottanker.de";
 
 /* ==========================================================================
    1. NAVIGATION (ANSICHTEN UMSCHALTEN)
@@ -58,7 +58,7 @@ async function loadPersonsFromDB() {
     container.innerHTML = '<div class="loading">Lade Personen...</div>'; // Korrigiert: "<" ergänzt
 
     try {
-        const response = await fetch('${API_BASE}/api/Schuldenbuch/Person');
+        const response = await fetch(${API_BASE}/api/Schuldenbuch/Person');
         
         if (!response.ok) {
             throw new Error(`Server-Fehler: ${response.status} ${response.statusText}`);
