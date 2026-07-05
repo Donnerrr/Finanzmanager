@@ -1,6 +1,7 @@
 let currentPersonId = null; // Globale Variable, um die aktuelle Person zu speichern
 let currentPersonName = null; // Globale Variable, um den aktuellen Personennamen zu speichern
 let currentDebtId = null; // Globale Variable, um die aktuelle Schuld zu speichern
+const API_BASE = "https://finanzen.pottanker.de";
 
 /* ==========================================================================
    1. NAVIGATION (ANSICHTEN UMSCHALTEN)
@@ -57,7 +58,7 @@ async function loadPersonsFromDB() {
     container.innerHTML = '<div class="loading">Lade Personen...</div>'; // Korrigiert: "<" ergänzt
 
     try {
-        const response = await fetch('/api/Schuldenbuch/Person');
+        const response = await fetch('${API_BASE}/api/Schuldenbuch/Person');
         
         if (!response.ok) {
             throw new Error(`Server-Fehler: ${response.status} ${response.statusText}`);
@@ -108,7 +109,7 @@ async function loadPersonDetails(personId) {
     container.innerHTML = '<div class="loading">Lade Schulden...</div>';
 
     try {
-        const response = await fetch(`/api/Schuldenbuch/Person/${personId}`);
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Person/${personId}`);
         
         if (!response.ok) {
             throw new Error(`Server-Fehler: ${response.status}`);
@@ -197,7 +198,7 @@ async function savePerson(event) {
     };
     
     try {
-        const response = await fetch('/api/Schuldenbuch/Person', {
+        const response = await fetch('${API_BASE}/api/Schuldenbuch/Person', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -239,7 +240,7 @@ async function saveEntry(event) {
     console.log("Sende Payload an API:", JSON.stringify(entryData));
 
     try {
-        const response = await fetch('/api/Schuldenbuch/Debt', {
+        const response = await fetch('${API_BASE}/api/Schuldenbuch/Debt', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -287,7 +288,7 @@ function formatCurrency(amount) {
 async function deleteDebt(debtId) {
     if (confirm("Sind Sie sicher, dass Sie diese Schuld löschen möchten?")) {
         
-        const response = await fetch(`/api/Schuldenbuch/Debt/${debtId}`, {
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Debt/${debtId}`, {
             method: 'DELETE'
         });
 
@@ -308,7 +309,7 @@ async function deletePerson(event, personId) {
     event.stopPropagation(); // Verhindert das Auslösen des onclick-Events der Kachel
     if (confirm("Sind Sie sicher, dass Sie diese Person löschen möchten?")) {
 
-        const response = await fetch(`/api/Schuldenbuch/Person/${personId}`, {
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Person/${personId}`, {
             method: 'DELETE'
         });
 
@@ -343,7 +344,7 @@ async function updateDebt(event) {
 
 
     try {
-        const response = await fetch(`/api/Schuldenbuch/Debt/${debtId}`, {
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Debt/${debtId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
