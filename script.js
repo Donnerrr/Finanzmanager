@@ -58,9 +58,9 @@ async function loadPersonsFromDB() {
     container.innerHTML = '<div class="loading">Lade Personen...</div>'; // Korrigiert: "<" ergänzt
 
     try {
-        const response = await fetch(${API_BASE}/api/Schuldenbuch/Person');
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Person`);
         
-        if (!response.ok) {
+      if (!response.ok) {
             throw new Error(`Server-Fehler: ${response.status} ${response.statusText}`);
         }
 
@@ -198,7 +198,7 @@ async function savePerson(event) {
     };
     
     try {
-        const response = await fetch('${API_BASE}/api/Schuldenbuch/Person', {
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Person`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -240,7 +240,7 @@ async function saveEntry(event) {
     console.log("Sende Payload an API:", JSON.stringify(entryData));
 
     try {
-        const response = await fetch('${API_BASE}/api/Schuldenbuch/Debt', {
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Debt`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
