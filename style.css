@@ -132,6 +132,7 @@ h1 {
 
 .app {
     width: 100%;
+    max-width: 260px;
     margin: 0 auto;
     background-color: var(--card-bg);
     border: 2px solid var(--border-color);
