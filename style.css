@@ -42,7 +42,7 @@ body {
     margin-bottom: 35px;
 }
 
-.home-logo {
+.home-logo :hover {
    transform: translateY(-6px);
     box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
     border-color: var(--accent-gold);
