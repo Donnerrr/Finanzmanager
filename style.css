@@ -93,7 +93,9 @@ h1 {
 
 /* Buttons im Header */
 .view-header .btn-primary {
-    width: 160px;
+    min-width: 140px;
+    width: 100%;
+    max-width: 160px;
     height: 45px;
     flex-shrink: 0;
     justify-self: center;
@@ -101,7 +103,9 @@ h1 {
 
 /* Placeholder für Zentrierung */
 .view-header .header-placeholder {
-    width: 160px;
+    min-width: 140px;
+    width: 100%;
+    max-width: 160px;
 }
 
 /* ==========================================================================
@@ -267,9 +271,7 @@ h1 {
 
     .view-header {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-        gap: 12px;
-        text-align: center;
+        border-bottom: none;
     }
 
     .view-header h3 {
