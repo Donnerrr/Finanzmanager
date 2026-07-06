@@ -43,7 +43,7 @@ body {
    2. HEADER & TYPOGRAFIE
    ========================================================================== */
 h1 {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     color: var(--accent-gold);
     font-weight: 300;
     text-align: center;
@@ -79,7 +79,7 @@ h1 {
 }
 
 .view-header h3 {
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 4vw, 2rem);
     color: var(--accent-gold);
     font-weight: 400;
 }
@@ -275,23 +275,21 @@ h1 {
 @media (max-width: 768px){
     .view-header {
         flex-direction: column;
-        text-align: center;
+        align-items: center;
         gap: 12px;
-        padding-bottom: 20px;
+    }
+
+    .view-header .btn-primary {
+        width: 100%;
+        max-width: 280px;
+        display: block;
     }
 
     .view-header .header-placeholder {
         display: none; /* Platzhalter auf kleineren Bildschirmen ausblenden */
     }
 
-    .view.header .btn-primary {
-        width: 100%; /* Buttons auf kleineren Bildschirmen volle Breite */
-        max-width: 280px; /* Optional: Begrenzung der maximalen Breite */
-        margin: 0 auto; /* Zentriert die Buttons */
-    }
+    
 
-    .view-header h3 {
-        font-size: clamp(0.75rem, 4vw, 2rem); /* Dynamische Schriftgröße zwischen 22px und 32px */
-        margin: 5px 0; /* Etwas Abstand nach oben und unten */
-    }
+    
 }
