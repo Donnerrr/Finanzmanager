@@ -85,11 +85,13 @@ h1 {
 }
 
 /* Logos/Navigations-Bilder im Header */
-.view-header btn-primary {
+.view-header .btn-primary {
     height: 45px;
-    width: 160px;
+    width: auto;
+    max-width: 160px;
     cursor: pointer;
     transition: transform 0.2s;
+    box-sizing: border-box;
 }
 
 .view-header img:hover {
