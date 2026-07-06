@@ -87,11 +87,15 @@ h1 {
 /* Logos/Navigations-Bilder im Header */
 .view-header .btn-primary {
     height: 45px;
-    width: auto;
-    max-width: 160px;
-    cursor: pointer;
+    width: 160px;
+    flex-shrink: 0; /* Verhindert, dass die Buttons schrumpfen */
     transition: transform 0.2s;
     box-sizing: border-box;
+}
+
+.view-header .header-placeholder {
+    width: 160px; /* Gleiche Breite wie die Buttons, um die Überschrift zu zentrieren */
+    flex-shrink: 0; /* Verhindert, dass der Platzhalter schrumpft */
 }
 
 .view-header img:hover {
