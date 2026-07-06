@@ -76,13 +76,12 @@ h1 {
 
 .view-header {
     display: grid;
-    grid-template-columns: auto 1fr auto; /* Safari-fix */
+    grid-template-columns: 160px 1fr 160px;
     align-items: center;
     width: 100%;
     margin-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 15px;
-    min-width: 0; /* verhindert Safari-Zoom */
 }
 
 .view-header h3 {
@@ -93,14 +92,20 @@ h1 {
 }
 
 /* Buttons im Header */
-.view-header .btn-primary,
+.view-header .btn-primary {
+    min-width: 140px;
+    width: 100%;
+    max-width: 160px;
+    height: 45px;
+    flex-shrink: 0;
+    justify-self: center;
+}
+
+/* Placeholder für Zentrierung */
 .view-header .header-placeholder {
     min-width: 140px;
-    max-width: 160px;
     width: 100%;
-    height: 45px;
-    justify-self: center;
-    flex-shrink: 1; /* Safari erlaubt Schrumpfen */
+    max-width: 160px;
 }
 
 /* ==========================================================================
@@ -114,12 +119,11 @@ h1 {
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Safari-fix */
-    width: 100%;
+    /*display: grid;*/
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /*width: 100%;
     gap: 10px;
-    justify-content: center;
-    min-width: 0; /* Safari-fix */
+    justify-content: center;*/
 }
 
 /* ==========================================================================
@@ -271,6 +275,7 @@ h1 {
         gap: 10px;
     }
 
+    /* Reihenfolge für mobile Ansicht */
     .view-header h3 {
         order: 1;
     }
@@ -282,7 +287,7 @@ h1 {
     }
 
     .view-header button:first-child {
-        order: 3;
+        order: 3; /* Zurück-Button */
     }
 
     .view-header .btn-primary {
