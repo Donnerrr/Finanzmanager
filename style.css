@@ -120,7 +120,7 @@ h1 {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 260px));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 400px));
     width: 100%;
     gap: 10px;
     justify-content: center;
