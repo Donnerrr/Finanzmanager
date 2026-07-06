@@ -42,11 +42,12 @@ body {
     margin-bottom: 35px;
 }
 
-.home-logo :hover {
-   transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
-    border-color: var(--accent-gold);
+.home-logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 15px var(--accent-gold));
+    transition: all 0.3s ease;
 }
+
 
 /* ==========================================================================
    HEADER
