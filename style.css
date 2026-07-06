@@ -85,9 +85,9 @@ h1 {
 }
 
 /* Logos/Navigations-Bilder im Header */
-.view-header img {
+.view-header btn-primary {
     height: 45px;
-    width: auto;
+    width: 160px;
     cursor: pointer;
     transition: transform 0.2s;
 }

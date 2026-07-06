@@ -31,7 +31,7 @@
 
     <section id="SchuldenSection" class="app-container  hidden">
         <div class="view-header">
-            <img src="bilder/applogo.png" onclick="openDashboard()" alt="Logo mit Link zur Startseite">
+            <div class="btn-primary"></div>
             <h3>Schuldenbuch</h3>
             <button class="btn-primary" id="add-person-btn" type="button" onclick="openModal('AddPersonModal')">Person hinzufügen</button>
         </div>
@@ -45,10 +45,9 @@
     <section id="SchuldenDetailSection" class="app-container  hidden">
         <div class="view-header">
             
-            <img src="bilder/applogo.png" onclick="openDashboard()" alt="Direkt zum Dashboard">
+            <button class="btn-primary" onclick="openDebts()">&larr; Zurück</button>
             <h3 id="CurrentPersonName">Schulden von ...</h3>
             <button class="btn-primary" id="add-entry-btn" type="button" onclick="openModal('AddEntryModal')">Schuld hinzufügen</button>
-            <button class="btn-primary" onclick="openDebts()">&larr; Zurück</button>
         </div>
 
         <div id="Personen-Schulden-Container" class="grid">
@@ -59,7 +58,7 @@
 
     <section id="FinanzSection" class="app-container grid hidden">
         <div class="view-header">
-            <img src="bilder/applogo.png" onclick="openDashboard()" alt="Logo mit Link zu den Finanzen">
+            <div class="btn-primary"></div>
             <h3>Finanzen</h3>
             <button class="btn-primary" id="add-finance-btn" type="submit">Schuld hinzufügen</button>
         </div>
