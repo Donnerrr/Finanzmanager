@@ -274,8 +274,19 @@ h1 {
         border-bottom: none;
     }
 
+    /* Reihenfolge für mobile Ansicht */
     .view-header h3 {
         order: 1;
+    }
+
+    #add-entry-btn,
+    #add-person-btn,
+    #add-finance-btn {
+        order: 2;
+    }
+
+    .view-header button:first-child {
+        order: 3; /* Zurück-Button */
     }
 
     .view-header .btn-primary {
