@@ -272,6 +272,7 @@ h1 {
     .view-header {
         grid-template-columns: 1fr;
         border-bottom: none;
+        gap: 10px;
     }
 
     /* Reihenfolge für mobile Ansicht */
