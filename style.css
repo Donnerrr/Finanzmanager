@@ -119,11 +119,11 @@ h1 {
 }
 
 .grid {
-    display: grid;
+    /*display: grid;*/
     grid-template-columns: repeat(auto-fit, minmax(240px, 250px));
-    width: 100%;
+    /*width: 100%;
     gap: 10px;
-    justify-content: center;
+    justify-content: center;*/
 }
 
 /* ==========================================================================
