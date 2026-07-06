@@ -3,13 +3,7 @@ let currentPersonName = null; // Globale Variable, um den aktuellen Personenname
 let currentDebtId = null; // Globale Variable, um die aktuelle Schuld zu speichern
 const API_BASE = "https://api.pottanker.de";
 
-window.addEventListener('unhandledrejection', event => {
-    console.error('Ungefangener Promise-Fehler:', event.reason);
-    // Das gibt dir in der Konsole meistens den Stacktrace mit Zeilennummer aus
-    if (event.reason && event.reason.stack) {
-        console.error(event.reason.stack);
-    }
-});
+
 
 /* ==========================================================================
    1. NAVIGATION (ANSICHTEN UMSCHALTEN)
