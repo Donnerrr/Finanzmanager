@@ -2,13 +2,13 @@
    1. FARBPALETTE & BASIS-SETUP
    ========================================================================== */
 :root {
-    --bg-color: #0b131a;         /* Sehr dunkles, edles Blau-Grau */
-    --card-bg: #11222c;          /* Dunkles Teal/Grünblau für die Kacheln */
-    --border-color: #1a3a4b;     /* Subtiler bläulicher Rahmen */
-    --text-color: #e0e1dd;       /* Helles Elfenbeinweiß */
-    --accent-gold: #cca43b;      /* Glänzendes Gold aus den Rahmen */
-    --accent-gold-hover: #e0a96d;/* Helleres Gold für Hover-Effekte */
-    --text-muted: #8d99ae;       /* Gedämpftes Grau für Untertitel */
+    --bg-color: #0b131a;
+    --card-bg: #11222c;
+    --border-color: #1a3a4b;
+    --text-color: #e0e1dd;
+    --accent-gold: #cca43b;
+    --accent-gold-hover: #e0a96d;
+    --text-muted: #8d99ae;
 }
 
 .hidden {
@@ -32,22 +32,20 @@ body {
     min-height: 100vh;
 }
 
-/* Das Hauptlogo oben sauber über dem Titel zentrieren */
+/* ==========================================================================
+   LOGO
+   ========================================================================== */
+
 .logo {
     width: 90px;
     height: auto;
     margin-bottom: 35px;
-    /* Absolute Positionierung komplett entfernt! */
 }
 
-.home-logo {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
-    border-color: var(--accent-gold);
-}
 /* ==========================================================================
-   2. HEADER & TYPOGRAFIE
+   HEADER
    ========================================================================== */
+
 h1 {
     font-size: clamp(1.8rem, 5vw, 2.5rem);
     color: var(--accent-gold);
@@ -72,45 +70,48 @@ h1 {
     font-weight: 400;
 }
 
-/* Header-Leiste innerhalb der einzelnen Ansichten (Ebene 2 & 3) */
+/* ==========================================================================
+   VIEW HEADER (DESKTOP GRID + MOBILE STACK)
+   ========================================================================== */
+
 .view-header {
-    grid-column: 1 / -1; /* Streckt die Bar über das gesamte Grid */
-    display: flex;
-    justify-content:space-between;
+    display: grid;
+    grid-template-columns: 160px 1fr 160px;
     align-items: center;
+    width: 100%;
     margin-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 15px;
-    width: 100%;
 }
 
 .view-header h3 {
     font-size: clamp(1.2rem, 4vw, 2rem);
     color: var(--accent-gold);
     font-weight: 400;
+    text-align: center;
 }
 
-/* Logos/Navigations-Bilder im Header */
+/* Buttons im Header */
 .view-header .btn-primary {
+    min-width: 140px;
+    width: 100%;
+    max-width: 160px;
     height: 45px;
-    width: 160px;
-    flex-shrink: 0; /* Verhindert, dass die Buttons schrumpfen */
-    transition: transform 0.2s;
-    box-sizing: border-box;
+    flex-shrink: 0;
+    justify-self: center;
 }
 
+/* Placeholder für Zentrierung */
 .view-header .header-placeholder {
-    width: 160px; /* Gleiche Breite wie die Buttons, um die Überschrift zu zentrieren */
-    flex-shrink: 0; /* Verhindert, dass der Platzhalter schrumpft */
-}
-
-.view-header img:hover {
-    transform: scale(1.05);
+    min-width: 140px;
+    width: 100%;
+    max-width: 160px;
 }
 
 /* ==========================================================================
-   3. CONTAINER & GRIDS
+   CONTAINER & GRID
    ========================================================================== */
+
 .app-container {
     width: 100%;
     max-width: 800px;
@@ -118,41 +119,37 @@ h1 {
 }
 
 .grid {
-    display: grid;
-    /* Erstellt quadratische Kacheln, die sich responsiv anordnen */
-    grid-template-columns: repeat(auto-fit, minmax(240px, 250px));
-    width: 100%;
-    gap: 10px; /* Einheitlicher Abstand zwischen den Kacheln */
-    justify-content: center; /* Zentriert die Kacheln innerhalb des Containers */
+    /*display: grid;*/
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /*width: 100%;
+    gap: 10px;
+    justify-content: center;*/
 }
 
-
-
 /* ==========================================================================
-   4. KACHELN (CARDS / .APP)
+   CARDS
    ========================================================================== */
+
 .app {
     width: 100%;
-    box-sizing: border-box;
-    margin: 0 auto;                 /* Zentriert die Kacheln in der Grid-Zelle */
+    margin: 0 auto;
     background-color: var(--card-bg);
     border: 2px solid var(--border-color);
-    border-radius: 20px;          /* Etwas weichere, modernere Ecken */
+    border-radius: 20px;
     padding: 35px 24px;
     cursor: pointer;
     user-select: none;
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s, border-color 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     display: flex;
     flex-direction: column;
-    align-items: center;          
-    justify-content: center;      /* Inhalt rückt harmonisch ins Zentrum */
-    gap: 20px;                    /* Fester, sauberer Abstand zwischen Text und Bild */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
     text-align: center;
-    min-height: 280px;            /* Etwas mehr Raum zum Atmen */
+    min-height: 280px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Eleganter Hover-Effekt: Kachel hebt sich und glüht leicht gold */
 .app:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
@@ -163,85 +160,81 @@ h1 {
     color: var(--text-color);
     font-size: 1.4rem;
     font-weight: 400;
-    letter-spacing: 0.5px;
 }
 
-/* Die runden App-Logos in den Kacheln optimal zur Geltung bringen */
 .app img {
     max-width: 120px;
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2)); /* Gibt den runden Logos Tiefe */
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
-.btn-primary{
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.btn-primary {
     max-width: 180px;
-    height: auto;
-    
     padding: 10px;
     background-color: var(--card-bg);
     border-radius: 10px;
     color: var(--text-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size:16px;
-    border-color: var(--border-color);
+    font-size: 16px;
+    border: 1px solid var(--border-color);
     cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s, border-color 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
     border-color: var(--accent-gold);
 }
 
-/* 1. Der abgedunkelte Hintergrund (Hintergrundmaske) */
+/* ==========================================================================
+   MODAL
+   ========================================================================== */
+
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Etwas dunkler für besseren Fokus */
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
-    align-items: center;     /* Vertikale Zentrierung */
-    justify-content: center;   /* Horizontale Zentrierung */
-    z-index: 1000;             /* Sicherstellen, dass es über allem liegt */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
 
-/* 2. Das eigentliche Popup-Fenster (Die Card) */
 .modal-content {
-    background-color: var(--card-bg); /* Passend zu deinem dunklen Design */
+    background-color: var(--card-bg);
     color: var(--text-color);
     padding: 30px;
     border-radius: 8px;
     width: 100%;
-    max-width: 500px;          /* Verhindert, dass das Modal zu breit wird */
+    max-width: 500px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--border-color); /* Dezenter Rahmen */
+    border: 1px solid var(--border-color);
 }
 
-/* Überschrift im Modal */
 .modal-content h3 {
-    margin-top: 0;
     margin-bottom: 20px;
     font-size: 1.5rem;
-    color: var(--accent-gold); /* Falls du das Goldgelb aus deinem Header nutzen willst */
+    color: var(--accent-gold);
 }
 
-/* 3. Formular-Layout: Elemente sauber untereinander */
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 12px;                 /* Gleichmäßiger Abstand zwischen den Elementen */
+    gap: 12px;
     margin-bottom: 25px;
 }
 
-/* Styling für die Eingabefelder */
 .form-group label {
     font-weight: bold;
     font-size: 0.9rem;
-    margin-bottom: -4px;       /* Label näher an sein Input-Feld rücken */
     text-align: left;
 }
 
@@ -256,46 +249,55 @@ h1 {
 
 .form-group input:focus {
     outline: none;
-    border-color: var(--accent-gold);     /* Highlight-Farbe bei Klick */
+    border-color: var(--accent-gold);
 }
 
-/* 4. Die Buttons nebeneinander */
 .modal-buttons {
     display: flex;
-    justify-content: flex-end; /* Buttons rechtsbündig anordnen */
+    justify-content: flex-end;
     gap: 10px;
 }
 
-
-
-
 .btn-secondary {
-    background-color: #7f8c8d; /* Neutrales Grau für "Abbrechen" */
+    background-color: #7f8c8d;
     color: white;
 }
 
 /* ==========================================================================
-   5. RESPONSIVE DESIGN
+   RESPONSIVE
    ========================================================================== */
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
+
     .view-header {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
+        grid-template-columns: 1fr;
+        border-bottom: none;
+        gap: 10px;
+    }
+
+    /* Reihenfolge für mobile Ansicht */
+    .view-header h3 {
+        order: 1;
+    }
+
+    #add-entry-btn,
+    #add-person-btn,
+    #add-finance-btn {
+        order: 2;
+    }
+
+    .view-header button:first-child {
+        order: 3; /* Zurück-Button */
     }
 
     .view-header .btn-primary {
         width: 100%;
         max-width: 280px;
-        flex-shrink: 1;
+        height: 45px;
+        justify-self: center;
     }
 
     .view-header .header-placeholder {
-        display: none; /* Platzhalter auf kleineren Bildschirmen ausblenden */
+        display: none;
     }
-
-    
-
-    
 }
