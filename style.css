@@ -282,7 +282,7 @@ h1 {
     .view-header .btn-primary {
         width: 100%;
         max-width: 280px;
-        display: block;
+        flex-shrink: 1;
     }
 
     .view-header .header-placeholder {
