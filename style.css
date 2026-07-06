@@ -290,7 +290,7 @@ h1 {
         margin: 0 auto; /* Zentriert die Buttons */
     }
 
-    view-header h3 {
+    .view-header h3 {
         font-size: clamp(1.375rem, 4vw, 2rem); /* Dynamische Schriftgröße zwischen 22px und 32px */
         margin: 5px 0; /* Etwas Abstand nach oben und unten */
     }
