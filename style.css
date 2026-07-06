@@ -39,6 +39,12 @@ body {
     margin-bottom: 35px;
     /* Absolute Positionierung komplett entfernt! */
 }
+
+.home-logo {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
+    border-color: var(--accent-gold);
+}
 /* ==========================================================================
    2. HEADER & TYPOGRAFIE
    ========================================================================== */
