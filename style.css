@@ -267,3 +267,31 @@ h1 {
     background-color: #7f8c8d; /* Neutrales Grau für "Abbrechen" */
     color: white;
 }
+
+/* ==========================================================================
+   5. RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px){
+    .view-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        padding-bottom: 20px;
+    }
+
+    .view-header .header-placeholder {
+        display: none; /* Platzhalter auf kleineren Bildschirmen ausblenden */
+    }
+
+    .view.header .btn-primary {
+        width: 100%; /* Buttons auf kleineren Bildschirmen volle Breite */
+        max-width: 280px; /* Optional: Begrenzung der maximalen Breite */
+        margin: 0 auto; /* Zentriert die Buttons */
+    }
+
+    view-header h3 {
+        font-size: clamp(1.375rem, 4vw, 2rem); /* Dynamische Schriftgröße zwischen 22px und 32px */
+        margin: 5px 0; /* Etwas Abstand nach oben und unten */
+    }
+}
