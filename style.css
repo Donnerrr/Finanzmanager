@@ -201,6 +201,20 @@ h1 {
     border-color: var(--accent-gold);
 }
 
+.btn-danger {
+    background: transparent;
+    border: 1px solid #e05c5c; /* gedämpftes Rot statt Knallrot */
+    color: #e05c5c;
+}
+.btn-danger:hover {
+    background: rgba(224, 92, 92, 0.1); /* leichter roter Tint beim Hover */
+}
+
+.btn-secondary {
+    background-color: #7f8c8d;
+    color: white;
+}
+
 /* ==========================================================================
    MODAL
    ========================================================================== */
@@ -268,10 +282,7 @@ h1 {
     gap: 10px;
 }
 
-.btn-secondary {
-    background-color: #7f8c8d;
-    color: white;
-}
+
 
 .confirm-modal {
     position: fixed;
