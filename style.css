@@ -207,7 +207,7 @@ h1 {
     padding: 10px;
     border-radius: 10px;
     background: transparent;
-    color: var(--text-danger);
+    color: var(--danger-accent);
 
     font-size: 16px;
     border: 1px solid var(--danger-accent); /* gedämpftes Rot statt Knallrot */
