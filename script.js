@@ -1,6 +1,8 @@
 let currentPersonId = null; // Globale Variable, um die aktuelle Person zu speichern
 let currentPersonName = null; // Globale Variable, um den aktuellen Personennamen zu speichern
 let currentDebtId = null; // Globale Variable, um die aktuelle Schuld zu speichern
+let currentDeletePersonId = null; // Globale Variable, um die aktuelle Person für das Löschen zu speichern
+let currentDeleteDebtId = null; // Globale Variable, um die aktuelle Schuld für das Löschen zu speichern
 const API_BASE = "https://api.pottanker.de";
 
 
@@ -83,7 +85,7 @@ async function loadPersonsFromDB() {
                     <h3>${escapeHtml(person.name)}</h3>
                     
                     <div class="details">${escapeHtml(person.street)}, ${escapeHtml(person.zipCode)} ${escapeHtml(person.city)}</div>
-                    <button class="btn btn-primary" onclick="deletePerson(event, ${person.id})">Löschen</button>
+                    <button class="btn btn-primary" onclick="openDeletePersonModal(event, ${person.id})">Löschen</button>
                 </div>
             `;
             container.insertAdjacentHTML('beforeend', personCard);
@@ -142,7 +144,7 @@ async function loadPersonDetails(personId) {
                     <div class="app">
                         <h3>${formatCurrency(debt.amount)}</h3>
                         <div class="details">${escapeHtml(debt.reason || 'Kein Verwendungszweck')}</div>
-                        <button class="btn btn-primary" onclick="deleteDebt(${debt.id})">Löschen</button>
+                        <button class="btn btn-primary" onclick="openDeleteDebtModal(${debt.id})">Löschen</button>
                         <button class="btn btn-primary" onclick="openUpdateDebtModal(${debt.id}, ${debt.amount})">Bearbeiten</button>
                     </div>
                 `;
@@ -184,6 +186,31 @@ function openModal(modalId) {
 
 function closeModal(modalId) {
     document.getElementById(modalId).classList.add("hidden");
+}
+
+//#endregion
+
+//#region Delete Person Modal öffnen
+function openDeletePersonModal(event, personId) {
+    event.stopPropagation(); // Verhindert das Auslösen des onclick-Events der Kachel
+    currentDeletePersonId = personId; // Speichert die aktuelle Person-ID in der globalen Variable
+    openModal('ConfirmDeletePersonModal');
+}
+//#endregion
+
+//#region Delete Debt Modal öffnen
+function openDeleteDebtModal(debtId) {
+    currentDeleteDebtId = debtId; // Speichert die aktuelle Schuld-ID in der globalen Variable
+    openModal('ConfirmDeleteDebtModal');
+}
+//#endregion
+
+
+//#region Update Debt Modal öffnen
+function openUpdateDebtModal(debtId) {
+    currentDebtId = debtId; // Speichert die aktuelle Schuld-ID in der globalen Variable
+    document.getElementById("update-debt-id").value = debtId; // Setzt die Schuld-ID im versteckten Input-Feld
+    openModal('UpdateDebtModal');
 }
 
 //#endregion
@@ -287,19 +314,24 @@ function formatCurrency(amount) {
 //#endregion
 
 //#region SCHULD LÖSCHEN
-async function deleteDebt(debtId) {
-    if (confirm("Sind Sie sicher, dass Sie diese Schuld löschen möchten?")) {
+async function deleteDebt() {
         
-        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Debt/${debtId}`, {
+    try {
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Debt/${currentDeleteDebtId}`, {
             method: 'DELETE'
         });
 
         if (response.ok) {
             console.log('Schuld erfolgreich gelöscht!');
+            closeModal('ConfirmDeleteDebtModal');
             loadPersonDetails(currentPersonId); 
         } else {
             console.error("Fehler beim Löschen:", await response.text());
         }
+    } catch (error) {
+        console.error("Fehler beim Löschen:", error);
+    } finally {
+        currentDeleteDebtId = null;
     }
 
 }
@@ -307,34 +339,35 @@ async function deleteDebt(debtId) {
 //#endregion
 
 //#region PERSON LÖSCHEN
-async function deletePerson(event, personId) {
-    event.stopPropagation(); // Verhindert das Auslösen des onclick-Events der Kachel
-    if (confirm("Sind Sie sicher, dass Sie diese Person löschen möchten?")) {
+async function deletePerson(event) {
+    event.stopPropagation(); // Verhindert das Auslösen des onclick-Events der Kachel    
 
-        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Person/${personId}`, {
+        try {
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/Person/${currentDeletePersonId}`, {
             method: 'DELETE'
         });
 
-        if (response.ok) {
-            console.log('Person erfolgreich gelöscht!');
-            loadPersonsFromDB();
+            if (response.ok) {
+                console.log('Person erfolgreich gelöscht!');
+                closeModal('DeletePersonModal');
+                loadPersonsFromDB();
             
-        } else {
-            console.error("Fehler beim Löschen:", await response.text());
+            } 
+            else {
+                console.error("Fehler beim Löschen:", await response.text());
+            }
+        } 
+        catch (error) {
+            console.error("Fehler beim Löschen:", error);
         }
-    }
+        finally {
+            currentDeletePersonId = null; // Setzt die globale Variable zurück
+        }
 }
 
 //#endregion
 
-//#region Update Debt Modal öffnen
-function openUpdateDebtModal(debtId) {
-    currentDebtId = debtId; // Speichert die aktuelle Schuld-ID in der globalen Variable
-    document.getElementById("update-debt-id").value = debtId; // Setzt die Schuld-ID im versteckten Input-Feld
-    openModal('UpdateDebtModal');
-}
 
-//#endregion
 
 //#region SCHULD AKTUALISIEREN
 async function updateDebt(event) {

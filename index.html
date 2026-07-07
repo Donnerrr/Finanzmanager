@@ -9,6 +9,7 @@
 </head>
 <body>
 
+    <!-- #region Header -->
     <h1>Finanz Manager</h1>
     <a href="finanzen.pottanker.de">
     <img class="logo home-logo" src="bilder/applogo.png" alt="Logo der App">
@@ -16,7 +17,9 @@
     <article class="subtitle">
         <h2>Wähle zwischen Schuldeneinträgen oder eigenen Finanzen.</h2>       
     </article>
+    <!-- #endregion Header -->
 
+    <!-- #region Hauptkacheln -->
     <section class="app-container grid">
         <div class="app" onclick="openDebts()">
             <h3>Schuldenbuch</h3>
@@ -29,7 +32,11 @@
         </div>
     </section>
 
+    
+    <!-- #endregion Hauptkacheln -->
 
+
+    <!-- #region Schuldenbuch -->
     <section id="SchuldenSection" class="app-container  hidden">
         <div class="view-header">
             <div class="header-placeholder"></div>
@@ -55,8 +62,9 @@
 
         </div>
     </section>
+    <!-- #endregion Schuldenbuch -->
 
-
+    <!-- #region Finanzen -->
     <section id="FinanzSection" class="app-container hidden">
         <div class="view-header">
             <div class="header-placeholder"></div>
@@ -68,7 +76,9 @@
             
         </div>
     </section>
+    <!-- #endregion Finanzen -->
 
+    <!-- #region AddPersonModal -->
     <div id="AddPersonModal" class="modal hidden">
         <div class="modal-content">
             <h3>Neue Person hinzufügen</h3>
@@ -91,7 +101,10 @@
             </form>
         </div>
     </div>
+    <!-- #endregion AddPersonModal -->
 
+
+    <!-- #region AddEntryModal -->
     <div id="AddEntryModal" class="modal hidden">
         <div class="modal-content">
             <h3 id="EntryModalTitle">Neuen Eintrag hinzufügen</h3>
@@ -112,6 +125,9 @@
         </div>
     </div>
 
+    <!-- #endregion AddEntryModal -->
+
+    <!-- #region UpdateDebtModal -->
     <div id="UpdateDebtModal" class="modal hidden">
         <div class="modal-content">
             <h3 id="EntryModalTitle">Schuld bearbeiten</h3>
@@ -131,7 +147,34 @@
             </form>
         </div>
     </div>
-                    
+    <!-- #endregion UpdateDebtModal -->
+     
+    <!-- #region ConfirmDeletePersonModal -->
+    <div id="ConfirmDeletePersonModal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="EntryModalTitle">Sicher das die Person und alle zugehörigen Einträge gelöscht werden sollen?</h3>
+            
+                <div class="modal-buttons">
+                    <button type="button" class="btn-primary" onclick="closeModal('ConfirmDeletePersonModal')">Abbrechen</button>
+                    <button type="button" class="btn-primary" onclick="deletePerson(event)">Bestätigen</button>
+                </div>
+        </div>
+    </div>
+    <!-- #endregion ConfirmDeletePersonModal -->
+
+    <!-- #region ConfirmDeleteDebtModal -->
+    <div id="ConfirmDeleteDebtModal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="EntryModalTitle">Sicher das die Schuld gelöscht werden soll?</h3>
+            
+                <div class="modal-buttons">
+                    <button type="button" class="btn-primary" onclick="closeModal('ConfirmDeleteDebtModal')">Abbrechen</button>
+                    <button type="button" class="btn-primary" onclick="deleteDebt()">Bestätigen</button>
+                </div>
+        </div>
+    </div>
+    <!-- #endregion ConfirmDeleteDebtModal -->
+
 
 <script src="script.js"></script>
 
