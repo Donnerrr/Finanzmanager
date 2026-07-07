@@ -218,7 +218,6 @@ h1 {
     background: rgba(224, 92, 92, 0.1); /* leichter roter Tint beim Hover */
     transform: translateY(-6px);
     box-shadow: 0 12px 30px var(--text-danger);
-    filter: drop-shadow(0 0 15px var(--danger-accent));
     border-color: var(--danger-accent);
 }
 
@@ -237,7 +236,7 @@ h1 {
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.05); /* leichter grauer Tint beim Hover */
     transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
+    box-shadow: 0 12px 30px rgba(131, 130, 128, 0.15);
     border-color: rgba(255, 255, 255, 0.4);}
 /* ==========================================================================
    MODAL
