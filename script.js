@@ -109,7 +109,7 @@ async function loadPersonDetails(personId) {
     
     const titelEl = document.getElementById("CurrentPersonName");
     titelEl.innerText = "Lade Details..."; // Setzt den Titel auf "Lade Details..." während der Datenabfrage
-    titelEl.classList.add("loading"); // Optional: Füge eine Lade-Klasse hinzu, um visuelles Feedback zu geben
+    titelEl.classList.add("pulse-loading"); // Optional: Füge eine Lade-Klasse hinzu, um visuelles Feedback zu geben
     
     const container = document.getElementById("Personen-Schulden-Container");
     container.innerHTML = '<div class="loading">Lade Schulden...</div>';
@@ -161,7 +161,7 @@ async function loadPersonDetails(personId) {
     } catch (error) {
         console.error("Fehler beim Laden der Schulden:", error);
         titelEl.innerText = "Fehler beim Laden";
-        titelEl.classList.remove("loading");
+        titelEl.classList.remove("pulse-loading");
         container.innerHTML = '<div class="error-state">Fehler beim Laden der Daten vom Server.</div>';
     }
 }

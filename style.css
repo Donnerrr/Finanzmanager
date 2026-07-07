@@ -197,10 +197,13 @@ h1 {
         pulse 1.5s ease-in-out infinite 0.4s; /* startet erst nach dem Fade-In */
 }
 
-h3.loading{
-    padding: 0;
-    grid-column: unset;
-    color: var(--accent-gold);
+.pulse-loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
 }
 
 @keyframes fadeIn {
