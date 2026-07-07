@@ -292,7 +292,7 @@ h1 {
     padding: 30px;
     border-radius: 8px;
     width: 100%;
-    max-width: 500px;
+    max-width: 250px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     border: 1px solid var(--border-color);
 }
@@ -310,15 +310,13 @@ h1 {
 }
 
 .confirm-modal .btn-primary .btn-confirm-delete {
-    background-color: var(--text-danger);
-    color: var(--text-color);
+    color: var(--text-danger);
 }
 
 .btn-confirm-delete:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
-    background-color: var(--danger-accent);
-    border-color: var(--text-danger);
+    border-color: var(--danger-accent);
 
 }
 
