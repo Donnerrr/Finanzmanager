@@ -129,7 +129,7 @@ async function loadPersonDetails(personId) {
         if (personObj) {
             // Namen setzen
             titelEl.innerText = `Schulden von ${personObj.name}`;
-            titelEl.classList.remove("loading"); // Entfernt die Lade-Klasse, wenn die Daten geladen sind
+            titelEl.classList.remove("pulse-loading"); // Entfernt die Lade-Klasse, wenn die Daten geladen sind
             
             // Schulden-Array holen
             const debts = personObj.debts || [];
