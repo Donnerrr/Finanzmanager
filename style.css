@@ -197,6 +197,12 @@ h1 {
         pulse 1.5s ease-in-out infinite 0.4s; /* startet erst nach dem Fade-In */
 }
 
+h3.loading{
+    padding: 0;
+    grid-column: unset;
+    color: var(--accent-gold);
+}
+
 @keyframes fadeIn {
     to { opacity: 1; }
 }
