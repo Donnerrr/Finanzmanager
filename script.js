@@ -107,7 +107,9 @@ async function loadPersonDetails(personId) {
     hideAllSections();
     document.getElementById("SchuldenDetailSection").classList.remove("hidden");
     
-    document.getElementById("CurrentPersonName").innerText = "Lade Details...";
+    const titelEl = document.getElementById("CurrentPersonName");
+    titelEl.innerText = "Lade Details..."; // Setzt den Titel auf "Lade Details..." während der Datenabfrage
+    titelEl.classList.add("loading"); // Optional: Füge eine Lade-Klasse hinzu, um visuelles Feedback zu geben
     
     const container = document.getElementById("Personen-Schulden-Container");
     container.innerHTML = '<div class="loading">Lade Schulden...</div>';
@@ -126,7 +128,8 @@ async function loadPersonDetails(personId) {
 
         if (personObj) {
             // Namen setzen
-            document.getElementById("CurrentPersonName").innerText = `Schulden von ${personObj.name}`;
+            titelEl.innerText = `Schulden von ${personObj.name}`;
+            titelEl.classList.remove("loading"); // Entfernt die Lade-Klasse, wenn die Daten geladen sind
             
             // Schulden-Array holen
             const debts = personObj.debts || [];
@@ -157,7 +160,8 @@ async function loadPersonDetails(personId) {
 
     } catch (error) {
         console.error("Fehler beim Laden der Schulden:", error);
-        document.getElementById("CurrentPersonName").innerText = "Fehler beim Laden";
+        titelEl.innerText = "Fehler beim Laden";
+        titelEl.classList.remove("loading");
         container.innerHTML = '<div class="error-state">Fehler beim Laden der Daten vom Server.</div>';
     }
 }
