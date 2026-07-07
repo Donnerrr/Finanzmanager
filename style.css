@@ -294,7 +294,7 @@ h1 {
     width: 100%;
     max-width: 350px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--danger-accent);
 }
 
 .confirm-modal .modal-content h3 {
@@ -316,7 +316,9 @@ h1 {
 .btn-confirm-delete:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
+    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
     border-color: var(--danger-accent);
+    transition: all 0.3s ease;
 
 }
 
