@@ -85,7 +85,7 @@ async function loadPersonsFromDB() {
                     <h3>${escapeHtml(person.name)}</h3>
                     
                     <div class="details">${escapeHtml(person.street)}, ${escapeHtml(person.zipCode)} ${escapeHtml(person.city)}</div>
-                    <button class="btn btn-primary" onclick="openDeletePersonModal(event, ${person.id})">Löschen</button>
+                    <button class="btn btn-danger" onclick="openDeletePersonModal(event, ${person.id})">Löschen</button>
                 </div>
             `;
             container.insertAdjacentHTML('beforeend', personCard);
@@ -144,7 +144,7 @@ async function loadPersonDetails(personId) {
                     <div class="app">
                         <h3>${formatCurrency(debt.amount)}</h3>
                         <div class="details">${escapeHtml(debt.reason || 'Kein Verwendungszweck')}</div>
-                        <button class="btn btn-primary" onclick="openDeleteDebtModal(${debt.id})">Löschen</button>
+                        <button class="btn btn-danger" onclick="openDeleteDebtModal(${debt.id})">Löschen</button>
                         <button class="btn btn-primary" onclick="openUpdateDebtModal(${debt.id}, ${debt.amount})">Bearbeiten</button>
                     </div>
                 `;
