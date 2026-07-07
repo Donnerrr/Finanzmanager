@@ -202,9 +202,17 @@ h1 {
 }
 
 .btn-danger {
+
+    max-width: 180px;
+    padding: 10px;
+    border-radius: 10px;
     background: transparent;
-    border: 1px solid #e05c5c; /* gedämpftes Rot statt Knallrot */
     color: #e05c5c;
+
+    font-size: 16px;
+    border: 1px solid #e05c5c; /* gedämpftes Rot statt Knallrot */
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 .btn-danger:hover {
     background: rgba(224, 92, 92, 0.1); /* leichter roter Tint beim Hover */
@@ -215,17 +223,17 @@ h1 {
 }
 
 .btn-secondary {
+    max-width: 180px;
+    padding: 10px;
     background: transparent;
+    color: rgba(255, 255, 255, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.2); /* schwaches Grau/Weiß */
-    color: rgba(255, 255, 255, 0.1);
-}
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.05); /* leichter weißer Tint beim Hover */
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
-    border-color: rgba(255, 255, 255, 0.4);
+
 }
 
 /* ==========================================================================
