@@ -292,7 +292,7 @@ h1 {
     padding: 30px;
     border-radius: 8px;
     width: 100%;
-    max-width: 250px;
+    max-width: 350px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     border: 1px solid var(--border-color);
 }
