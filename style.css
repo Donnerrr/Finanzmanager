@@ -211,8 +211,9 @@ h1 {
 }
 
 .btn-secondary {
-    background-color: #7f8c8d;
-    color: white;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* schwaches Grau/Weiß */
+    color: rgba(255, 255, 255, 0.7);
 }
 
 /* ==========================================================================
