@@ -421,6 +421,27 @@ h1 {
         justify-self: center;
     }
 
+    .view-header .btn-secondary {
+        width: 100%;
+        max-width: 220px;
+        height: 45px;
+        justify-self: center;
+    }
+
+    .view-header .btn-danger {
+        width: 100%;
+        max-width: 220px;
+        height: 45px;
+        justify-self: center;
+    }
+
+    .view-header .btn-success {
+        width: 100%;
+        max-width: 220px;
+        height: 45px;
+        justify-self: center;
+    }
+
     .view-header .header-placeholder {
         display: none;
     }
