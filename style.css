@@ -208,12 +208,24 @@ h1 {
 }
 .btn-danger:hover {
     background: rgba(224, 92, 92, 0.1); /* leichter roter Tint beim Hover */
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
+    filter: drop-shadow(0 0 15px var(--text-danger));
+    border-color: var(--danger-accent);
 }
 
 .btn-secondary {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2); /* schwaches Grau/Weiß */
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05); /* leichter weißer Tint beim Hover */
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* ==========================================================================
