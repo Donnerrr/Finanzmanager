@@ -349,7 +349,7 @@ async function deletePerson(event) {
 
             if (response.ok) {
                 console.log('Person erfolgreich gelöscht!');
-                closeModal('DeletePersonModal');
+                closeModal('ConfirmDeletePersonModal');
                 loadPersonsFromDB();
             
             } 
