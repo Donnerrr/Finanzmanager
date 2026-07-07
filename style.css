@@ -216,9 +216,10 @@ h1 {
 }
 .btn-danger:hover {
     background: rgba(224, 92, 92, 0.1); /* leichter roter Tint beim Hover */
-    transform: translateY(-6px);
     box-shadow: 0 12px 30px var(--text-danger);
     border-color: var(--danger-accent);
+    transform: translateY(-6px);
+    
 }
 
 .btn-secondary {
