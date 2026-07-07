@@ -316,7 +316,7 @@ h1 {
 .btn-confirm-delete:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
-    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
+    filter: drop-shadow(0 0 15px var(--text-danger));
     border-color: var(--danger-accent);
     transition: all 0.3s ease;
 
