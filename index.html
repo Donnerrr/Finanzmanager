@@ -11,9 +11,7 @@
 
     <!-- #region Header -->
     <h1>Finanz Manager</h1>
-    <a href="finanzen.pottanker.de">
-    <img class="logo home-logo" src="bilder/applogo.png" alt="Logo der App">
-    </a>
+    <img class="logo home-logo" src="bilder/applogo.png" alt="Logo der App" onclick="openDashboard()">
     <article class="subtitle">
         <h2>Wähle zwischen Schuldeneinträgen oder eigenen Finanzen.</h2>       
     </article>
@@ -39,9 +37,8 @@
     <!-- #region Schuldenbuch -->
     <section id="SchuldenSection" class="app-container  hidden">
         <div class="view-header">
-            <a href="finanzen.pottanker.de">
-                <button class="btn-primary">&#8962; Zurück</button>
-            </a>
+            <button class="btn-primary" onclick="openDashboard()" >&#8962; Zurück</button>
+            
             <h3>Schuldenbuch</h3>
             <button class="btn-primary" id="add-person-btn" type="button" onclick="openModal('AddPersonModal')">Person hinzufügen</button>
         </div>
@@ -69,7 +66,7 @@
     <!-- #region Finanzen -->
     <section id="FinanzSection" class="app-container hidden">
         <div class="view-header">
-            <div class="header-placeholder"></div>
+            <button class="btn-primary" onclick="openDashboard()" >&#8962; Zurück</button>
             <h3>Finanzen</h3>
             <button class="btn-primary" id="add-finance-btn" type="submit">Eintrag hinzufügen</button>
         </div>
