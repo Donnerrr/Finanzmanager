@@ -150,26 +150,26 @@
     <!-- #endregion UpdateDebtModal -->
      
     <!-- #region ConfirmDeletePersonModal -->
-    <div id="ConfirmDeletePersonModal" class="modal hidden">
+    <div id="ConfirmDeletePersonModal" class="confirm-modal hidden">
         <div class="modal-content">
             <h3 id="EntryModalTitle">Sicher das die Person und alle zugehörigen Einträge gelöscht werden sollen?</h3>
             
                 <div class="modal-buttons">
                     <button type="button" class="btn-primary" onclick="closeModal('ConfirmDeletePersonModal')">Abbrechen</button>
-                    <button type="button" class="btn-primary" onclick="deletePerson(event)">Bestätigen</button>
+                    <button type="button" class="btn-primary btn-confirm-delete" onclick="deletePerson(event)">Bestätigen</button>
                 </div>
         </div>
     </div>
     <!-- #endregion ConfirmDeletePersonModal -->
 
     <!-- #region ConfirmDeleteDebtModal -->
-    <div id="ConfirmDeleteDebtModal" class="modal hidden">
+    <div id="ConfirmDeleteDebtModal" class="confirm-modal hidden">
         <div class="modal-content">
             <h3 id="EntryModalTitle">Sicher das die Schuld gelöscht werden soll?</h3>
             
                 <div class="modal-buttons">
                     <button type="button" class="btn-primary" onclick="closeModal('ConfirmDeleteDebtModal')">Abbrechen</button>
-                    <button type="button" class="btn-primary" onclick="deleteDebt()">Bestätigen</button>
+                    <button type="button" class="btn-primary btn-confirm-delete" onclick="deleteDebt()">Bestätigen</button>
                 </div>
         </div>
     </div>
