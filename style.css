@@ -17,7 +17,7 @@
     --app-hover-box-shadow: rgba(204, 164, 59, 0.15);
     --app-img-dropshadow: rgba(0, 0, 0, 0.2);
     --btn-primary-hover-shadow: rgba(204, 164, 59, 0.15);
-    --btn-danger-hover-shadow: rgb(255,76,76, 0.15);
+    --btn-danger-hover-shadow: rgba(255,76,76, 0.15);
     --danger-tint: rgba(224, 92, 92, 0.1);
     --success-tint: rgba(76, 199, 122, 0.1);
     --secondary-text-color: rgba(255, 255, 255, 0.7);
