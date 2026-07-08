@@ -108,8 +108,8 @@ async function loadPersonDetails(personId) {
     document.getElementById("SchuldenDetailSection").classList.remove("hidden");
     
     const titelEl = document.getElementById("CurrentPersonName");
-    titelEl.innerText = "Lade Details..."; // Setzt den Titel auf "Lade Details..." während der Datenabfrage
     titelEl.classList.add("pulse-loading"); // Optional: Füge eine Lade-Klasse hinzu, um visuelles Feedback zu geben
+    titelEl.innerText = "Lade Details..."; // Setzt den Titel auf "Lade Details..." während der Datenabfrage
     
     const container = document.getElementById("Personen-Schulden-Container");
     container.innerHTML = '<div class="loading">Lade Schulden...</div>';
