@@ -144,7 +144,7 @@ async function loadPersonDetails(personId) {
             // Kacheln rendern (mit debt.reason aus deinem Swagger)
             debts.forEach(debt => {
                 const personCard = `
-                    <div class="app">
+                    <div class="app app-schulden">
                         <h3>${formatCurrency(debt.amount)}</h3>
                         <div class="details">${escapeHtml(debt.reason || 'Kein Verwendungszweck')}</div>
                         <button class="btn btn-danger" onclick="openDeleteDebtModal(${debt.id})">Löschen</button>

@@ -178,6 +178,10 @@ h1 {
     box-shadow: 0 4px 15px var(--app-box-shadow);
 }
 
+.app-schulden {
+    cursor: default;
+}
+
 .app:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 30px var(--app-hover-box-shadow);
