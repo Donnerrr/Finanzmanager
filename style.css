@@ -13,6 +13,20 @@
     --danger-accent: #ff4c4c;
     --success-accent: #4ce079;
     --text-success: #0a6b2e;
+    --app-box-shadow: rgba(0, 0, 0, 0.3);
+    --app-hover-box-shadow: rgba(204, 164, 59, 0.15);
+    --app-img-dropshadow: rgba(0, 0, 0, 0.2);
+    --btn-primary-hover-shadow: rgba(204, 164, 59, 0.15);
+    --btn-danger-hover-shadow: rgb(255,76,76, 0.15);
+    --danger-tint: rgba(224, 92, 92, 0.1);
+    --success-tint: rgba(76, 199, 122, 0.1);
+    --secondary-text-color: rgba(255, 255, 255, 0.7);
+    --secondary-border-color: rgba(255, 255, 255, 0.2);
+    --secondary-tint: rgba(255, 255, 255, 0.05);
+    --secondary-hover-box-shadow: rgba(131, 130, 128, 0.15);
+    --secondary-hover-border: rgba(255, 255, 255, 0.4);
+    --modal-bg-color: rgba(0, 0, 0, 0.7);
+    --modal-content-box-shadow: rgba(0, 0, 0, 0.5);
 }
 
 .hidden {
@@ -160,12 +174,12 @@ h1 {
     gap: 20px;
     text-align: center;
     min-height: 280px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px var(--app-box-shadow);
 }
 
 .app:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
+    box-shadow: 0 12px 30px var(--app-hover-box-shadow);
     border-color: var(--accent-gold);
 }
 
@@ -179,7 +193,7 @@ h1 {
     max-width: 120px;
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 4px 8px var(--app-img-dropshadow));
 }
 
 /* ==========================================================================
@@ -198,8 +212,9 @@ h1 {
 }
 
 .pulse-loading {
-    fadeIn 0.25s ease forwards 0.15s,
-    animation: pulse 1.5s ease-in-out infinite;
+    animation:
+        fadeIn 0.25s ease forwards 0.15s
+        pulse 1.5s ease-in-out infinite;
 }
 
 
@@ -235,7 +250,7 @@ h1 {
 
 .btn-primary:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(204, 164, 59, 0.15);
+    box-shadow: 0 12px 30px var(--btn-primary-hover-shadow);
     border-color: var(--accent-gold);
 }
 
@@ -264,10 +279,10 @@ h1 {
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 .btn-danger:hover {
-    background: rgba(224, 92, 92, 0.1); /* leichter roter Tint beim Hover */
-    border-color: var(--text-danger);
+    background: var(--danger-tint); /* leichter roter Tint beim Hover */
     transform: translateY(-6px);
-    
+    box-shadow: 0 12px 30px var(--btn-danger-hover-shadow);
+    border-color: var(--text-danger);
 }
 
 .btn-success {
@@ -283,7 +298,7 @@ h1 {
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 .btn-success:hover {
-    background: rgba(76, 199, 122, 0.1); /* leichter grüner Tint beim Hover */
+    background: var(--success-tint); /* leichter grüner Tint beim Hover */
     border-color: var(--text-success);
     transform: translateY(-6px);
     
@@ -293,8 +308,8 @@ h1 {
     max-width: 180px;
     padding: 10px;
     background: transparent;
-    color: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.2); /* schwaches Grau/Weiß */
+    color: var(--secondary-text-color);
+    border: 1px solid var(--secondary-border-color); /* schwaches Grau/Weiß */
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
@@ -302,10 +317,10 @@ h1 {
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.05); /* leichter grauer Tint beim Hover */
+    background: var(--secondary-tint); /* leichter grauer Tint beim Hover */
     transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(131, 130, 128, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);}
+    box-shadow: 0 12px 30px var(--secondary-hover-box-shadow);
+    border-color: var(--secondary-hover-border);}
 /* ==========================================================================
    MODAL
    ========================================================================== */
@@ -316,7 +331,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: var(--modal-bg-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -330,7 +345,7 @@ h1 {
     border-radius: 8px;
     width: 100%;
     max-width: 500px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 20px var(--modal-content-box-shadow);
     border: 1px solid var(--border-color);
 }
 
@@ -381,7 +396,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: var(--modal-bg-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -395,7 +410,7 @@ h1 {
     border-radius: 8px;
     width: 100%;
     max-width: 350px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 20px var(--modal-content-box-shadow);
     border: 1px solid var(--danger-accent);
 }
 
