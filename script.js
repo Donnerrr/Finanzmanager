@@ -1,5 +1,7 @@
 const API_BASE = "https://api.pottanker.de";
 const API_TEST = "https://dev.pottanker.de";
+
+let currentUserId = null;
 let currentPersonId = null; // Globale Variable, um die aktuelle Person zu speichern
 let currentPersonName = null; // Globale Variable, um den aktuellen Personennamen zu speichern
 let currentDebtId = null; // Globale Variable, um die aktuelle Schuld zu speichern
@@ -467,6 +469,7 @@ async function register() {
             alert('Fehler: ' + errorMsg);
         } else {
             // Erfolg
+            currentUserId = data.id;
             localStorage.setItem('token', data.token);
             console.log("Token gespeichert");
             closeModal('AuthModal');
