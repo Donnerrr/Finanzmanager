@@ -72,7 +72,7 @@ async function authorizedFetch(endpoint, method = 'Get', body = null)
 
         if(!response.ok)
         {
-            let errorMsg = `Felhler ${response.status}`;
+            let errorMsg = `Fehler ${response.status}`;
             try
             {
                 const errorData = await response.json();
@@ -440,7 +440,7 @@ async function login() {
         if (response.ok) {
             const data = await response.json();   // <-- WICHTIG
             localStorage.setItem('token', data.token);
-            loadPersonInfoModal();
+            openDashboard();
         } else {
             const errorData = await response.json();
             let errorMsg = errorData.detail || errorData.message || JSON.stringify(errorData);
@@ -480,7 +480,7 @@ async function register() {
 
             localStorage.setItem('token', data.token);
             closeModal('AuthModal');
-            loadPersonsFromDB();
+            openDashboard();
         
         
     } catch(error){
