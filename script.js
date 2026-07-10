@@ -445,7 +445,7 @@ async function login() {
         loadPersonsFromDB();
         
     } catch(error){
-        alert('Fehler: ' + error.errorMsg);
+        alert('Fehler: ' + error.errorData + error.errorMsg);
     }
 }
 
