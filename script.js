@@ -5,6 +5,15 @@ let currentDeletePersonId = null; // Globale Variable, um die aktuelle Person f�
 let currentDeleteDebtId = null; // Globale Variable, um die aktuelle Schuld für das Löschen zu speichern
 const API_BASE = "https://api.pottanker.de";
 
+document.addEventListener('DOMContentLoaded'), () =>{
+    const token = localStorage.getItem('token');
+    if(!token){
+        openModal('AuthModal');
+    } else{
+        loadFinancesFromDB();
+    }
+}
+
 
 //#region Hilfsfunktionen
 /* ==========================================================================
@@ -234,7 +243,7 @@ async function loadPersonDetails(personId) {
 
 //#endregion
 
-
+//#region Finanzen
 // Läuft beim Klick auf "Finanzen"
 function loadFinancesFromDB() {
     console.log("DB-Aufruf: Lade eigene Finanzen & Raten...");
@@ -248,6 +257,7 @@ function loadFinancesFromDB() {
         </div>
     `;
 }
+//#endregion
 
 //#region MODAL-FUNKTIONEN
 
@@ -275,7 +285,6 @@ function openDeleteDebtModal(debtId) {
     openModal('ConfirmDeleteDebtModal');
 }
 //#endregion
-
 
 //#region Update Debt Modal öffnen
 function openUpdateDebtModal(debtId) {
@@ -385,8 +394,6 @@ async function deletePerson(event) {
 
 //#endregion
 
-
-
 //#region SCHULD AKTUALISIEREN
 async function updateDebt(event) {
     event.preventDefault();
@@ -410,4 +417,56 @@ async function updateDebt(event) {
     }
 }
 
+//#endregion
+
+//#region Authentifizieren
+async function login() {
+    const username = document.getElementById('authUsername').value;
+    const password = document.getElementById('authPassword').value;
+
+    try{
+        const response = await fetch(`${API_BASE}/api/Auth/login`,{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, password})
+        });
+
+        if (response.ok){
+            const { token } = await response.json();
+
+            localStorage.setItem('token', token);
+            closeModal('AuthModal');
+            loadPersonsFromDB();
+        } else{
+            alert('Login fehlgeschlagen');
+        }
+    } catch(error){
+        alert('Fehler: ' + error.message);
+    }
+}
+
+async function register() {
+    const username = document.getElementById('authUsername').value;
+    const password = document.getElementById('authPassword').value;
+
+    try{
+        const response = await fetch(`${API_BASE}/api/Auth/register`,{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, password})
+        });
+
+        if (response.ok){
+            const { token } = await response.json();
+
+            localStorage.setItem('token', token);
+            closeModal('AuthModal');
+            loadPersonsFromDB();
+        } else{
+            alert('Login fehlgeschlagen');
+        }
+    } catch(error){
+        alert('Fehler: ' + error.message);
+    }
+}
 //#endregion

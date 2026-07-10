@@ -44,7 +44,6 @@
     
     <!-- #endregion Hauptkacheln -->
 
-
     <!-- #region Schuldenbuch -->
     <section id="SchuldenSection" class="app-container  hidden">
         <div class="view-header">
@@ -112,7 +111,6 @@
         </div>
     </div>
     <!-- #endregion AddPersonModal -->
-
 
     <!-- #region AddEntryModal -->
     <div id="AddEntryModal" class="modal hidden">
@@ -185,6 +183,17 @@
     </div>
     <!-- #endregion ConfirmDeleteDebtModal -->
 
+    <!--#region AuthModal-->
+    <div id="AuthModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Finanz Manager</h3>
+            <input type="text" id="authUsername" placeholder="Username">
+            <input type="password" id="authPassword" placeholder="Passwort">
+            <button class="btn-primary" onclick="login()">Login</button>
+            <button class="btn-primary" onclick="register()">Registrieren</button>
+        </div>
+    </div>
+    <!--#endregion AuthModal-->
 
 <script src="script.js" defer></script>
 
