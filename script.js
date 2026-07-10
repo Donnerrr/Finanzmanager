@@ -434,7 +434,7 @@ async function login() {
 
         if (!response.ok){
             const errorData = await response.json().catch(() => ({}));
-            const errorMsg = errorData.message && `HTTP ${response.status}`;
+            const errorMsg = errorData.message + `HTTP ${response.status}`;
             throw new Error(errorMsg);
         } 
 
@@ -462,7 +462,7 @@ async function register() {
 
         if (!response.ok){
             const errorData = await response.json().catch(() => ({}));
-            const errorMsg = errorData.message && `HTTP ${response.status}`;
+            const errorMsg = errorData.message + `HTTP ${response.status}`;
             throw new Error(errorMsg);
 
         }
