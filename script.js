@@ -428,7 +428,7 @@ async function login() {
             const data = await response.json();   // <-- WICHTIG
             localStorage.setItem('token', data.token);
             closeModal('AuthModal');
-            openDashboard();
+            
         } else {
             const errorData = await response.json();
             let errorMsg = errorData.detail || errorData.message || JSON.stringify(errorData);
@@ -463,7 +463,7 @@ async function register() {
             } catch(e){
                 try{errorMsg = await response.text()}catch(_){}
             }
-        } 
+        } else {
             const data =  await response.json();
             
             try{
@@ -471,7 +471,8 @@ async function register() {
             console.log("Token gespeichert");
             } catch (e){console.log("Fehler beim speichern des Token. Error: "+e);}
             closeModal('AuthModal');
-            openDashboard();
+            
+        }
         
         
     } catch(error){
