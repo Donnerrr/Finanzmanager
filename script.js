@@ -487,6 +487,7 @@ async function register() {
 
 function logout(){
     localStorage.removeItem('token');
+    openDashboard();
     start();
 
 }
