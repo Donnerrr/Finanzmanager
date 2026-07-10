@@ -6,14 +6,14 @@ let currentDeleteDebtId = null; // Globale Variable, um die aktuelle Schuld für
 const API_BASE = "https://api.pottanker.de";
 const API_TEST = "https://dev.pottanker.de";
 
-document.addEventListener('DOMContentLoaded'), () =>{
+document.addEventListener('DOMContentLoaded', () =>{
     const token = localStorage.getItem('token');
     if(!token){
         openModal('AuthModal');
     } else{
         loadFinancesFromDB();
     }
-}
+});
 
 
 //#region Hilfsfunktionen
