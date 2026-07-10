@@ -459,7 +459,7 @@ async function login() {
         loadPersonsFromDB();
         
     } catch(error){
-        alert('Fehler: ' + errorMsg+" "+ error.message);
+        alert('Fehler: '+ error.message);
     }
 }
 
@@ -495,7 +495,7 @@ async function register() {
         
         
     } catch(error){
-        alert('Fehler: ' + errorMsg+" "+ error.message);
+        alert('Fehler: '+ error.message);
     }
 }
 
