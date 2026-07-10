@@ -444,39 +444,35 @@ async function register() {
     const username = document.getElementById('authUsername').value;
     const password = document.getElementById('authPassword').value;
 
-    try{
-        const response = await fetch(`${API_TEST}/api/Auth/register`,{
+    try {
+        const response = await fetch(`${API_TEST}/api/Auth/register`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username,  password})
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
         });
 
-        if (!response.ok){
-            let errorMsg = `HTTP ${response.status}`;
+        // 1. Hole den Text ODER das JSON einmalig aus der Antwort
+        // Wir lesen den Body hier als Text, damit wir ihn sicher parsen können
+        const responseText = await response.text();
+        let data;
+        try {
+            data = JSON.parse(responseText);
+        } catch (e) {
+            data = { message: responseText };
+        }
 
-            try{
-                const errorData = await response.json();
-                errorMsg = errorData.detail
-                        || errorData.title
-                        || errorData.message
-                        || JSON.stringify(errorData);
-            } catch(e){
-                try{errorMsg = await response.text()}catch(_){}
-            }
+        if (!response.ok) {
+            // Fehlermeldung anzeigen
+            const errorMsg = data.detail || data.title || data.message || `HTTP Fehler ${response.status}`;
+            alert('Fehler: ' + errorMsg);
         } else {
-            const data =  await response.json();
-            
-            try{
+            // Erfolg
             localStorage.setItem('token', data.token);
             console.log("Token gespeichert");
-            } catch (e){console.log("Fehler beim speichern des Token. Error: "+e);}
             closeModal('AuthModal');
-            
         }
-        
-        
-    } catch(error){
-        alert('Fehler: '+ error.message);
+    } catch (error) {
+        alert('Netzwerk-Fehler: ' + error.message);
     }
 }
 
