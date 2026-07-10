@@ -429,7 +429,7 @@ async function login() {
         const response = await fetch(`${API_BASE}/api/Auth/login`,{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username, password})
+            body: JSON.stringify({Username: username, Password: password})
         });
 
         if (response.ok){
@@ -454,7 +454,7 @@ async function register() {
         const response = await fetch(`${API_BASE}/api/Auth/register`,{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username, password})
+            body: JSON.stringify({Username: username, Password: password})
         });
 
         if (response.ok){
