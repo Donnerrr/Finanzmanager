@@ -487,7 +487,7 @@ async function register() {
                 try{errorMsg = await response.text()}catch(_){}
             }
         } 
-            const data = await response.json();
+            const data =  response.json();
 
             localStorage.setItem('token', data.token);
             closeModal('AuthModal');
