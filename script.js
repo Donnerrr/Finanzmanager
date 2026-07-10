@@ -1,3 +1,5 @@
+const { startTransition } = require("react");
+
 let currentPersonId = null; // Globale Variable, um die aktuelle Person zu speichern
 let currentPersonName = null; // Globale Variable, um den aktuellen Personennamen zu speichern
 let currentDebtId = null; // Globale Variable, um die aktuelle Schuld zu speichern
@@ -5,6 +7,8 @@ let currentDeletePersonId = null; // Globale Variable, um die aktuelle Person f�
 let currentDeleteDebtId = null; // Globale Variable, um die aktuelle Schuld für das Löschen zu speichern
 const API_BASE = "https://api.pottanker.de";
 const API_TEST = "https://dev.pottanker.de";
+
+
 
 document.addEventListener('DOMContentLoaded', () =>{
     const token = localStorage.getItem('token');
@@ -14,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () =>{
         loadFinancesFromDB();
     }
 });
+
+
 
 
 //#region Hilfsfunktionen
@@ -477,4 +483,21 @@ async function register() {
         alert('Fehler: ' + message);
     }
 }
+
+
+function logout(){
+    localStorage.removeItem('token');
+    start();
+
+}
+
+function start(){
+    const token = localStorage.getItem('token');
+    if(!token){
+        openModal('AuthModal');
+    } else{
+        loadFinancesFromDB();
+    }
+}
+
 //#endregion
