@@ -438,9 +438,17 @@ async function login() {
         });
 
         if (!response.ok){
-            const errorData = await response.json();
-            const errorMsg = errorData.detail +" "+ `HTTP ${response.status}`;
-            throw new Error(errorMsg);
+            let errorMsg = `HTTP ${response.status}`;
+
+            try{
+                const errorData = await response.json();
+                errorMsg = errorData.detail
+                        || errorData.title
+                        || errorData.message
+                        || JSON.stringify(errorData);
+            } catch(e){
+                try{errorMsg = await response.text()}catch(_){}
+            }
         } 
 
          const { token } = await response.json();
@@ -466,11 +474,18 @@ async function register() {
         });
 
         if (!response.ok){
-            const errorData = await response.json();
-            const errorMsg = errorData.detail +" "+ `HTTP ${response.status}`;
-            throw new Error(errorMsg);
+            let errorMsg = `HTTP ${response.status}`;
 
-        }
+            try{
+                const errorData = await response.json();
+                errorMsg = errorData.detail
+                        || errorData.title
+                        || errorData.message
+                        || JSON.stringify(errorData);
+            } catch(e){
+                try{errorMsg = await response.text()}catch(_){}
+            }
+        } 
             const { token } = await response.json();
 
             localStorage.setItem('token', token);
