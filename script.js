@@ -452,7 +452,7 @@ async function login() {
             }
         } 
 
-         const { token } = response.token;
+         const { token } = response.Token;
 
         localStorage.setItem('token', token);
         closeModal('AuthModal');
@@ -487,7 +487,7 @@ async function register() {
                 try{errorMsg = await response.text()}catch(_){}
             }
         } 
-            const { token } = response.token;
+            const { token } = response.Token;
 
             localStorage.setItem('token', token);
             closeModal('AuthModal');
