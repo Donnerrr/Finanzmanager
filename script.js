@@ -464,8 +464,11 @@ async function register() {
             }
         } 
             const data =  response.json();
-
+            
+            try{
             localStorage.setItem('token', data.token);
+            console.log("Token gespeichert");
+            } catch (e){console.log("Fehler beim speichern des Token. Error: "+e);}
             closeModal('AuthModal');
             openDashboard();
         
