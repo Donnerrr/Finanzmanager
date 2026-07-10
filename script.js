@@ -1,5 +1,3 @@
-const { startTransition } = require("react");
-
 const API_BASE = "https://api.pottanker.de";
 const API_TEST = "https://dev.pottanker.de";
 let currentPersonId = null; // Globale Variable, um die aktuelle Person zu speichern
