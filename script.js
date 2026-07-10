@@ -429,39 +429,28 @@ async function updateDebt(event) {
 async function login() {
     const username = document.getElementById('authUsername').value;
     const password = document.getElementById('authPassword').value;
-    
 
-    try{
-        const response = await fetch(`${API_TEST}/api/Auth/login`,{
+    try {
+        const response = await fetch(`${API_TEST}/api/Auth/login`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({Username: username, Password: password})
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
         });
 
-        if (!response.ok){
-            let errorMsg = `HTTP ${response.status}`;
-
-            try{
-                const errorData = await response.json();
-                errorMsg = errorData.detail
-                        || errorData.title
-                        || errorData.message
-                        || JSON.stringify(errorData);
-            } catch(e){
-                try{errorMsg = await response.text()}catch(_){}
-            }
-        } 
-
-         const data = response.json();
-
-        localStorage.setItem('token', data.token);
-        closeModal('AuthModal');
-        loadPersonsFromDB();
-        
-    } catch(error){
-        alert('Fehler: '+ error.message);
+        if (response.ok) {
+            const data = await response.json();   // <-- WICHTIG
+            localStorage.setItem('token', data.token);
+            loadPersonInfoModal();
+        } else {
+            const errorData = await response.json();
+            let errorMsg = errorData.detail || errorData.message || JSON.stringify(errorData);
+            alert(`Fehler: ${errorMsg}`);
+        }
+    } catch (error) {
+        alert(`Fehler: ${error.message}`);
     }
 }
+
 
 async function register() {
     const username = document.getElementById('authUsername').value;
