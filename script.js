@@ -433,14 +433,17 @@ async function login() {
         });
 
         if (response.ok){
-            const { token } = await response.json();
+            const errorData = await response.json().catch(() => ({}));
+            const errorMsg = errorData.message || `HTTP ${response.status}`;
+            throw new Error(errorMsg);
+        } 
 
-            localStorage.setItem('token', token);
-            closeModal('AuthModal');
-            loadPersonsFromDB();
-        } else{
-            alert('Login fehlgeschlagen');
-        }
+         const { token } = await response.json();
+
+        localStorage.setItem('token', token);
+        closeModal('AuthModal');
+        loadPersonsFromDB();
+        
     } catch(error){
         alert('Fehler: ' + error.message);
     }
