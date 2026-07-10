@@ -445,7 +445,7 @@ async function login() {
         loadPersonsFromDB();
         
     } catch(error){
-        alert('Fehler: ' + error.message);
+        alert('Fehler: ' + error.errorMsg);
     }
 }
 
@@ -474,7 +474,7 @@ async function register() {
         
         
     } catch(error){
-        alert('Fehler: ' + error.message);
+        alert('Fehler: ' + error.errorMsg);
     }
 }
 //#endregion
