@@ -434,7 +434,7 @@ async function login() {
 
         if (!response.ok){
             const errorData = await response.json().catch(() => ({}));
-            const errorMsg = errorData.message || `HTTP ${response.status}`;
+            const errorMsg = errorData.message && `HTTP ${response.status}`;
             throw new Error(errorMsg);
         } 
 
@@ -445,7 +445,7 @@ async function login() {
         loadPersonsFromDB();
         
     } catch(error){
-        alert('Fehler: ' + error.errorData + error.errorMsg);
+        alert('Fehler: ' + error.message);
     }
 }
 
@@ -462,7 +462,7 @@ async function register() {
 
         if (!response.ok){
             const errorData = await response.json().catch(() => ({}));
-            const errorMsg = errorData.message || `HTTP ${response.status}`;
+            const errorMsg = errorData.message && `HTTP ${response.status}`;
             throw new Error(errorMsg);
 
         }
@@ -474,7 +474,7 @@ async function register() {
         
         
     } catch(error){
-        alert('Fehler: ' + error.errorData + error.errorMsg);
+        alert('Fehler: ' + message);
     }
 }
 //#endregion
