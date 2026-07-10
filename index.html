@@ -186,9 +186,12 @@
     <!--#region AuthModal-->
     <div id="AuthModal" class="modal hidden">
         <div class="modal-content">
-            <h3>Finanz Manager</h3>
-            <input type="text" id="authUsername" placeholder="Username">
-            <input type="password" id="authPassword" placeholder="Passwort">
+            <div class="form-group">
+                <h3>Finanz Manager</h3>
+                <input type="text" id="authUsername" placeholder="Username">
+                <input type="password" id="authPassword" placeholder="Passwort">
+            </div>
+
             <div class="modal-buttons">
                 <button class="btn-primary" onclick="login()">Login</button>
                 <button class="btn-primary" onclick="register()">Registrieren</button>        
