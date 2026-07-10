@@ -39,59 +39,46 @@ function hideAllSections() {
 }
 
 // Hilfsfunktion: Vereinfacht den API Aufruf
-async function authorizedFetch(endpoint, method = 'GET', body = null)
-{
-    const token = localStorage.getItem('token');        //Token aus dem Local Storage laden
+async function authorizedFetch(endpoint, method = 'GET', body = null) {
+    const token = localStorage.getItem('token');
 
-    if(!token)      //Wenn kein Token -> Login
-    {
+    if (!token) {
         console.warn('Kein Token gefunden - Weiterleitung zum Login');
-
-        openModal('authModal');
+        openModal('AuthModal');
         return Promise.reject(new Error('Nicht authentifiziert'));
     }
 
-    // Token direkt in den Headern verankern
     const options = {
         method: method,
         headers: {
-            'Authorization': `Bearer ${token}`,
-            }
-        };
+            'Authorization': `Bearer ${token}`
+        }
+    };
 
-    // Body nur mitschicken wenn wirklich gebraucht wird
-    if(body !== null && (method === 'POST' || method === 'PUT' || method === 'PATCH'))
-    {
+    if (body !== null && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
         options.headers['Content-Type'] = 'application/json';
         options.body = JSON.stringify(body);
     }
 
-    try
-    {
+    try {
         const response = await fetch(`${API_TEST}/api/Schuldenbuch/${endpoint}`, options);
 
-        if(!response.ok)
-        {
+        if (!response.ok) {
             let errorMsg = `Fehler ${response.status}`;
-            try
-            {
+            try {
                 const errorData = await response.json();
-                errorMsg = errorData.message || errorData.title || errorMsg;
-            }
-            catch (e){}
+                errorMsg = errorData.message || errorData.title || errorData.detail || errorMsg;
+            } catch (e) {}
             throw new Error(errorMsg);
         }
 
-        if(response.status === 204) {return null;}
+        if (response.status === 204) return null;
 
         return await response.json();
-    }
-    catch (error)
-    {
+    } catch (error) {
         console.error(`API Fehler bei ${method} ${endpoint}:`, error);
         throw error;
     }
-
 }
 
 function escapeHtml(text) {
