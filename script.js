@@ -305,7 +305,7 @@ async function savePerson(event) {
             console.log('Person erfolgreich gespeichert');
             closeModal('AddPersonModal');
             loadPersonsFromDB();
-            document.getElementById("add-person-form").reset;
+            document.getElementById("add-person-form").reset();
     }
 
     catch (error) 
@@ -337,7 +337,7 @@ async function saveEntry(event) {
             await authorizedFetch('Debt', 'POST', entryData);
             console.log('Schuld erfolgreich gespeichert');
             closeModal('AddEntryModal');
-            document.getElementById("add-entry-form").reset;33
+            document.getElementById("add-entry-form").reset();
 
             loadPersonDetails(currentPersonId);
     }
@@ -463,7 +463,7 @@ async function register() {
                 try{errorMsg = await response.text()}catch(_){}
             }
         } 
-            const data =  response.json();
+            const data =  await response.json();
             
             try{
             localStorage.setItem('token', data.token);
