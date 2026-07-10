@@ -474,7 +474,7 @@ async function register() {
         
         
     } catch(error){
-        alert('Fehler: ' + error.errorMsg);
+        alert('Fehler: ' + error.errorData + error.errorMsg);
     }
 }
 //#endregion
