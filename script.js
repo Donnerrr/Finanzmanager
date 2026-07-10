@@ -429,6 +429,7 @@ async function updateDebt(event) {
 async function login() {
     const username = document.getElementById('authUsername').value;
     const password = document.getElementById('authPassword').value;
+    
 
     try{
         const response = await fetch(`${API_TEST}/api/Auth/login`,{
@@ -451,7 +452,7 @@ async function login() {
             }
         } 
 
-         const { token } = await response.json();
+         const { token } = response.token;
 
         localStorage.setItem('token', token);
         closeModal('AuthModal');
@@ -486,7 +487,7 @@ async function register() {
                 try{errorMsg = await response.text()}catch(_){}
             }
         } 
-            const { token } = await response.json();
+            const { token } = response.token;
 
             localStorage.setItem('token', token);
             closeModal('AuthModal');
