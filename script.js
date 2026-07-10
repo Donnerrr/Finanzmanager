@@ -39,7 +39,7 @@ function hideAllSections() {
 }
 
 // Hilfsfunktion: Vereinfacht den API Aufruf
-async function authorizedFetch(endpoint, method = 'Get', body = null)
+async function authorizedFetch(endpoint, method = 'GET', body = null)
 {
     const token = localStorage.getItem('token');        //Token aus dem Local Storage laden
 
