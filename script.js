@@ -432,7 +432,7 @@ async function login() {
             body: JSON.stringify({Username: username, Password: password})
         });
 
-        if (response.ok){
+        if (!response.ok){
             const errorData = await response.json().catch(() => ({}));
             const errorMsg = errorData.message || `HTTP ${response.status}`;
             throw new Error(errorMsg);
@@ -460,15 +460,19 @@ async function register() {
             body: JSON.stringify({Username: username, Password: password})
         });
 
-        if (response.ok){
+        if (!response.ok){
+            const errorData = await response.json().catch(() => ({}));
+            const errorMsg = errorData.message || `HTTP ${response.status}`;
+            throw new Error(errorMsg);
+
+        }
             const { token } = await response.json();
 
             localStorage.setItem('token', token);
             closeModal('AuthModal');
             loadPersonsFromDB();
-        } else{
-            alert('Login fehlgeschlagen');
-        }
+        
+        
     } catch(error){
         alert('Fehler: ' + error.message);
     }
