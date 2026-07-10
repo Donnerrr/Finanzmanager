@@ -427,6 +427,7 @@ async function login() {
         if (response.ok) {
             const data = await response.json();   // <-- WICHTIG
             localStorage.setItem('token', data.token);
+            closeModal('AuthModal');
             openDashboard();
         } else {
             const errorData = await response.json();
