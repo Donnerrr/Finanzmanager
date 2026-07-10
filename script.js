@@ -4,6 +4,7 @@ let currentDebtId = null; // Globale Variable, um die aktuelle Schuld zu speiche
 let currentDeletePersonId = null; // Globale Variable, um die aktuelle Person für das Löschen zu speichern
 let currentDeleteDebtId = null; // Globale Variable, um die aktuelle Schuld für das Löschen zu speichern
 const API_BASE = "https://api.pottanker.de";
+const API_TEST = "https://test.pottanker.de";
 
 document.addEventListener('DOMContentLoaded'), () =>{
     const token = localStorage.getItem('token');
@@ -62,7 +63,7 @@ async function authorizedFetch(endpoint, method = 'Get', body = null)
 
     try
     {
-        const response = await fetch(`${API_BASE}/api/Schulednbuch/${endpoint}`, options);
+        const response = await fetch(`${API_TEST}/api/Schuldenbuch/${endpoint}`, options);
 
         if(!response.ok)
         {
