@@ -418,7 +418,7 @@ async function login() {
     const password = document.getElementById('authPassword').value;
 
     try {
-        const response = await fetch(`${API_TEST}/api/Authentification/Auth/login`, {
+        const response = await fetch(`${API_TEST}/api/Auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
@@ -444,7 +444,7 @@ async function register() {
     const password = document.getElementById('authPassword').value;
 
     try{
-        const response = await fetch(`${API_TEST}/api/Authentification/Auth/register`,{
+        const response = await fetch(`${API_TEST}/api/Auth/register`,{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(username, password})
