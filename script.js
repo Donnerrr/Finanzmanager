@@ -399,7 +399,7 @@ async function updateDebt(event) {
 
 
     try {
-        await authorizedFetch(`Debt/${debtId}`, 'PUT', {amount: updatedAmount});
+        await authorizedFetch(`Debt/${debtId}`, 'PUT', updatedAmount);
         console.log('Schuld erfolgreich aktualisiert');
         closeModal('UpdateDebtModal');
         
