@@ -228,7 +228,7 @@ async function loadPersonDetails(personId) {
                         <h3>${formatCurrency(debt.amount)}</h3>
                         <div class="details">${escapeHtml(debt.reason || 'Kein Verwendungszweck')}</div>
                         <button class="btn btn-danger" onclick="openDeleteDebtModal(${debt.id})">Löschen</button>
-                        <button class="btn btn-secondary" onclick="openUpdateDebtModal(${debt.id})">Bearbeiten</button>
+                        <button class="btn btn-secondary" onclick="openUpdateDebtModal(${debt.id}, ${debt.amount})">Bearbeiten</button>
                     </div>
                 `;
                 container.insertAdjacentHTML('beforeend', personCard);
