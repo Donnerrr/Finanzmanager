@@ -30,6 +30,19 @@
     --modal-content-box-shadow: rgba(0, 0, 0, 0.5);
 }
 
+.app-header {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+.menu-wrapper {
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+
+
 .hidden {
     display: none !important;
 }
