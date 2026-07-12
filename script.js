@@ -408,6 +408,7 @@ async function updateDebt(event) {
     const updateData = {
         Amount: inputValue
     };
+        console.log("Request Body wird gesendet als:", JSON.stringify(updateData));
 
     console.log("Sende Update-Payload:", JSON.stringify(updateData));
 
