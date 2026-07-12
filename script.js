@@ -332,29 +332,28 @@ async function saveEntry(event) {
     event.preventDefault(); 
 
     if (currentPersonId === null) {
-        console.error('Keine Person ausgewählt.');
         alert('Keine Person ausgewählt.');
         return;
     }
     
     const entryData = {
         personId: currentPersonId, 
-        amount: parseFloat(document.getElementById("entry-amount").value) || 0,
-        reason: document.getElementById("entry-purpose").value
+        Amount: document.getElementById("entry-amount").value,     // Großes A
+        Description: document.getElementById("entry-purpose").value
     };
 
     console.log("Sende Payload an API:", JSON.stringify(entryData));
 
     try {
-        await authorizedFetch('Debt', 'POST', entryData);
-        console.log('Schuld erfolgreich gespeichert');
+        const result = await authorizedFetch('Debt', 'POST', entryData);
+        console.log('Schuld erfolgreich gespeichert:', result);
         closeModal('AddEntryModal');
         document.getElementById("add-entry-form").reset();
         loadPersonDetails(currentPersonId);
     }
     catch (error) {
         console.error('Fehler beim Speichern der Schuld:', error.message);
-        alert('Fehler beim Speichern der Schuld: ' + error.message);
+        alert('Fehler beim Speichern:\n' + error.message);
     }
 }
 //#endregion
@@ -403,14 +402,11 @@ async function updateDebt(event) {
     event.preventDefault();
     
     const debtId = currentDebtId;
-    const updatedAmount = parseFloat(document.getElementById("update-debt-amount").value);
+    const updatedAmount = document.getElementById("update-debt-amount").value;
 
-    if (!debtId || isNaN(updatedAmount)) {
-        alert("Ungültige Eingabe.");
-        return;
-    }
-
-    const updateData = { amount: updatedAmount };
+    const updateData = {
+        Amount: updatedAmount   // Großes A ! Wichtig
+    };
 
     console.log("Sende Update-Payload:", JSON.stringify(updateData));
 
