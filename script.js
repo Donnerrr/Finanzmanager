@@ -402,10 +402,11 @@ async function updateDebt(event) {
     event.preventDefault();
     
     const debtId = currentDebtId;
-    const updatedAmount = document.getElementById("update-debt-amount").value;
+    const inputValue = document.getElementById("update-debt-amount").value.trim();
 
+    // Sende als String (wie der Service es erwartet)
     const updateData = {
-        Amount: updatedAmount
+        Amount: inputValue
     };
 
     console.log("Sende Update-Payload:", JSON.stringify(updateData));
