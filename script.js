@@ -75,8 +75,11 @@ async function authorizedFetch(endpoint, method = 'GET', body = null) {
         }
 
         if (response.status === 204) return null;
+ 
+        const text = await response.text();
+        if (!text) return null;
 
-        return await response.json();
+        return JSON.parse(text);
     } catch (error) {
         console.error(`API Fehler bei ${method} ${endpoint}:`, error);
         throw error;
