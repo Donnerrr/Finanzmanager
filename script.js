@@ -228,7 +228,7 @@ async function loadPersonDetails(personId) {
                         <h3>${formatCurrency(debt.amount)}</h3>
                         <div class="details">${escapeHtml(debt.reason || 'Kein Verwendungszweck')}</div>
                         <button class="btn btn-danger" onclick="openDeleteDebtModal(${debt.id})">Löschen</button>
-                        <button class="btn btn-secondary" onclick="openUpdateDebtModal(${debt.id}, ${debt.amount})">Bearbeiten</button>
+                        <button class="btn btn-secondary" onclick="openUpdateDebtModal(${debt.id})">Bearbeiten</button>
                     </div>
                 `;
                 container.insertAdjacentHTML('beforeend', personCard);
@@ -307,22 +307,22 @@ async function savePerson(event) {
     const personData = {
         name: document.getElementById("person-name").value,
         street: document.getElementById("street").value,
-        zipcode: document.getElementById("ZipCode").value,
+        zipCode: document.getElementById("ZipCode").value,
         city: document.getElementById("city").value
     };
     
     try 
     {
-            await authorizedFetch('Person', 'POST', personData);
-            console.log('Person erfolgreich gespeichert');
-            closeModal('AddPersonModal');
-            loadPersonsFromDB();
-            document.getElementById("add-person-form").reset();
+        await authorizedFetch('Person', 'POST', personData);
+        console.log('Person erfolgreich gespeichert');
+        closeModal('AddPersonModal');
+        loadPersonsFromDB();
+        document.getElementById("add-person-form").reset();
     }
-
     catch (error) 
     {
-        console.error('Fehler beim Speichern der Person:' + error.message);
+        console.error('Fehler beim Speichern der Person:', error.message);
+        alert('Fehler beim Speichern der Person: ' + error.message);
     }
 }
 //#endregion
@@ -339,23 +339,22 @@ async function saveEntry(event) {
     
     const entryData = {
         personId: currentPersonId, 
-        amount: document.getElementById("entry-amount").value,
-        description: document.getElementById("entry-purpose").value // Im HTML heißt die ID 'entry-purpose'
+        amount: parseFloat(document.getElementById("entry-amount").value) || 0,
+        reason: document.getElementById("entry-purpose").value
     };
 
     console.log("Sende Payload an API:", JSON.stringify(entryData));
 
     try {
-            await authorizedFetch('Debt', 'POST', entryData);
-            console.log('Schuld erfolgreich gespeichert');
-            closeModal('AddEntryModal');
-            document.getElementById("add-entry-form").reset();
-
-            loadPersonDetails(currentPersonId);
+        await authorizedFetch('Debt', 'POST', entryData);
+        console.log('Schuld erfolgreich gespeichert');
+        closeModal('AddEntryModal');
+        document.getElementById("add-entry-form").reset();
+        loadPersonDetails(currentPersonId);
     }
-    
     catch (error) {
-        console.error('Fehler beim Speichern der Schuld:' + error.message);
+        console.error('Fehler beim Speichern der Schuld:', error.message);
+        alert('Fehler beim Speichern der Schuld: ' + error.message);
     }
 }
 //#endregion
