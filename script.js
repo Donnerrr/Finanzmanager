@@ -18,6 +18,20 @@ document.addEventListener('DOMContentLoaded', () =>{
     } else{
         loadFinancesFromDB();
     }
+    
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation(); // verhindert, dass der Klick "durchsickert"
+      dropdownMenu.classList.toggle('open');
+    });
+
+    // Menü schließen, wenn irgendwo anders geklickt wird
+    document.addEventListener('click', () => {
+      dropdownMenu.classList.remove('open');
+    });
+
 });
 
 
