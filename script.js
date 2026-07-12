@@ -406,27 +406,24 @@ async function updateDebt(event) {
     const updatedAmount = parseFloat(document.getElementById("update-debt-amount").value);
 
     if (!debtId || isNaN(updatedAmount)) {
-        alert("Ungültige Eingabe für Betrag.");
+        alert("Ungültige Eingabe.");
         return;
     }
 
-    const updateData = {
-        amount: updatedAmount
-    };
+    const updateData = { amount: updatedAmount };
+
+    console.log("Sende Update-Payload:", JSON.stringify(updateData));
 
     try {
         const result = await authorizedFetch(`Debt/${debtId}`, 'PUT', updateData);
-        console.log('Schuld erfolgreich aktualisiert:', result);
+        console.log('Update erfolgreich:', result);
         closeModal('UpdateDebtModal');
         document.getElementById("update-debt-amount").value = "";
         currentDebtId = null;
-        
-        if (currentPersonId) {
-            loadPersonDetails(currentPersonId);
-        }
+        if (currentPersonId) loadPersonDetails(currentPersonId);
     } catch (error) {
         console.error("Fehler beim Aktualisieren:", error.message);
-        alert('Fehler beim Aktualisieren:\n' + error.message);
+        alert('Update-Fehler:\n' + error.message);
     }
 }
 
