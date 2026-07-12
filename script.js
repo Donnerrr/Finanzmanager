@@ -402,22 +402,31 @@ async function deletePerson(event) {
 async function updateDebt(event) {
     event.preventDefault();
     
-    
-    const debtId = currentDebtId; // Verwendet die globale Variable, die beim Öffnen des Modals gesetzt wurde
-    const updatedAmount = document.getElementById("update-debt-amount").value;
+    const debtId = currentDebtId;
+    const updatedAmount = parseFloat(document.getElementById("update-debt-amount").value);
 
+    if (!debtId || isNaN(updatedAmount)) {
+        alert("Ungültige Eingabe für Betrag.");
+        return;
+    }
+
+    const updateData = {
+        amount: updatedAmount
+    };
 
     try {
-        await authorizedFetch(`Debt/${debtId}`, 'PUT', {amount: updatedAmount});
-        console.log('Schuld erfolgreich aktualisiert');
+        const result = await authorizedFetch(`Debt/${debtId}`, 'PUT', updateData);
+        console.log('Schuld erfolgreich aktualisiert:', result);
         closeModal('UpdateDebtModal');
-        
-        loadPersonDetails(currentPersonId);
-        currentDebtId = null;
         document.getElementById("update-debt-amount").value = "";
-    
+        currentDebtId = null;
+        
+        if (currentPersonId) {
+            loadPersonDetails(currentPersonId);
+        }
     } catch (error) {
-        console.error("Fehler beim Aktualisieren:" + error.message);
+        console.error("Fehler beim Aktualisieren:", error.message);
+        alert('Fehler beim Aktualisieren:\n' + error.message);
     }
 }
 
