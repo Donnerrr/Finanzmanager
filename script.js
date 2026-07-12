@@ -337,8 +337,8 @@ async function saveEntry(event) {
     }
     
     const entryData = {
-        personId: currentPersonId, 
-        Amount: document.getElementById("entry-amount").value,     // Großes A
+        PersonId: currentPersonId, 
+        Amount: document.getElementById("entry-amount").value,
         Description: document.getElementById("entry-purpose").value
     };
 
@@ -405,7 +405,7 @@ async function updateDebt(event) {
     const updatedAmount = document.getElementById("update-debt-amount").value;
 
     const updateData = {
-        Amount: updatedAmount   // Großes A ! Wichtig
+        Amount: updatedAmount
     };
 
     console.log("Sende Update-Payload:", JSON.stringify(updateData));
