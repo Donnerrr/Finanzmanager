@@ -41,6 +41,7 @@ function hideAllSections() {
 }
 
 // Hilfsfunktion: Vereinfacht den API Aufruf
+// Hilfsfunktion: Vereinfacht den API Aufruf
 async function authorizedFetch(endpoint, method = 'GET', body = null) {
     const token = localStorage.getItem('token');
 
@@ -79,7 +80,13 @@ async function authorizedFetch(endpoint, method = 'GET', body = null) {
         const text = await response.text();
         if (!text) return null;
 
-        return JSON.parse(text);
+        try {
+            return JSON.parse(text);
+        } catch (parseError) {
+            console.error("JSON Parse Fehler. Roh-Response war:", text.substring(0, 300));
+            throw new Error(`Server-Antwort ist kein JSON: ${text.substring(0, 150)}...`);
+        }
+
     } catch (error) {
         console.error(`API Fehler bei ${method} ${endpoint}:`, error);
         throw error;
