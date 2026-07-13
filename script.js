@@ -465,13 +465,10 @@ async function updateDebt(event) {
     console.log("Sende Update-Payload:", JSON.stringify(updateData));
 
     try {
-<<<<<<< HEAD
         await authorizedFetch(`Debt/${debtId}`, 'PUT', updatedAmount);
         console.log('Schuld erfolgreich aktualisiert');
-=======
         const result = await authorizedFetch(`Debt/${debtId}`, 'PUT', updateData);
         console.log('Update erfolgreich:', result);
->>>>>>> 634c171f5a26e497b288dc7f7c8bc7f0544c9b90
         closeModal('UpdateDebtModal');
         document.getElementById("update-debt-amount").value = "";
         currentDebtId = null;
