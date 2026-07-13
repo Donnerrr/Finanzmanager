@@ -450,34 +450,41 @@ async function deletePerson(event) {
 //#endregion
 
 //#region SCHULD AKTUALISIEREN
+//#region SCHULD AKTUALISIEREN
 async function updateDebt(event) {
     event.preventDefault();
     
     const debtId = currentDebtId;
     const inputValue = document.getElementById("update-debt-amount").value.trim();
 
-    // Sende als String (wie der Service es erwartet)
+    // Sende das Objekt (wie dein Service es erwartet)
     const updateData = {
         Amount: inputValue
     };
-        console.log("Request Body wird gesendet als:", JSON.stringify(updateData));
 
     console.log("Sende Update-Payload:", JSON.stringify(updateData));
 
     try {
-        await authorizedFetch(`Debt/${debtId}`, 'PUT', updatedAmount);
-        console.log('Schuld erfolgreich aktualisiert');
+        // Jetzt wird der Request nur noch EINMAL und mit den RICHTIGEN Daten gefeuert
         const result = await authorizedFetch(`Debt/${debtId}`, 'PUT', updateData);
         console.log('Update erfolgreich:', result);
+        
+        // Modal schließen und Input leeren
         closeModal('UpdateDebtModal');
         document.getElementById("update-debt-amount").value = "";
         currentDebtId = null;
-        if (currentPersonId) loadPersonDetails(currentPersonId);
+        
+        // Benutzeroberfläche aktualisieren, falls eine Person aktiv ist
+        if (currentPersonId) {
+            loadPersonDetails(currentPersonId);
+        }
     } catch (error) {
         console.error("Fehler beim Aktualisieren:", error.message);
         alert('Update-Fehler:\n' + error.message);
     }
 }
+//#endregion
+
 
 //#endregion
 
