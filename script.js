@@ -521,9 +521,16 @@ async function register() {
 
 
 function logout(){
-    localStorage.removeItem('token');
-    openDashboard();
-    start();
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    if(dropdownMenu){
+        dropdownMenu.classList.remove('open');
+    }
+    setTimeout(() => {
+        localStorage.removeItem('token');
+        openDashboard();
+        start();
+    }, 150);
+    
 
 }
 
