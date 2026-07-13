@@ -469,7 +469,7 @@ h1 {
   visibility: visible;
   /* animation-delay: 0.12s wartet, bis der Button-Klick vorbei ist, 
      bevor die Blase explodiert */
-  animation: bubblePop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards;
+  animation: bubblePop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards;
 }
 
 /* Die Seifenblasen-Animation */
