@@ -482,8 +482,8 @@ async function updateDebt(event) {
 
 //#region Authentifizieren
 async function login() {
-    const username = document.getElementById('authUsername').value;
-    const password = document.getElementById('authPassword').value;
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
 
     try {
         const response = await fetch(`${API_TEST}/api/Auth/login`, {
@@ -496,8 +496,8 @@ async function login() {
             const data = await response.json();   // <-- WICHTIG
             localStorage.setItem('token', data.token);
             closeModal('AuthModal');
-            document.getElementById('authUsername').value = '';
-            document.getElementById('authPassword').value ='';
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value ='';
             
         } else {
             const errorData = await response.json();
@@ -513,8 +513,8 @@ async function login() {
 
 
 async function register() {
-    const username = document.getElementById('authUsername').value;
-    const password = document.getElementById('authPassword').value;
+    const username = document.getElementById('registerUsername').value;
+    const password = document.getElementById('registerPassword').value;
 
     try {
         const response = await fetch(`${API_TEST}/api/Auth/register`, {
@@ -543,8 +543,8 @@ async function register() {
             localStorage.setItem('token', data.token);
             console.log("Token gespeichert");
             closeModal('AuthModal');
-            document.getElementById('authUsername').value = '';
-            document.getElementById('authPassword').value ='';
+            document.getElementById('registerUsername').value = '';
+            document.getElementById('registerPassword').value ='';
         }
     } catch (error) {
         alert('Netzwerk-Fehler: ' + error.message);
