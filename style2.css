@@ -33,28 +33,22 @@
 /* ==========================================================================
    HEADER & WRAPPER OPTIMIERUNG
    ========================================================================== */
-
 .app-header {
-    position: relative; /* Bleibt der Bezugspunkt für absolute Elemente */
+    position: relative;
     width: 100%;
     max-width: 800px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Zentriert H1, Logo und Subtitle perfekt */
+    align-items: center;
     text-align: center;
 }
 
-/* Der Wrapper wird jetzt komplett unabhängig oben rechts in die Ecke gepinnt */
 .menu-wrapper {
     position: absolute;
-    top: -20px;   /* Verschiebt den Button weiter nach oben über den Titel */
-    right: 0px;   /* Ganz nach rechts an den Rand des Containers */
+    top: -20px;
+    right: 0px;
     z-index: 100;
 }
-
-
-
-
 
 .hidden {
     display: none !important;
@@ -80,7 +74,6 @@ body {
 /* ==========================================================================
    LOGO
    ========================================================================== */
-
 .logo {
     width: 90px;
     height: auto;
@@ -94,11 +87,9 @@ body {
     cursor: pointer;
 }
 
-
 /* ==========================================================================
    HEADER
    ========================================================================== */
-
 h1 {
     font-size: clamp(1.8rem, 5vw, 2.5rem);
     color: var(--accent-gold);
@@ -124,47 +115,8 @@ h1 {
 }
 
 /* ==========================================================================
-   VIEW HEADER (DESKTOP GRID + MOBILE STACK)
-   ========================================================================== */
-
-.view-header {
-    display: grid;
-    grid-template-columns: 160px 1fr 160px;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 15px;
-}
-
-.view-header h3 {
-    font-size: clamp(1.2rem, 4vw, 2rem);
-    color: var(--accent-gold);
-    font-weight: 400;
-    text-align: center;
-}
-
-/* Buttons im Header */
-.view-header .btn-primary {
-    min-width: 140px;
-    width: 100%;
-    max-width: 160px;
-    height: 45px;
-    flex-shrink: 0;
-    justify-self: center;
-}
-
-/* Placeholder für Zentrierung */
-.view-header .header-placeholder {
-    min-width: 140px;
-    width: 100%;
-    max-width: 160px;
-}
-
-/* ==========================================================================
    CONTAINER & GRID
    ========================================================================== */
-
 .app-container {
     width: 100%;
     max-width: 800px;
@@ -182,7 +134,6 @@ h1 {
 /* ==========================================================================
    CARDS
    ========================================================================== */
-
 .app {
     width: 100%;
     max-width: 260px;
@@ -230,7 +181,6 @@ h1 {
 /* ==========================================================================
    LOADING STATE
    ========================================================================== */
-
 .loading {
     text-align: center;
     padding: 40px;
@@ -239,7 +189,7 @@ h1 {
     opacity: 0;
     animation: 
         fadeIn 1.5s ease forwards 0.15s,
-        pulse 1.5s ease-in-out infinite 0.4s; /* startet erst nach dem Fade-In */
+        pulse 1.5s ease-in-out infinite 0.4s;
 }
 
 .pulse-loading {
@@ -248,7 +198,6 @@ h1 {
         fadeIn 1.5s ease forwards 0.15s,
         pulse 1.5s ease-in-out infinite 0.4s;
 }
-
 
 @keyframes fadeIn {
     to { opacity: 1; }
@@ -267,7 +216,6 @@ h1 {
 /* ==========================================================================
    BUTTONS
    ========================================================================== */
-
 .btn-primary {
     max-width: 180px;
     padding: 10px;
@@ -292,48 +240,47 @@ h1 {
     border-radius: 10px;
     background: transparent;
     color: var(--danger-accent);
-    border: 1px solid var(--border-color); 
+    border: 1px solid var(--border-color);
     font-size: 16px;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
 .btn-danger {
-
     max-width: 180px;
     padding: 10px;
     border-radius: 10px;
     background: transparent;
     color: var(--danger-accent);
     font-size: 16px;
-    border: 1px solid var(--danger-accent); /* gedämpftes Rot statt Knallrot */
+    border: 1px solid var(--danger-accent);
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
+
 .btn-danger:hover {
-    background: var(--danger-tint); /* leichter roter Tint beim Hover */
+    background: var(--danger-tint);
     transform: translateY(-6px);
     box-shadow: 0 12px 30px var(--btn-danger-hover-shadow);
     border-color: var(--text-danger);
 }
 
 .btn-success {
-
     max-width: 180px;
     padding: 10px;
     border-radius: 10px;
     background: transparent;
     color: var(--success-accent);
     font-size: 16px;
-    border: 1px solid var(--success-accent); /* gedämpftes Grün statt Knallgrün */
+    border: 1px solid var(--success-accent);
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
+
 .btn-success:hover {
-    background: var(--success-tint); /* leichter grüner Tint beim Hover */
+    background: var(--success-tint);
     border-color: var(--text-success);
     transform: translateY(-6px);
-    
 }
 
 .btn-secondary {
@@ -341,7 +288,7 @@ h1 {
     padding: 10px;
     background: transparent;
     color: var(--secondary-text-color);
-    border: 1px solid var(--secondary-border-color); /* schwaches Grau/Weiß */
+    border: 1px solid var(--secondary-border-color);
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
@@ -349,14 +296,15 @@ h1 {
 }
 
 .btn-secondary:hover {
-    background: var(--secondary-tint); /* leichter grauer Tint beim Hover */
+    background: var(--secondary-tint);
     transform: translateY(-6px);
     box-shadow: 0 12px 30px var(--secondary-hover-box-shadow);
-    border-color: var(--secondary-hover-border);}
+    border-color: var(--secondary-hover-border);
+}
+
 /* ==========================================================================
    MODAL
    ========================================================================== */
-
 .modal {
     position: fixed;
     top: 0;
@@ -420,8 +368,6 @@ h1 {
     gap: 10px;
 }
 
-
-
 .confirm-modal {
     position: fixed;
     top: 0;
@@ -460,9 +406,9 @@ h1 {
 
 .auth-toggle-text {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--text-color);
 }
 
 .auth-toggle-text a {
@@ -477,145 +423,92 @@ h1 {
     text-decoration: underline;
 }
 
-
+/* Der Toggle-Button (⋯) */
 /* ==========================================================================
-   RESPONSIVE
+   DROPDOWN MENÜ (SMOOTH BUBBLE DELAY)
    ========================================================================== */
-
-@media (max-width: 768px) {
-
-    .view-header {
-        grid-template-columns: 1fr;
-        border-bottom: none;
-        gap: 10px;
-    }
-
-    /* Reihenfolge für mobile Ansicht */
-    .view-header h3 {
-        order: 1;
-    }
-
-    #add-entry-btn,
-    #add-person-btn,
-    #add-finance-btn {
-        order: 2;
-    }
-
-    .view-header button:first-child {
-        order: 3; /* Zurück-Button */
-    }
-
-    .view-header .btn-primary {
-        width: 100%;
-        max-width: 220px;
-        height: 45px;
-        justify-self: center;
-    }
-
-    .view-header .btn-secondary {
-        width: 100%;
-        max-width: 220px;
-        height: 45px;
-        justify-self: center;
-    }
-
-    .view-header .btn-danger {
-        width: 100%;
-        max-width: 220px;
-        height: 45px;
-        justify-self: center;
-    }
-
-    .view-header .btn-success {
-        width: 100%;
-        max-width: 220px;
-        height: 45px;
-        justify-self: center;
-    }
-
-    .view-header .header-placeholder {
-        display: none;
-    }
-}
-
-/* ==========================================================================
-   Dropdown Menü
-   ========================================================================== */
-
-/* Wrapper bleibt wie besprochen der Bezugspunkt */
-/* ==========================================================================
-   Dropdown Menü (Korrigerte Fassung)
-   ========================================================================== */
-
-
 
 /* Der Toggle-Button (⋯) */
 .menu-toggle {
-  background: none;
+  background: none !important;
   border: none;
   color: #c8a96e;
   font-size: 24px;
   cursor: pointer;
   padding: 8px 12px;
   border-radius: 8px;
-  transition: background 0.2s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Der Toggle-Button (⋯) */
-.menu-toggle {
-  background: none;
-  border: none;
-  color: #c8a96e; /* */
-  font-size: 24px; /* */
-  cursor: pointer; /* */
-  padding: 8px 12px; /* */
-  border-radius: 8px; /* */
-  outline: none; /* Verhindert hässliche Standard-Rahmen auf Mobilgeräten */
-  -webkit-tap-highlight-color: transparent; /* Verhindert das blaue Aufblitzen beim Tippen auf iOS */
+/* Klick-Effekt (Mobile & Desktop): Drückt sich ein und leuchtet kurz auf */
+.menu-toggle.clicked {
+  background: rgba(200, 169, 110, 0.25) !important;
+  transform: scale(0.92);
 }
 
-/* Hover-Effekt NUR auf Geräten erlauben, die echtes Hover unterstützen (PC/Laptop) */
-@media (hover: hover) {
+/* Hover-Effekt: Gilt AUSSCHLIESSLICH für Desktop mit Maus */
+@media (hover: hover) and (pointer: fine) {
   .menu-toggle:hover {
-    background: rgba(200, 169, 110, 0.1); /* */
+    background: rgba(200, 169, 110, 0.1) !important;
   }
 }
 
-/* Für Touch-Geräte nutzen wir :active (gilt nur, solange der Finger den Bildschirm berührt) */
-.menu-toggle:active {
-  background: rgba(200, 169, 110, 0.2);
-}
-
-
-/* Das Dropdown selbst */
-/* Anpassung für das Dropdown, damit es unter dem Button bündig abschließt */
+/* Das Dropdown im Gemini-Look */
 .dropdown-menu {
     position: absolute;
-    top: calc(100% + 4px);
-    right: 0;
-    min-width: 160px;
-    background: #0a1628;
-    border: 1px solid rgba(200, 169, 110, 0.3);
+    top: -6px; 
+    right: -6px;
+    min-width: 170px;
+    
+    /* Transparentes Design */
+    background: rgba(11, 19, 26, 0.05); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    border: 1px solid rgba(200, 169, 110, 0.25);
     border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
     overflow: hidden;
     padding: 6px;
+    z-index: 999;
   
+    /* Ausgangszustand vor der Animation */
     opacity: 0;
     visibility: hidden;
-    transform: scale(0.95) translateY(-10px);
+    transform: scale(0);
     transform-origin: top right;
-    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-                transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-                visibility 0.2s;
 }
 
-/* Offener Zustand – wird per JS getoggelt */
+/* Offener Zustand mit kontrollierter Verzögerung */
 .dropdown-menu.open {
-  opacity: 1;
   visibility: visible;
-  transform: scale(1) translateY(0);
+  /* animation-delay: 0.12s wartet, bis der Button-Klick vorbei ist, 
+     bevor die Blase explodiert */
+  animation: bubblePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards;
 }
+
+/* Die Seifenblasen-Animation */
+@keyframes bubblePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  70% {
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Schließ-Animation: Schließt ohne Verzögerung sofort und weich */
+.dropdown-menu:not(.open) {
+  transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
+}
+
 
 /* Einzelne Menüpunkte */
 .dropdown-item {
@@ -650,4 +543,115 @@ h1 {
   height: 1px;
   background: rgba(200, 169, 110, 0.15);
   margin: 6px 4px;
+}
+
+
+/* ==========================================================================
+   VIEW HEADER (STANDARD / MOBIL BASIS)
+   ========================================================================== */
+.view-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    gap: 10px;
+    padding-bottom: 15px;
+}
+
+.view-header h3 {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    color: var(--accent-gold);
+    font-weight: 400;
+    text-align: center;
+    order: 1;
+}
+
+#add-entry-btn,
+#add-person-btn,
+#add-finance-btn {
+    order: 2;
+}
+
+.view-header button:first-child {
+    order: 3;
+}
+
+.view-header .btn-primary,
+.view-header .btn-secondary,
+.view-header .btn-danger,
+.view-header .btn-success {
+    width: 100%;
+    max-width: 220px;
+    height: 45px;
+    justify-self: center;
+}
+
+.view-header .header-placeholder {
+    display: none;
+}
+
+/* ==========================================================================
+   PASSWORT ANZEIGEN (TOGGLE EYE BRIGHTNESS)
+   ========================================================================== */
+
+/* Für Microsoft Edge */
+input[type="password"]::-ms-reveal {
+    filter: invert(1) brightness(2); /* Dreht Schwarz zu Weiß um und macht es maximal hell */
+    cursor: pointer;
+}
+
+/* Für Google Chrome, Opera und Safari */
+input[type="password"]::-webkit-credentials-automfill-button,
+input[type="password"]::-webkit-contacts-auto-fill-button {
+    filter: invert(1) brightness(2);
+}
+
+/* Falls du ein eigenes Icon/Button im HTML hast (z.B. ein <span> oder <button>) */
+.password-toggle-btn {
+    color: #ffffff !important; /* Erzwingt klares Weiß */
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+
+/* ==========================================================================
+   DESKTOP ERWEITERUNGEN (AB 769px)
+   ========================================================================== */
+@media (min-width: 769px) {
+    .view-header {
+        grid-template-columns: 160px 1fr 160px;
+        border-bottom: 1px solid var(--border-color);
+        gap: 0;
+    }
+
+    .view-header h3 {
+        order: initial;
+    }
+
+    #add-entry-btn,
+    #add-person-btn,
+    #add-finance-btn {
+        order: initial;
+    }
+
+    .view-header button:first-child {
+        order: initial;
+    }
+
+    .view-header .btn-primary,
+    .view-header .btn-secondary,
+    .view-header .btn-danger,
+    .view-header .btn-success {
+        min-width: 140px;
+        width: 100%;
+        max-width: 160px;
+    }
+
+    .view-header .header-placeholder {
+        display: block;
+        min-width: 140px;
+        width: 100%;
+        max-width: 160px;
+    }
 }

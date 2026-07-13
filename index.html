@@ -5,22 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finanz Manager</title>
     <link rel="icon" type="image/x-icon" href="bilder/favicon3.ico">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
     <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
+    
+    <!-- #region DropdownMenu -->
+  
+
+    <!-- #endregion DropdownMenu-->
 
     <!-- #region Header -->
+ <!-- #region Header -->
+<div class="app-header">
+    <div class="menu-wrapper">
+      <button class="menu-toggle" id="menuToggle">⋯</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <button class="dropdown-item">⚙️ Settings</button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item danger" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
     <h1>Finanz Manager</h1>
     <picture>
         <source srcset="bilder/applogo.webp" type="image/webp">
         <img class="logo home-logo" src="bilder/applogo.png" alt="Logo der App" onclick="openDashboard()">
     </picture>
-    
+
     <article class="subtitle">
-        <h2>Wähle zwischen Schuldeneinträgen oder eigenen Finanzen.</h2>       
-        <button class="btn-danger" id="logout-btn" type="button" onclick="logout()">Logout</button>
+        <h2>Wähle zwischen Schuldeneinträgen oder eigenen Finanzen.</h2>
     </article>
+</div>
+<!-- #endregion Header -->
+
     <!-- #endregion Header -->
 
     <!-- #region Hauptkacheln -->
@@ -54,7 +72,6 @@
             
             <h3>Schuldenbuch</h3>
             <button class="btn-primary" id="add-person-btn" type="button" onclick="openModal('AddPersonModal')">Person hinzufügen</button>
-            <button class="btn-danger" id="logout-btn" type="button" onclick="logout()">Logout</button>
         </div>
 
         <div id="Schulden-Container" class="grid">
@@ -188,20 +205,35 @@
     <!-- #endregion ConfirmDeleteDebtModal -->
 
     <!--#region AuthModal-->
-    <div id="AuthModal" class="modal hidden">
-        <div class="modal-content">
+  <div id="AuthModal" class="modal hidden">
+    <div class="modal-content">
+        <h3>Finanz Manager</h3>
+        
+        <form id="loginForm" onsubmit="handleAuth(event, 'login')">
             <div class="form-group">
-                <h3>Finanz Manager</h3>
-                <input type="text" id="authUsername" placeholder="Username">
-                <input type="password" id="authPassword" placeholder="Passwort">
+                <input type="text" id="loginUsername" placeholder="Username" required>
+                <input type="password" id="loginPassword" placeholder="Passwort" required>
             </div>
-
             <div class="modal-buttons">
-                <button class="btn-primary" onclick="login()">Login</button>
-                <button class="btn-primary" onclick="register()">Registrieren</button>        
+                <button type="submit" class="btn-primary">Login</button>
             </div>
-        </div>
+            <p class="auth-toggle-text">Noch kein Konto? <a href="#" onclick="toggleAuthMode(event, 'register')">Jetzt registrieren</a></p>
+        </form>
+
+        <form id="registerForm" class="hidden" onsubmit="handleAuth(event, 'register')">
+            <div class="form-group">
+                <input type="text" id="registerUsername" placeholder="Username erstellen" required>
+                <input type="password" id="registerPassword" placeholder="Passwort erstellen" required>
+            </div>
+            <div class="modal-buttons">
+                <button type="submit" class="btn-primary">Registrieren</button>
+            </div>
+            <p class="auth-toggle-text">Bereits registriert? <a href="#" onclick="toggleAuthMode(event, 'login')">Zum Login</a></p>
+        </form>
+
     </div>
+</div>
+
     <!--#endregion AuthModal-->
 
 <script src="script.js" defer></script>

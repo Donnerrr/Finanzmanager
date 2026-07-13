@@ -11,14 +11,35 @@ let currentDeleteDebtId = null; // Globale Variable, um die aktuelle Schuld für
 
 
 
-document.addEventListener('DOMContentLoaded', () =>{
+document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
-    if(!token){
+    if (!token) {
         openModal('AuthModal');
-    } else{
+    } else {
         loadFinancesFromDB();
     }
+    
+    
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        
+        // Fügt den visuellen "Klick-Effekt" hinzu und entfernt ihn nach 150ms wieder
+        menuToggle.classList.add('clicked');
+        setTimeout(() => menuToggle.classList.remove('clicked'), 150);
+        
+        dropdownMenu.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!dropdownMenu.contains(e.target) && e.target !== menuToggle) {
+            dropdownMenu.classList.remove('open');
+        }
+    });
 });
+
 
 
 
@@ -63,7 +84,7 @@ async function authorizedFetch(endpoint, method = 'GET', body = null) {
     }
 
     try {
-        const response = await fetch(`${API_TEST}/api/Schuldenbuch/${endpoint}`, options);
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/${endpoint}`, options);
 
         if (!response.ok) {
             let errorMsg = `Fehler ${response.status}`;
@@ -75,8 +96,17 @@ async function authorizedFetch(endpoint, method = 'GET', body = null) {
         }
 
         if (response.status === 204) return null;
+ 
+        const text = await response.text();
+        if (!text) return null;
 
-        return await response.json();
+        try {
+            return JSON.parse(text);
+        } catch (parseError) {
+            console.error("JSON Parse Fehler. Roh-Response war:", text.substring(0, 300));
+            throw new Error(`Server-Antwort ist kein JSON: ${text.substring(0, 150)}...`);
+        }
+
     } catch (error) {
         console.error(`API Fehler bei ${method} ${endpoint}:`, error);
         throw error;
@@ -129,6 +159,38 @@ function openFinances() {
     document.getElementById("FinanzSection").classList.remove("hidden");
     loadFinancesFromDB();
 }
+
+// Schaltet zwischen Login und Registrierung hin und her
+function toggleAuthMode(event, mode) {
+    event.preventDefault(); // Verhindert, dass die Seite neu lädt (wegen dem <a> Tag)
+    
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    
+    if (mode === 'register') {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+    } else {
+        registerForm.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+    }
+}
+
+// Zentrale Funktion, die bei Klick ODER Enter anspringt
+function handleAuth(event, type) {
+    event.preventDefault(); // Verhindert das Neuladen der Seite durch das Formular
+    
+    if (type === 'login') {
+        // Hier rufst du deine bestehende login() Logik auf
+        console.log("Login wird ausgeführt...");
+        login(); 
+    } else if (type === 'register') {
+        // Hier rufst du deine bestehende register() Logik auf
+        console.log("Registrierung wird ausgeführt...");
+        register();
+    }
+}
+
 
 //#endregion
 
@@ -297,22 +359,22 @@ async function savePerson(event) {
     const personData = {
         name: document.getElementById("person-name").value,
         street: document.getElementById("street").value,
-        zipcode: document.getElementById("ZipCode").value,
+        zipCode: document.getElementById("ZipCode").value,
         city: document.getElementById("city").value
     };
     
     try 
     {
-            await authorizedFetch('Person', 'POST', personData);
-            console.log('Person erfolgreich gespeichert');
-            closeModal('AddPersonModal');
-            loadPersonsFromDB();
-            document.getElementById("add-person-form").reset();
+        await authorizedFetch('Person', 'POST', personData);
+        console.log('Person erfolgreich gespeichert');
+        closeModal('AddPersonModal');
+        loadPersonsFromDB();
+        document.getElementById("add-person-form").reset();
     }
-
     catch (error) 
     {
-        console.error('Fehler beim Speichern der Person:' + error.message);
+        console.error('Fehler beim Speichern der Person:', error.message);
+        alert('Fehler beim Speichern der Person: ' + error.message);
     }
 }
 //#endregion
@@ -322,30 +384,28 @@ async function saveEntry(event) {
     event.preventDefault(); 
 
     if (currentPersonId === null) {
-        console.error('Keine Person ausgewählt.');
         alert('Keine Person ausgewählt.');
         return;
     }
     
     const entryData = {
-        personId: currentPersonId, 
-        amount: document.getElementById("entry-amount").value,
-        description: document.getElementById("entry-purpose").value // Im HTML heißt die ID 'entry-purpose'
+        PersonId: currentPersonId, 
+        Amount: document.getElementById("entry-amount").value,
+        Description: document.getElementById("entry-purpose").value
     };
 
     console.log("Sende Payload an API:", JSON.stringify(entryData));
 
     try {
-            await authorizedFetch('Debt', 'POST', entryData);
-            console.log('Schuld erfolgreich gespeichert');
-            closeModal('AddEntryModal');
-            document.getElementById("add-entry-form").reset();
-
-            loadPersonDetails(currentPersonId);
+        const result = await authorizedFetch('Debt', 'POST', entryData);
+        console.log('Schuld erfolgreich gespeichert:', result);
+        closeModal('AddEntryModal');
+        document.getElementById("add-entry-form").reset();
+        loadPersonDetails(currentPersonId);
     }
-    
     catch (error) {
-        console.error('Fehler beim Speichern der Schuld:' + error.message);
+        console.error('Fehler beim Speichern der Schuld:', error.message);
+        alert('Fehler beim Speichern:\n' + error.message);
     }
 }
 //#endregion
@@ -393,22 +453,32 @@ async function deletePerson(event) {
 async function updateDebt(event) {
     event.preventDefault();
     
-    
-    const debtId = currentDebtId; // Verwendet die globale Variable, die beim Öffnen des Modals gesetzt wurde
-    const updatedAmount = document.getElementById("update-debt-amount").value;
+    const debtId = currentDebtId;
+    const inputValue = document.getElementById("update-debt-amount").value.trim();
 
+    // Sende als String (wie der Service es erwartet)
+    const updateData = {
+        Amount: inputValue
+    };
+        console.log("Request Body wird gesendet als:", JSON.stringify(updateData));
+
+    console.log("Sende Update-Payload:", JSON.stringify(updateData));
 
     try {
+<<<<<<< HEAD
         await authorizedFetch(`Debt/${debtId}`, 'PUT', updatedAmount);
         console.log('Schuld erfolgreich aktualisiert');
+=======
+        const result = await authorizedFetch(`Debt/${debtId}`, 'PUT', updateData);
+        console.log('Update erfolgreich:', result);
+>>>>>>> 634c171f5a26e497b288dc7f7c8bc7f0544c9b90
         closeModal('UpdateDebtModal');
-        
-        loadPersonDetails(currentPersonId);
-        currentDebtId = null;
         document.getElementById("update-debt-amount").value = "";
-    
+        currentDebtId = null;
+        if (currentPersonId) loadPersonDetails(currentPersonId);
     } catch (error) {
-        console.error("Fehler beim Aktualisieren:" + error.message);
+        console.error("Fehler beim Aktualisieren:", error.message);
+        alert('Update-Fehler:\n' + error.message);
     }
 }
 
@@ -416,11 +486,11 @@ async function updateDebt(event) {
 
 //#region Authentifizieren
 async function login() {
-    const username = document.getElementById('authUsername').value;
-    const password = document.getElementById('authPassword').value;
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
 
     try {
-        const response = await fetch(`${API_TEST}/api/Auth/login`, {
+        const response = await fetch(`${API_BASE}/api/Auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
@@ -430,11 +500,15 @@ async function login() {
             const data = await response.json();   // <-- WICHTIG
             localStorage.setItem('token', data.token);
             closeModal('AuthModal');
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value ='';
             
         } else {
             const errorData = await response.json();
             let errorMsg = errorData.detail || errorData.message || JSON.stringify(errorData);
             alert(`Fehler: ${errorMsg}`);
+            
+            
         }
     } catch (error) {
         alert(`Fehler: ${error.message}`);
@@ -443,11 +517,11 @@ async function login() {
 
 
 async function register() {
-    const username = document.getElementById('authUsername').value;
-    const password = document.getElementById('authPassword').value;
+    const username = document.getElementById('registerUsername').value;
+    const password = document.getElementById('registerPassword').value;
 
     try {
-        const response = await fetch(`${API_TEST}/api/Auth/register`, {
+        const response = await fetch(`${API_BASE}/api/Auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
@@ -473,6 +547,8 @@ async function register() {
             localStorage.setItem('token', data.token);
             console.log("Token gespeichert");
             closeModal('AuthModal');
+            document.getElementById('registerUsername').value = '';
+            document.getElementById('registerPassword').value ='';
         }
     } catch (error) {
         alert('Netzwerk-Fehler: ' + error.message);
@@ -481,9 +557,16 @@ async function register() {
 
 
 function logout(){
-    localStorage.removeItem('token');
-    openDashboard();
-    start();
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    if(dropdownMenu){
+        dropdownMenu.classList.remove('open');
+    }
+    setTimeout(() => {
+        localStorage.removeItem('token');
+        openDashboard();
+        start();
+    }, 5);
+    
 
 }
 
