@@ -412,6 +412,11 @@ h1 {
    ========================================================================== */
 
 /* Der Toggle-Button (⋯) */
+/* ==========================================================================
+   DROPDOWN MENÜ (SMOOTH BUBBLE DELAY)
+   ========================================================================== */
+
+/* Der Toggle-Button (⋯) */
 .menu-toggle {
   background: none !important;
   border: none;
@@ -420,42 +425,33 @@ h1 {
   cursor: pointer;
   padding: 8px 12px;
   border-radius: 8px;
-  transition: background 0.15s ease, transform 0.1s ease;
+  transition: background 0.1s ease, transform 0.1s ease;
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Garantiertes Aufleuchten & minimales Eindrücken beim Klick (Mobile & Desktop) */
+/* Klick-Effekt (Mobile & Desktop): Drückt sich ein und leuchtet kurz auf */
 .menu-toggle.clicked {
   background: rgba(200, 169, 110, 0.25) !important;
   transform: scale(0.92);
 }
 
-/* Bleibender Hintergrund, solange das Menü offen steht 
-.menu-toggle:has(+ .dropdown-menu.open) {
-  background: rgba(200, 169, 110, 0.15) !important;
-}
-*/
-/* Hover-Effekt: Nur für PC/Maus */
+/* Hover-Effekt: Gilt AUSSCHLIESSLICH für Desktop mit Maus */
 @media (hover: hover) and (pointer: fine) {
   .menu-toggle:hover {
     background: rgba(200, 169, 110, 0.1) !important;
   }
 }
 
-/* Das Dropdown selbst */
-/* Das Dropdown selbst im eleganten Gemini-Look */
+/* Das Dropdown im Gemini-Look */
 .dropdown-menu {
     position: absolute;
-    /* Schiebt das Menü nach oben, sodass es direkt auf/über den Punkten liegt */
     top: -6px; 
     right: -6px;
     min-width: 170px;
     
-    /* Leicht transparente Hintergrundfarbe (rgba), damit das Design durchschimmert */
+    /* Transparentes Design */
     background: rgba(11, 19, 26, 0.05); 
-    
-    /* Der gläserne Unschärfe-Effekt (Glassmorphism) für den Hintergrund */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     
@@ -466,17 +462,19 @@ h1 {
     padding: 6px;
     z-index: 999;
   
-    /* Ausgangszustand für die Bubble-Animation */
+    /* Ausgangszustand vor der Animation */
     opacity: 0;
     visibility: hidden;
     transform: scale(0);
     transform-origin: top right;
 }
 
-/* Offener Zustand mit dem elastischen "Bubble-Pop" */
+/* Offener Zustand mit kontrollierter Verzögerung */
 .dropdown-menu.open {
   visibility: visible;
-  animation: bubblePop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  /* animation-delay: 0.12s wartet, bis der Button-Klick vorbei ist, 
+     bevor die Blase explodiert */
+  animation: bubblePop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) 0.12s forwards;
 }
 
 /* Die Seifenblasen-Animation */
@@ -494,10 +492,11 @@ h1 {
   }
 }
 
-/* Schließ-Animation */
+/* Schließ-Animation: Schließt ohne Verzögerung sofort und weich */
 .dropdown-menu:not(.open) {
-  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
 }
+
 
 /* Einzelne Menüpunkte */
 .dropdown-item {
