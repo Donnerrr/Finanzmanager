@@ -420,7 +420,7 @@ h1 {
   cursor: pointer;
   padding: 8px 12px;
   border-radius: 8px;
-  transition: background 1.5s ease, transform 1.5s ease;
+  transition: background 0.5s ease, transform 0.5s ease;
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -469,7 +469,7 @@ h1 {
   visibility: visible;
   /* animation-delay: 0.12s wartet, bis der Button-Klick vorbei ist, 
      bevor die Blase explodiert */
-  animation: bubblePop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+  animation: bubblePop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards;
 }
 
 /* Die Seifenblasen-Animation */
