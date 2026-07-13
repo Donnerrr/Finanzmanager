@@ -62,7 +62,6 @@ function hideAllSections() {
 }
 
 // Hilfsfunktion: Vereinfacht den API Aufruf
-// Hilfsfunktion: Vereinfacht den API Aufruf
 async function authorizedFetch(endpoint, method = 'GET', body = null) {
     const token = localStorage.getItem('token');
 
@@ -184,11 +183,11 @@ function handleAuth(event, type) {
     if (type === 'login') {
         // Hier rufst du deine bestehende login() Logik auf
         console.log("Login wird ausgeführt...");
-        // login(); 
+        login(); 
     } else if (type === 'register') {
         // Hier rufst du deine bestehende register() Logik auf
         console.log("Registrierung wird ausgeführt...");
-        // register();
+        register();
     }
 }
 
