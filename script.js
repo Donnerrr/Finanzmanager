@@ -84,7 +84,7 @@ async function authorizedFetch(endpoint, method = 'GET', body = null) {
     }
 
     try {
-        const response = await fetch(`${API_TEST}/api/Schuldenbuch/${endpoint}`, options);
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/${endpoint}`, options);
 
         if (!response.ok) {
             let errorMsg = `Fehler ${response.status}`;
@@ -485,7 +485,7 @@ async function login() {
     const password = document.getElementById('loginPassword').value;
 
     try {
-        const response = await fetch(`${API_TEST}/api/Auth/login`, {
+        const response = await fetch(`${API_BASE}/api/Auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
@@ -516,7 +516,7 @@ async function register() {
     const password = document.getElementById('registerPassword').value;
 
     try {
-        const response = await fetch(`${API_TEST}/api/Auth/register`, {
+        const response = await fetch(`${API_BASE}/api/Auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
