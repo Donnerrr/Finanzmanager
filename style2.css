@@ -423,6 +423,28 @@ h1 {
     text-decoration: underline;
 }
 
+/* ==========================================================================
+   PASSWORT TOGGLE LINK
+   ========================================================================== */
+.password-toggle-link {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-align: left;
+    margin-top: 4px;
+    user-select: none;
+    transition: color 0.2s ease;
+    width: fit-content;
+}
+
+.password-toggle-link:hover,
+.password-toggle-link:active {
+    color: var(--accent-gold);
+    text-decoration: underline;
+}
+
+
 /* Der Toggle-Button (⋯) */
 /* ==========================================================================
    DROPDOWN MENÜ (SMOOTH BUBBLE DELAY)
