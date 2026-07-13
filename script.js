@@ -608,6 +608,7 @@ function logout(){
     }
     setTimeout(() => {
         localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
         openDashboard();
         start();
     }, 5);
