@@ -11,11 +11,11 @@ let currentDeleteDebtId = null; // Globale Variable, um die aktuelle Schuld für
 
 
 
-document.addEventListener('DOMContentLoaded', () =>{
+document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
-    if(!token){
+    if (!token) {
         openModal('AuthModal');
-    } else{
+    } else {
         loadFinancesFromDB();
     }
     
@@ -23,15 +23,17 @@ document.addEventListener('DOMContentLoaded', () =>{
     const dropdownMenu = document.getElementById('dropdownMenu');
 
     menuToggle.addEventListener('click', (e) => {
-      e.stopPropagation(); // verhindert, dass der Klick "durchsickert"
-      dropdownMenu.classList.toggle('open');
+        e.stopPropagation(); // Verhindert, dass der Klick direkt auf das Dokument durchreicht
+        dropdownMenu.classList.toggle('open');
     });
 
-    // Menü schließen, wenn irgendwo anders geklickt wird
-    document.addEventListener('click', () => {
-      dropdownMenu.classList.remove('open');
+    // Menü NUR schließen, wenn außerhalb geklickt wird
+    document.addEventListener('click', (e) => {
+        // Wenn das Ziel des Klicks NICHT das Menü selbst ist und NICHT der Toggle-Button
+        if (!dropdownMenu.contains(e.target) && e.target !== menuToggle) {
+            dropdownMenu.classList.remove('open');
+        }
     });
-
 });
 
 
