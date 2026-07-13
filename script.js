@@ -517,38 +517,42 @@ async function login() {
             body: JSON.stringify({ username, password })
         });
 
-        if (response.ok){
-    const data = await response.json();   
-    
-    // Checkbox auslesen
-    const rememberMe = document.getElementById('loginRememberMe').checked;
-
-    // Die Weiche: localStorage oder sessionStorage
-    if (rememberMe) {
-        localStorage.setItem('token', data.token);
-    } else {
-        sessionStorage.setItem('token', data.token);
-    }
-    
-    closeModal('AuthModal');
-    // ... Felder leeren wie gehabt
-}
-
-            closeModal('AuthModal');
-            document.getElementById('loginUsername').value = '';
-            document.getElementById('loginPassword').value ='';
+        if (response.ok) {
+            const data = await response.json();   
             
+            // Checkbox für "Angemeldet bleiben" auslesen
+            const rememberMe = document.getElementById('loginRememberMe').checked;
+
+            // Die Weiche: Entweder dauerhaft (local) oder nur für die Session speichern
+            if (rememberMe) {
+                localStorage.setItem('token', data.token);
+            } else {
+                sessionStorage.setItem('token', data.token);
+            }
+            
+            // Modal schließen
+            closeModal('AuthModal');
+
+            // Formularfelder & Checkbox säubern
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginRememberMe').checked = false;
+
+            // Daten nach erfolgreichem Login laden
+            loadFinancesFromDB();
+
         } else {
+            // Fehlerbehandlung, falls Server-Antwort nicht OK (z.B. 401 Unauthorized)
             const errorData = await response.json();
             let errorMsg = errorData.detail || errorData.message || JSON.stringify(errorData);
             alert(`Fehler: ${errorMsg}`);
-            
-            
         }
     } catch (error) {
+        // Netzwerk- oder sonstige Laufzeitfehler abfangen
         alert(`Fehler: ${error.message}`);
     }
 }
+
 
 
 async function register() {
