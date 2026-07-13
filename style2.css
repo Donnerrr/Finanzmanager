@@ -444,20 +444,29 @@ h1 {
 }
 
 /* Das Dropdown selbst */
+/* Das Dropdown selbst im eleganten Gemini-Look */
 .dropdown-menu {
     position: absolute;
-    top: calc(100% + 4px);
-    right: 0;
-    min-width: 160px;
-    background: #0a1628;
-    border: 1px solid rgba(200, 169, 110, 0.3);
+    /* Schiebt das Menü nach oben, sodass es direkt auf/über den Punkten liegt */
+    top: -6px; 
+    right: -6px;
+    min-width: 170px;
+    
+    /* Leicht transparente Hintergrundfarbe (rgba), damit das Design durchschimmert */
+    background: rgba(11, 19, 26, 0.85); 
+    
+    /* Der gläserne Unschärfe-Effekt (Glassmorphism) für den Hintergrund */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    border: 1px solid rgba(200, 169, 110, 0.25);
     border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
     overflow: hidden;
     padding: 6px;
-    z-index: 100;
+    z-index: 999;
   
-    /* Ausgangszustand: Unsichtbar und winzig (in der Ecke) */
+    /* Ausgangszustand für die Bubble-Animation */
     opacity: 0;
     visibility: hidden;
     transform: scale(0);
@@ -474,19 +483,18 @@ h1 {
 @keyframes bubblePop {
   0% {
     opacity: 0;
-    transform: scale(0.3) translateY(-10px);
+    transform: scale(0.3);
   }
   70% {
-    /* Schießt minimal über das Ziel hinaus für den elastischen Effekt */
-    transform: scale(1.04) translateY(2px);
+    transform: scale(1.03);
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1);
   }
 }
 
-/* Schließ-Animation (fließt weich aus) */
+/* Schließ-Animation */
 .dropdown-menu:not(.open) {
   transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
 }
