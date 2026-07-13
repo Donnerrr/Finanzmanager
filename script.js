@@ -528,10 +528,10 @@ console.log("Checkbox Zustand beim Login:", rememberMe);
 
             // Die Weiche: Entweder dauerhaft (local) oder nur für die Session speichern
 if (rememberMe) {
-    alert("Haken erkannt! Ich speichere im LOCAL STORAGE (für immer).");
+
     localStorage.setItem('token', data.token);
 } else {
-    alert("Kein Haken! Ich speichere im SESSION STORAGE (nur für diesen Tab).");
+
     sessionStorage.setItem('token', data.token);
 }
 
