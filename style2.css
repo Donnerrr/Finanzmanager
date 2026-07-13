@@ -1,0 +1,585 @@
+/* ==========================================================================
+   1. FARBPALETTE & BASIS-SETUP
+   ========================================================================== */
+:root,
+:root[data-theme="dark"] {
+    --bg-color: #0b131a;
+    --card-bg: #11222c;
+    --border-color: #1a3a4b;
+    --text-color: #e0e1dd;
+    --accent-gold: #cca43b;
+    --accent-gold-hover: #e0a96d;
+    --text-muted: #8d99ae;
+    --text-danger: #950606;
+    --danger-accent: #ff4c4c;
+    --success-accent: #4ce079;
+    --text-success: #0a6b2e;
+    --app-box-shadow: rgba(0, 0, 0, 0.3);
+    --app-hover-box-shadow: rgba(204, 164, 59, 0.15);
+    --app-img-dropshadow: rgba(0, 0, 0, 0.2);
+    --btn-primary-hover-shadow: rgba(204, 164, 59, 0.15);
+    --btn-danger-hover-shadow: rgba(255,76,76, 0.15);
+    --danger-tint: rgba(224, 92, 92, 0.1);
+    --success-tint: rgba(76, 199, 122, 0.1);
+    --secondary-text-color: rgba(255, 255, 255, 0.7);
+    --secondary-border-color: rgba(255, 255, 255, 0.2);
+    --secondary-tint: rgba(255, 255, 255, 0.05);
+    --secondary-hover-box-shadow: rgba(131, 130, 128, 0.15);
+    --secondary-hover-border: rgba(255, 255, 255, 0.4);
+    --modal-bg-color: rgba(0, 0, 0, 0.7);
+    --modal-content-box-shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   HEADER & WRAPPER OPTIMIERUNG
+   ========================================================================== */
+.app-header {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.menu-wrapper {
+    position: absolute;
+    top: -20px;
+    right: 0px;
+    z-index: 100;
+}
+
+.hidden {
+    display: none !important;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   LOGO
+   ========================================================================== */
+.logo {
+    width: 90px;
+    height: auto;
+    margin-bottom: 35px;
+}
+
+.home-logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 15px var(--accent-gold));
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: var(--accent-gold);
+    font-weight: 300;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.subtitle h2 {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* ==========================================================================
+   CONTAINER & GRID
+   ========================================================================== */
+.app-container {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 260px));
+    width: 100%;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   CARDS
+   ========================================================================== */
+.app {
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 35px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+    min-height: 280px;
+    box-shadow: 0 4px 15px var(--app-box-shadow);
+}
+
+.app-schulden {
+    cursor: default;
+}
+
+.app:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px var(--app-hover-box-shadow);
+    border-color: var(--accent-gold);
+}
+
+.app h3 {
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.app img {
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px var(--app-img-dropshadow));
+}
+
+/* ==========================================================================
+   LOADING STATE
+   ========================================================================== */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    grid-column: 1 / -1;
+    opacity: 0;
+    animation: 
+        fadeIn 1.5s ease forwards 0.15s,
+        pulse 1.5s ease-in-out infinite 0.4s;
+}
+
+.pulse-loading {
+    opacity: 0;
+    animation:
+        fadeIn 1.5s ease forwards 0.15s,
+        pulse 1.5s ease-in-out infinite 0.4s;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+#Schulden-Container .app,
+#Personen-Schulden-Container .app {
+    animation: fadeIn 0.25s ease;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.btn-primary {
+    max-width: 180px;
+    padding: 10px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: 16px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px var(--btn-primary-hover-shadow);
+    border-color: var(--accent-gold);
+}
+
+.app .btn-danger {
+    max-width: 180px;
+    padding: 10px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--danger-accent);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.btn-danger {
+    max-width: 180px;
+    padding: 10px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--danger-accent);
+    font-size: 16px;
+    border: 1px solid var(--danger-accent);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.btn-danger:hover {
+    background: var(--danger-tint);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px var(--btn-danger-hover-shadow);
+    border-color: var(--text-danger);
+}
+
+.btn-success {
+    max-width: 180px;
+    padding: 10px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--success-accent);
+    font-size: 16px;
+    border: 1px solid var(--success-accent);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.btn-success:hover {
+    background: var(--success-tint);
+    border-color: var(--text-success);
+    transform: translateY(-6px);
+}
+
+.btn-secondary {
+    max-width: 180px;
+    padding: 10px;
+    background: transparent;
+    color: var(--secondary-text-color);
+    border: 1px solid var(--secondary-border-color);
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-tint);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px var(--secondary-hover-box-shadow);
+    border-color: var(--secondary-hover-border);
+}
+
+/* ==========================================================================
+   MODAL
+   ========================================================================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px var(--modal-content-box-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.form-group input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.confirm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.confirm-modal .modal-content {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 4px 20px var(--modal-content-box-shadow);
+    border: 1px solid var(--danger-accent);
+}
+
+.confirm-modal .modal-content h3 {
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    color: var(--text-color);
+}
+
+.confirm-modal .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* ==========================================================================
+   DROPDOWN MENÜ (GLOBAL & BEREINIGT)
+   ========================================================================== */
+.menu-toggle {
+  background: none !important;
+  border: none;
+  color: #c8a96e;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-toggle:focus,
+.menu-toggle:focus-visible,
+.menu-toggle:active {
+  background: none !important;
+  outline: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .menu-toggle:hover {
+    background: rgba(200, 169, 110, 0.1) !important;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .menu-toggle:active {
+    background: rgba(200, 169, 110, 0.15) !important;
+  }
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    min-width: 160px;
+    background: #0a1628;
+    border: 1px solid rgba(200, 169, 110, 0.3);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    padding: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95) translateY(-10px);
+    transform-origin: top right;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                visibility 0.2s;
+}
+
+.dropdown-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: #e8e8e8;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.dropdown-item:hover {
+  background: rgba(62, 184, 192, 0.1);
+}
+
+.dropdown-item.danger {
+  color: #e05c5c;
+}
+
+.dropdown-item.danger:hover {
+  background: rgba(224, 92, 92, 0.1);
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: rgba(200, 169, 110, 0.15);
+  margin: 6px 4px;
+}
+
+/* ==========================================================================
+   VIEW HEADER (STANDARD / MOBIL BASIS)
+   ========================================================================== */
+.view-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    gap: 10px;
+    padding-bottom: 15px;
+}
+
+.view-header h3 {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    color: var(--accent-gold);
+    font-weight: 400;
+    text-align: center;
+    order: 1;
+}
+
+#add-entry-btn,
+#add-person-btn,
+#add-finance-btn {
+    order: 2;
+}
+
+.view-header button:first-child {
+    order: 3;
+}
+
+.view-header .btn-primary,
+.view-header .btn-secondary,
+.view-header .btn-danger,
+.view-header .btn-success {
+    width: 100%;
+    max-width: 220px;
+    height: 45px;
+    justify-self: center;
+}
+
+.view-header .header-placeholder {
+    display: none;
+}
+
+/* ==========================================================================
+   DESKTOP ERWEITERUNGEN (AB 769px)
+   ========================================================================== */
+@media (min-width: 769px) {
+    .view-header {
+        grid-template-columns: 160px 1fr 160px;
+        border-bottom: 1px solid var(--border-color);
+        gap: 0;
+    }
+
+    .view-header h3 {
+        order: initial;
+    }
+
+    #add-entry-btn,
+    #add-person-btn,
+    #add-finance-btn {
+        order: initial;
+    }
+
+    .view-header button:first-child {
+        order: initial;
+    }
+
+    .view-header .btn-primary,
+    .view-header .btn-secondary,
+    .view-header .btn-danger,
+    .view-header .btn-success {
+        min-width: 140px;
+        width: 100%;
+        max-width: 160px;
+    }
+
+    .view-header .header-placeholder {
+        display: block;
+        min-width: 140px;
+        width: 100%;
+        max-width: 160px;
+    }
+}
