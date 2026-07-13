@@ -542,10 +542,31 @@ h1 {
   transition: background 0.2s ease;
 }
 
-.menu-toggle:hover,
-.menu-toggle:active {
-  background: rgba(200, 169, 110, 0.1);
+/* Der Toggle-Button (⋯) */
+.menu-toggle {
+  background: none;
+  border: none;
+  color: #c8a96e; /* */
+  font-size: 24px; /* */
+  cursor: pointer; /* */
+  padding: 8px 12px; /* */
+  border-radius: 8px; /* */
+  outline: none; /* Verhindert hässliche Standard-Rahmen auf Mobilgeräten */
+  -webkit-tap-highlight-color: transparent; /* Verhindert das blaue Aufblitzen beim Tippen auf iOS */
 }
+
+/* Hover-Effekt NUR auf Geräten erlauben, die echtes Hover unterstützen (PC/Laptop) */
+@media (hover: hover) {
+  .menu-toggle:hover {
+    background: rgba(200, 169, 110, 0.1); /* */
+  }
+}
+
+/* Für Touch-Geräte nutzen wir :active (gilt nur, solange der Finger den Bildschirm berührt) */
+.menu-toggle:active {
+  background: rgba(200, 169, 110, 0.2);
+}
+
 
 /* Das Dropdown selbst */
 /* Anpassung für das Dropdown, damit es unter dem Button bündig abschließt */
