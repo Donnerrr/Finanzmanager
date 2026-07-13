@@ -63,7 +63,7 @@ function hideAllSections() {
 
 // Hilfsfunktion: Vereinfacht den API Aufruf
 async function authorizedFetch(endpoint, method = 'GET', body = null) {
-    const token = localStorage.getItem('token');
+    const token = getToken();
 
     if (!token) {
         console.warn('Kein Token gefunden - Weiterleitung zum Login');
