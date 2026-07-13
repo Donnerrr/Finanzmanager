@@ -12,7 +12,7 @@ let currentDeleteDebtId = null; // Globale Variable, um die aktuelle Schuld für
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const token = localStorage.getItem('token');
+    const token = getToken(); // Nutzt die neue Hilfsfunktion
     if (!token) {
         openModal('AuthModal');
     } else {
@@ -139,6 +139,9 @@ function togglePasswordVisibility(inputId, linkElement) {
     }
 }
 
+function getToken() {
+    return localStorage.getItem('token') || sessionStorage.getItem('token');
+}
 
 //#endregion
 
@@ -514,9 +517,23 @@ async function login() {
             body: JSON.stringify({ username, password })
         });
 
-        if (response.ok) {
-            const data = await response.json();   // <-- WICHTIG
-            localStorage.setItem('token', data.token);
+        if (response.ok){
+    const data = await response.json();   
+    
+    // Checkbox auslesen
+    const rememberMe = document.getElementById('loginRememberMe').checked;
+
+    // Die Weiche: localStorage oder sessionStorage
+    if (rememberMe) {
+        localStorage.setItem('token', data.token);
+    } else {
+        sessionStorage.setItem('token', data.token);
+    }
+    
+    closeModal('AuthModal');
+    // ... Felder leeren wie gehabt
+}
+
             closeModal('AuthModal');
             document.getElementById('loginUsername').value = '';
             document.getElementById('loginPassword').value ='';
@@ -589,10 +606,10 @@ function logout(){
 }
 
 function start(){
-    const token = localStorage.getItem('token');
-    if(!token){
+    const token = getToken(); // Nutzt die neue Hilfsfunktion
+    if (!token) {
         openModal('AuthModal');
-    } else{
+    } else {
         loadFinancesFromDB();
     }
 }
