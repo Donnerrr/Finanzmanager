@@ -464,13 +464,14 @@ async function login() {
             const data = await response.json();   // <-- WICHTIG
             localStorage.setItem('token', data.token);
             closeModal('AuthModal');
+            document.getElementById('authUsername').value = '';
+            document.getElementById('authPassword').value ='';
             
         } else {
             const errorData = await response.json();
             let errorMsg = errorData.detail || errorData.message || JSON.stringify(errorData);
             alert(`Fehler: ${errorMsg}`);
-            document.getElementById('authUsername').value = '';
-            document.getElementById('authPassword').value ='';
+            
             
         }
     } catch (error) {
@@ -510,6 +511,8 @@ async function register() {
             localStorage.setItem('token', data.token);
             console.log("Token gespeichert");
             closeModal('AuthModal');
+            document.getElementById('authUsername').value = '';
+            document.getElementById('authPassword').value ='';
         }
     } catch (error) {
         alert('Netzwerk-Fehler: ' + error.message);
