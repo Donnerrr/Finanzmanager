@@ -407,7 +407,11 @@ h1 {
 /* ==========================================================================
    DROPDOWN MENÜ (GLOBAL & BEREINIGT)
    ========================================================================== */
-/* Der Toggle-Button (⋯) im Standardzustand */
+/* ==========================================================================
+   DROPDOWN MENÜ (BUBBLE-ANIMATION FIX)
+   ========================================================================== */
+
+/* Der Toggle-Button (⋯) */
 .menu-toggle {
   background: none !important;
   border: none;
@@ -416,49 +420,30 @@ h1 {
   cursor: pointer;
   padding: 8px 12px;
   border-radius: 8px;
-  transition: background 0.2s ease; /* Macht das Aufblitzen geschmeidiger */
-  
-  /* Verhindert Standard-Rahmen und blaues Aufblitzen auf Mobilgeräten */
+  transition: background 0.15s ease, transform 0.1s ease;
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Entfernt den fehlerhaften persistenten Fokus nach dem Klick */
-.menu-toggle:focus,
-.menu-toggle:focus-visible {
-  background: none !important;
-  outline: none;
+/* Garantiertes Aufleuchten & minimales Eindrücken beim Klick (Mobile & Desktop) */
+.menu-toggle.clicked {
+  background: rgba(200, 169, 110, 0.25) !important;
+  transform: scale(0.92);
 }
 
-/* Hover-Effekt: Gilt ausschließlich für Desktop mit Maus */
-@media (hover: hover) and (pointer: fine) {
-  .menu-toggle:hover {
-    background: rgba(200, 169, 110, 0.1) !important;
-  }
-}
-
-/* NEU: Visuelles Feedback, wenn das Dropdown geöffnet ist (Für Mobile & Desktop!) */
-/* Wenn das Geschwisterelement .dropdown-menu die Klasse .open hat, färben wir den Button ein */
+/* Bleibender Hintergrund, solange das Menü offen steht */
 .menu-toggle:has(+ .dropdown-menu.open) {
   background: rgba(200, 169, 110, 0.15) !important;
 }
 
-
-
-
+/* Hover-Effekt: Nur für PC/Maus */
 @media (hover: hover) and (pointer: fine) {
   .menu-toggle:hover {
     background: rgba(200, 169, 110, 0.1) !important;
   }
 }
 
-/* Schnelles visuelles Feedback im Moment des echten Touches auf dem Handy */
-@media (hover: none) and (pointer: coarse) {
-  .menu-toggle:active {
-    background: rgba(200, 169, 110, 0.25) !important;
-  }
-}
-
+/* Das Dropdown selbst */
 .dropdown-menu {
     position: absolute;
     top: calc(100% + 4px);
@@ -470,21 +455,43 @@ h1 {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     padding: 6px;
+    z-index: 100;
+  
+    /* Ausgangszustand: Unsichtbar und winzig (in der Ecke) */
     opacity: 0;
     visibility: hidden;
-    transform: scale(0.95) translateY(-10px);
+    transform: scale(0);
     transform-origin: top right;
-    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-                transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-                visibility 0.2s;
 }
 
+/* Offener Zustand mit dem elastischen "Bubble-Pop" */
 .dropdown-menu.open {
-  opacity: 1;
   visibility: visible;
-  transform: scale(1) translateY(0);
+  animation: bubblePop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
+/* Die Seifenblasen-Animation */
+@keyframes bubblePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-10px);
+  }
+  70% {
+    /* Schießt minimal über das Ziel hinaus für den elastischen Effekt */
+    transform: scale(1.04) translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Schließ-Animation (fließt weich aus) */
+.dropdown-menu:not(.open) {
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+
+/* Einzelne Menüpunkte */
 .dropdown-item {
   display: flex;
   align-items: center;
@@ -518,6 +525,7 @@ h1 {
   background: rgba(200, 169, 110, 0.15);
   margin: 6px 4px;
 }
+
 
 /* ==========================================================================
    VIEW HEADER (STANDARD / MOBIL BASIS)
