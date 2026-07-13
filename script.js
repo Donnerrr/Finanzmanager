@@ -469,6 +469,9 @@ async function login() {
             const errorData = await response.json();
             let errorMsg = errorData.detail || errorData.message || JSON.stringify(errorData);
             alert(`Fehler: ${errorMsg}`);
+            document.getElementById('authUsername').value = '';
+            document.getElementById('authPassword').value ='';
+            
         }
     } catch (error) {
         alert(`Fehler: ${error.message}`);
