@@ -523,6 +523,8 @@ async function login() {
             // Checkbox für "Angemeldet bleiben" auslesen
             const rememberMe = document.getElementById('loginRememberMe').checked;
 
+console.log("Checkbox Zustand beim Login:", rememberMe);
+
             // Die Weiche: Entweder dauerhaft (local) oder nur für die Session speichern
             if (rememberMe) {
                 localStorage.setItem('token', data.token);
