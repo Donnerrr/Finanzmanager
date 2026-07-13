@@ -458,6 +458,25 @@ h1 {
     gap: 10px;
 }
 
+.auth-toggle-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.auth-toggle-text a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.auth-toggle-text a:hover {
+    color: var(--accent-gold-hover);
+    text-decoration: underline;
+}
+
 
 /* ==========================================================================
    RESPONSIVE
