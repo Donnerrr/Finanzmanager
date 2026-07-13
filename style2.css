@@ -438,6 +438,77 @@ h1 {
 }
 
 /* ==========================================================================
+   CUSTOM CHECKBOX („ANGEMELDET BLEIBEN“)
+   ========================================================================== */
+.checkbox-group {
+    margin-bottom: 20px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    user-select: none;
+    gap: 10px; /* Abstand zwischen Box und Text */
+}
+
+/* Die originale, hässliche Browser-Checkbox verstecken */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Unsere eigene, gestylte Box */
+.custom-checkbox {
+    width: 18px;
+    height: 18px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    position: relative;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Hover-Effekt auf Desktop */
+@media (hover: hover) and (pointer: fine) {
+    .checkbox-container:hover input ~ .custom-checkbox {
+        border-color: var(--accent-gold);
+    }
+}
+
+/* Wenn die Checkbox AKTIViert ist: Hintergrund gold färben */
+.checkbox-container input:checked ~ .custom-checkbox {
+    background-color: var(--accent-gold);
+    border-color: var(--accent-gold);
+}
+
+/* Das Häkchen im Inneren (standardmäßig unsichtbar) */
+.custom-checkbox::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #0b131a; /* Dunkle Farbe für das Häkchen selbst, passend zum Hintergrund */
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Häkchen anzeigen, wenn checked */
+.checkbox-container input:checked ~ .custom-checkbox::after {
+    display: block;
+}
+
+
+/* ==========================================================================
    PASSWORT TOGGLE LINK
    ========================================================================== */
 .password-toggle-link {
