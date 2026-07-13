@@ -431,11 +431,11 @@ h1 {
   transform: scale(0.92);
 }
 
-/* Bleibender Hintergrund, solange das Menü offen steht */
+/* Bleibender Hintergrund, solange das Menü offen steht 
 .menu-toggle:has(+ .dropdown-menu.open) {
   background: rgba(200, 169, 110, 0.15) !important;
 }
-
+*/
 /* Hover-Effekt: Nur für PC/Maus */
 @media (hover: hover) and (pointer: fine) {
   .menu-toggle:hover {
