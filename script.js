@@ -19,22 +19,27 @@ document.addEventListener('DOMContentLoaded', () => {
         loadFinancesFromDB();
     }
     
+    
     const menuToggle = document.getElementById('menuToggle');
     const dropdownMenu = document.getElementById('dropdownMenu');
 
     menuToggle.addEventListener('click', (e) => {
-        e.stopPropagation(); // Verhindert, dass der Klick direkt auf das Dokument durchreicht
+        e.stopPropagation();
+        
+        // Fügt den visuellen "Klick-Effekt" hinzu und entfernt ihn nach 150ms wieder
+        menuToggle.classList.add('clicked');
+        setTimeout(() => menuToggle.classList.remove('clicked'), 150);
+        
         dropdownMenu.classList.toggle('open');
     });
 
-    // Menü NUR schließen, wenn außerhalb geklickt wird
     document.addEventListener('click', (e) => {
-        // Wenn das Ziel des Klicks NICHT das Menü selbst ist und NICHT der Toggle-Button
         if (!dropdownMenu.contains(e.target) && e.target !== menuToggle) {
             dropdownMenu.classList.remove('open');
         }
     });
 });
+
 
 
 
