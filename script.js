@@ -529,7 +529,7 @@ function logout(){
         localStorage.removeItem('token');
         openDashboard();
         start();
-    }, 150);
+    }, 50);
     
 
 }
