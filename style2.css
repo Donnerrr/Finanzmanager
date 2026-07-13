@@ -71,6 +71,7 @@ body {
     min-height: 100vh;
 }
 
+
 /* ==========================================================================
    LOGO
    ========================================================================== */
@@ -78,14 +79,27 @@ body {
     width: 90px;
     height: auto;
     margin-bottom: 35px;
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.home-logo:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 15px var(--accent-gold));
-    transition: all 0.3s ease;
-    cursor: pointer;
+/* Gilt NUR für Desktop-Geräte mit einer echten Maus.
+   Smartphones ignorieren diesen gesamten Block!
+*/
+@media (hover: hover) and (pointer: fine) {
+    .home-logo:hover {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 15px var(--accent-gold));
+        cursor: pointer;
+    }
 }
+
+/* Für alle Geräte (inkl. Mobile): Ein kurzer, nativer Touch-Effekt.
+   Das Logo drückt sich beim Tippen minimal ein und wird beim Loslassen SOFORT wieder normal.
+*/
+.home-logo:active {
+    transform: scale(0.96);
+}
+
 
 /* ==========================================================================
    HEADER
