@@ -315,9 +315,8 @@ h1 {
     box-shadow: 0 12px 30px var(--secondary-hover-box-shadow);
     border-color: var(--secondary-hover-border);
 }
-
 /* ==========================================================================
-   MODAL
+   MODAL (STANDARD)
    ========================================================================== */
 .modal {
     position: fixed;
@@ -382,6 +381,9 @@ h1 {
     gap: 10px;
 }
 
+/* ==========================================================================
+   CONFIRM MODAL (Z.B. LÖSCHEN)
+   ========================================================================== */
 .confirm-modal {
     position: fixed;
     top: 0;
@@ -435,6 +437,62 @@ h1 {
 .auth-toggle-text a:hover {
     color: var(--accent-gold-hover);
     text-decoration: underline;
+}
+
+/* ==========================================================================
+   SPEZIFISCHES TUNING FÜR DAS AUTH-MODAL (KOMPAKT-REGLEN)
+   ========================================================================== */
+
+/* Verengt gezielt NUR das Auth-Modal-Fenster auf max. 360px */
+#AuthModal .modal-content {
+    max-width: 360px;
+    padding: 20px 24px; /* Weniger verschwendeter Platz oben und unten */
+}
+
+#AuthModal .modal-content h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Lässt die Abstände innerhalb des Login-Formulars zusammenschrumpfen */
+#loginForm .form-group, 
+#registerForm .form-group {
+    margin-bottom: 12px;
+    gap: 4px; /* Verringert den Abstand zwischen Label und Input */
+}
+
+/* Stylt den Umschalter-Link unter dem Passwort dezent */
+.password-toggle-link {
+    font-size: 0.75rem;
+    color: var(--accent-gold);
+    text-align: right;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+/* Sorgt dafür, dass die Checkbox-Reile nicht so stark nach unten drückt */
+#loginForm .checkbox-group {
+    margin-top: 4px;
+    margin-bottom: 16px;
+}
+
+/* Macht den Login-Button im Modal zu einem schicken Full-Width-Button */
+#loginForm .modal-buttons,
+#registerForm .modal-buttons {
+    width: 100%;
+}
+
+#loginForm .btn-primary,
+#registerForm .btn-primary {
+    width: 100%; /* Zieht den Button über die volle Breite */
+    padding: 11px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#loginForm .auth-toggle-text,
+#registerForm .auth-toggle-text {
+    margin-top: 15px;
 }
 
 /* ==========================================================================
