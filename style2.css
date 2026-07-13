@@ -453,7 +453,7 @@ h1 {
     min-width: 170px;
     
     /* Leicht transparente Hintergrundfarbe (rgba), damit das Design durchschimmert */
-    background: rgba(11, 19, 26, 0.25); 
+    background: rgba(11, 19, 26, 0.05); 
     
     /* Der gläserne Unschärfe-Effekt (Glassmorphism) für den Hintergrund */
     backdrop-filter: blur(12px);
