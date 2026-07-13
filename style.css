@@ -30,17 +30,30 @@
     --modal-content-box-shadow: rgba(0, 0, 0, 0.5);
 }
 
+/* ==========================================================================
+   HEADER & WRAPPER OPTIMIERUNG
+   ========================================================================== */
+
 .app-header {
-    position: relative;
+    position: relative; /* Bleibt der Bezugspunkt für absolute Elemente */
     width: 100%;
     max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Zentriert H1, Logo und Subtitle perfekt */
+    text-align: center;
 }
 
+/* Der Wrapper wird jetzt komplett unabhängig oben rechts in die Ecke gepinnt */
 .menu-wrapper {
     position: absolute;
-    top: 0;
-    right: 20px;
+    top: -20px;   /* Verschiebt den Button weiter nach oben über den Titel */
+    right: 0px;   /* Ganz nach rechts an den Rand des Containers */
+    z-index: 100;
 }
+
+
+
 
 
 .hidden {
@@ -541,26 +554,26 @@ h1 {
 }
 
 /* Das Dropdown selbst */
+/* Anpassung für das Dropdown, damit es unter dem Button bündig abschließt */
 .dropdown-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 160px;
-  background: #0a1628;
-  border: 1px solid rgba(200, 169, 110, 0.3);
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  padding: 6px;
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    min-width: 160px;
+    background: #0a1628;
+    border: 1px solid rgba(200, 169, 110, 0.3);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    padding: 6px;
   
-  /* Ausgangszustand: Unsichtbar + leicht verkleinert für die Animation */
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(0.95) translateY(-10px);
-  transform-origin: top right;
-  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-              transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-              visibility 0.2s;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95) translateY(-10px);
+    transform-origin: top right;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                visibility 0.2s;
 }
 
 /* Offener Zustand – wird per JS getoggelt */
