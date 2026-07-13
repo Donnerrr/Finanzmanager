@@ -438,10 +438,15 @@ h1 {
 }
 
 /* ==========================================================================
-   CUSTOM CHECKBOX („ANGEMELDET BLEIBEN“)
+   CUSTOM CHECKBOX („ANGEMELDET BLEIBEN“) CLEANUP
    ========================================================================== */
+
+/* Die umschließende Gruppe braucht etwas Luft nach oben und unten */
 .checkbox-group {
+    margin-top: 15px;
     margin-bottom: 20px;
+    display: flex; /* Erzwingt eine saubere Reihe */
+    justify-content: flex-start;
 }
 
 .checkbox-container {
@@ -449,19 +454,23 @@ h1 {
     align-items: center;
     position: relative;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--text-color);
     user-select: none;
-    gap: 10px; /* Abstand zwischen Box und Text */
+    gap: 10px; /* Perfekter Abstand zwischen Box und Text */
+    width: 100%;
 }
 
-/* Die originale, hässliche Browser-Checkbox verstecken */
+/* Die originale Browser-Checkbox unsichtbar machen, 
+   aber sie MUSS im Layout bleiben, damit sie klickbar ist */
 .checkbox-container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
-    height: 0;
-    width: 0;
+    height: 18px;
+    width: 18px;
+    margin: 0;
+    z-index: 2; /* Liegt unsichtbar über unserer custom Box */
 }
 
 /* Unsere eigene, gestylte Box */
@@ -471,41 +480,44 @@ h1 {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 4px;
+    display: inline-block;
+    flex-shrink: 0; /* Verhindert, dass die Box gequetscht wird */
     position: relative;
     transition: background-color 0.2s, border-color 0.2s;
 }
 
-/* Hover-Effekt auf Desktop */
-@media (hover: hover) and (pointer: fine) {
-    .checkbox-container:hover input ~ .custom-checkbox {
-        border-color: var(--accent-gold);
-    }
-}
-
-/* Wenn die Checkbox AKTIViert ist: Hintergrund gold färben */
+/* Wenn die unsichtbare Checkbox gecheckt ist, färbe unsere Custom-Box gold */
 .checkbox-container input:checked ~ .custom-checkbox {
     background-color: var(--accent-gold);
     border-color: var(--accent-gold);
 }
 
-/* Das Häkchen im Inneren (standardmäßig unsichtbar) */
+/* Das Häkchen (standardmäßig versteckt) */
 .custom-checkbox::after {
     content: "";
     position: absolute;
     display: none;
     left: 5px;
     top: 2px;
-    width: 5px;
-    height: 10px;
-    border: solid #0b131a; /* Dunkle Farbe für das Häkchen selbst, passend zum Hintergrund */
+    width: 4px;
+    height: 8px;
+    border: solid #0b131a; /* Dunkles Häkchen auf goldenem Grund */
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
 
-/* Häkchen anzeigen, wenn checked */
+/* Zeige das Häkchen, wenn ausgewählt */
 .checkbox-container input:checked ~ .custom-checkbox::after {
     display: block;
 }
+
+/* Desktop-Hover */
+@media (hover: hover) and (pointer: fine) {
+    .checkbox-container:hover input ~ .custom-checkbox {
+        border-color: var(--accent-gold);
+    }
+}
+
 
 
 /* ==========================================================================
