@@ -161,6 +161,38 @@ function openFinances() {
     loadFinancesFromDB();
 }
 
+// Schaltet zwischen Login und Registrierung hin und her
+function toggleAuthMode(event, mode) {
+    event.preventDefault(); // Verhindert, dass die Seite neu lädt (wegen dem <a> Tag)
+    
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    
+    if (mode === 'register') {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+    } else {
+        registerForm.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+    }
+}
+
+// Zentrale Funktion, die bei Klick ODER Enter anspringt
+function handleAuth(event, type) {
+    event.preventDefault(); // Verhindert das Neuladen der Seite durch das Formular
+    
+    if (type === 'login') {
+        // Hier rufst du deine bestehende login() Logik auf
+        console.log("Login wird ausgeführt...");
+        // login(); 
+    } else if (type === 'register') {
+        // Hier rufst du deine bestehende register() Logik auf
+        console.log("Registrierung wird ausgeführt...");
+        // register();
+    }
+}
+
+
 //#endregion
 
 /* ==========================================================================
