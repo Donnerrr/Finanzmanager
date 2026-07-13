@@ -126,6 +126,20 @@ function escapeHtml(text) {
 function formatCurrency(amount) {
     return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(amount);
 }
+
+function togglePasswordVisibility(inputId, linkElement) {
+    const passwordInput = document.getElementById(inputId);
+    
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        linkElement.innerText = "Passwort ausblenden";
+    } else {
+        passwordInput.type = "password";
+        linkElement.innerText = "Passwort anzeigen";
+    }
+}
+
+
 //#endregion
 
 //#region Navigation
