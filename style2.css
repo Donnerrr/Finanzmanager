@@ -407,6 +407,7 @@ h1 {
 /* ==========================================================================
    DROPDOWN MENÜ (GLOBAL & BEREINIGT)
    ========================================================================== */
+/* Der Toggle-Button (⋯) im Standardzustand */
 .menu-toggle {
   background: none !important;
   border: none;
@@ -415,16 +416,35 @@ h1 {
   cursor: pointer;
   padding: 8px 12px;
   border-radius: 8px;
+  transition: background 0.2s ease; /* Macht das Aufblitzen geschmeidiger */
+  
+  /* Verhindert Standard-Rahmen und blaues Aufblitzen auf Mobilgeräten */
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Entfernt den fehlerhaften persistenten Fokus nach dem Klick */
 .menu-toggle:focus,
-.menu-toggle:focus-visible,
-.menu-toggle:active {
+.menu-toggle:focus-visible {
   background: none !important;
   outline: none;
 }
+
+/* Hover-Effekt: Gilt ausschließlich für Desktop mit Maus */
+@media (hover: hover) and (pointer: fine) {
+  .menu-toggle:hover {
+    background: rgba(200, 169, 110, 0.1) !important;
+  }
+}
+
+/* NEU: Visuelles Feedback, wenn das Dropdown geöffnet ist (Für Mobile & Desktop!) */
+/* Wenn das Geschwisterelement .dropdown-menu die Klasse .open hat, färben wir den Button ein */
+.menu-toggle:has(+ .dropdown-menu.open) {
+  background: rgba(200, 169, 110, 0.15) !important;
+}
+
+
+
 
 @media (hover: hover) and (pointer: fine) {
   .menu-toggle:hover {
@@ -432,9 +452,10 @@ h1 {
   }
 }
 
+/* Schnelles visuelles Feedback im Moment des echten Touches auf dem Handy */
 @media (hover: none) and (pointer: coarse) {
   .menu-toggle:active {
-    background: rgba(200, 169, 110, 0.15) !important;
+    background: rgba(200, 169, 110, 0.25) !important;
   }
 }
 
