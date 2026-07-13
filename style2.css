@@ -406,9 +406,9 @@ h1 {
 
 .auth-toggle-text {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--text-color);
 }
 
 .auth-toggle-text a {
