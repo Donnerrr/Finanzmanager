@@ -218,7 +218,15 @@
             <div class="modal-buttons">
                 <button type="submit" class="btn-primary">Login</button>
             </div>
-            <p class="auth-toggle-text">Noch kein Konto? <a href="#" onclick="toggleAuthMode(event, 'register')">Jetzt registrieren</a></p>
+            <p class="auth-toggle-text">Noch kein Konto? <a href="#" onclick="toggleAuthMode(event, 'register')">Jetzt</a></p>
+            <div class="form-group checkbox-group">
+    <label class="checkbox-container">
+        <input type="checkbox" id="loginRememberMe">
+        <span class="custom-checkbox"></span>
+        Angemeldet bleiben
+    </label>
+</div>
+
         </form>
 
         <form id="registerForm" class="hidden" onsubmit="handleAuth(event, 'register')">
@@ -231,6 +239,14 @@
                 <button type="submit" class="btn-primary">Registrieren</button>
             </div>
             <p class="auth-toggle-text">Bereits registriert? <a href="#" onclick="toggleAuthMode(event, 'login')">Zum Login</a></p>
+            <div class="form-group checkbox-group">
+    <label class="checkbox-container">
+        <input type="checkbox" id="loginRememberMe">
+        <span class="custom-checkbox"></span>
+        Angemeldet bleiben
+    </label>
+</div>
+
         </form>
 
     </div>
