@@ -575,6 +575,30 @@ h1 {
 }
 
 /* ==========================================================================
+   PASSWORT ANZEIGEN (TOGGLE EYE BRIGHTNESS)
+   ========================================================================== */
+
+/* Für Microsoft Edge */
+input[type="password"]::-ms-reveal {
+    filter: invert(1) brightness(2); /* Dreht Schwarz zu Weiß um und macht es maximal hell */
+    cursor: pointer;
+}
+
+/* Für Google Chrome, Opera und Safari */
+input[type="password"]::-webkit-credentials-automfill-button,
+input[type="password"]::-webkit-contacts-auto-fill-button {
+    filter: invert(1) brightness(2);
+}
+
+/* Falls du ein eigenes Icon/Button im HTML hast (z.B. ein <span> oder <button>) */
+.password-toggle-btn {
+    color: #ffffff !important; /* Erzwingt klares Weiß */
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+
+/* ==========================================================================
    DESKTOP ERWEITERUNGEN (AB 769px)
    ========================================================================== */
 @media (min-width: 769px) {
