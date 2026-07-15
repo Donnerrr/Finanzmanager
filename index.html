@@ -210,25 +210,57 @@
         <h3>Finanz Manager</h3>
         
         <form id="loginForm" onsubmit="handleAuth(event, 'login')">
+            
             <div class="form-group">
+                <label for="loginUsername">Username</label>
                 <input type="text" id="loginUsername" placeholder="Username" required>
-                <input type="password" id="loginPassword" placeholder="Passwort" required>
             </div>
+            
+            <div class="form-group">
+                <label for="loginPassword">Passwort</label>
+                <input type="password" id="loginPassword" placeholder="Passwort" required>
+                <span class="password-toggle-link" onclick="togglePasswordVisibility('loginPassword', this)">Passwort anzeigen</span>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="loginRememberMe">
+                    <span class="custom-checkbox"></span>
+                    Angemeldet bleiben
+                </label>
+            </div>
+            
             <div class="modal-buttons">
                 <button type="submit" class="btn-primary">Login</button>
             </div>
+            
             <p class="auth-toggle-text">Noch kein Konto? <a href="#" onclick="toggleAuthMode(event, 'register')">Jetzt registrieren</a></p>
+            
+        </form>
+    </div>
+</div>
+
+
         </form>
 
         <form id="registerForm" class="hidden" onsubmit="handleAuth(event, 'register')">
             <div class="form-group">
                 <input type="text" id="registerUsername" placeholder="Username erstellen" required>
                 <input type="password" id="registerPassword" placeholder="Passwort erstellen" required>
+                <span class ="password-toggle-link" onclick="togglePasswordVisibility('loginPassword', this">Passwort anzeigen</span>
             </div>
             <div class="modal-buttons">
                 <button type="submit" class="btn-primary">Registrieren</button>
             </div>
             <p class="auth-toggle-text">Bereits registriert? <a href="#" onclick="toggleAuthMode(event, 'login')">Zum Login</a></p>
+            <div class="form-group checkbox-group">
+    <label class="checkbox-container">
+        <input type="checkbox" id="loginRememberMe">
+        <span class="custom-checkbox"></span>
+        Angemeldet bleiben
+    </label>
+</div>
+
         </form>
 
     </div>

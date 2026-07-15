@@ -71,6 +71,7 @@ body {
     min-height: 100vh;
 }
 
+
 /* ==========================================================================
    LOGO
    ========================================================================== */
@@ -78,14 +79,27 @@ body {
     width: 90px;
     height: auto;
     margin-bottom: 35px;
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.home-logo:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 15px var(--accent-gold));
-    transition: all 0.3s ease;
-    cursor: pointer;
+/* Gilt NUR für Desktop-Geräte mit einer echten Maus.
+   Smartphones ignorieren diesen gesamten Block!
+*/
+@media (hover: hover) and (pointer: fine) {
+    .home-logo:hover {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 15px var(--accent-gold));
+        cursor: pointer;
+    }
 }
+
+/* Für alle Geräte (inkl. Mobile): Ein kurzer, nativer Touch-Effekt.
+   Das Logo drückt sich beim Tippen minimal ein und wird beim Loslassen SOFORT wieder normal.
+*/
+.home-logo:active {
+    transform: scale(0.96);
+}
+
 
 /* ==========================================================================
    HEADER
@@ -301,9 +315,8 @@ h1 {
     box-shadow: 0 12px 30px var(--secondary-hover-box-shadow);
     border-color: var(--secondary-hover-border);
 }
-
 /* ==========================================================================
-   MODAL
+   MODAL (STANDARD)
    ========================================================================== */
 .modal {
     position: fixed;
@@ -368,6 +381,9 @@ h1 {
     gap: 10px;
 }
 
+/* ==========================================================================
+   CONFIRM MODAL (Z.B. LÖSCHEN)
+   ========================================================================== */
 .confirm-modal {
     position: fixed;
     top: 0;
@@ -422,6 +438,167 @@ h1 {
     color: var(--accent-gold-hover);
     text-decoration: underline;
 }
+
+/* ==========================================================================
+   SPEZIFISCHES TUNING FÜR DAS AUTH-MODAL (KOMPAKT-REGLEN)
+   ========================================================================== */
+
+/* Verengt gezielt NUR das Auth-Modal-Fenster auf max. 360px */
+#AuthModal .modal-content {
+    max-width: 360px;
+    padding: 20px 24px; /* Weniger verschwendeter Platz oben und unten */
+}
+
+#AuthModal .modal-content h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Lässt die Abstände innerhalb des Login-Formulars zusammenschrumpfen */
+#loginForm .form-group, 
+#registerForm .form-group {
+    margin-bottom: 12px;
+    gap: 4px; /* Verringert den Abstand zwischen Label und Input */
+}
+
+/* Stylt den Umschalter-Link unter dem Passwort dezent */
+.password-toggle-link {
+    font-size: 0.75rem;
+    color: var(--accent-gold);
+    text-align: right;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+/* Sorgt dafür, dass die Checkbox-Reile nicht so stark nach unten drückt */
+#loginForm .checkbox-group {
+    margin-top: 4px;
+    margin-bottom: 16px;
+}
+
+/* Macht den Login-Button im Modal zu einem schicken Full-Width-Button */
+#loginForm .modal-buttons,
+#registerForm .modal-buttons {
+    width: 100%;
+}
+
+#loginForm .btn-primary,
+#registerForm .btn-primary {
+    width: 100%; /* Zieht den Button über die volle Breite */
+    padding: 11px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#loginForm .auth-toggle-text,
+#registerForm .auth-toggle-text {
+    margin-top: 15px;
+}
+
+/* ==========================================================================
+   CUSTOM CHECKBOX („ANGEMELDET BLEIBEN“) CLEANUP
+   ========================================================================== */
+
+/* Die umschließende Gruppe braucht etwas Luft nach oben und unten */
+.checkbox-group {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: flex; /* Erzwingt eine saubere Reihe */
+    justify-content: flex-start;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    user-select: none;
+    gap: 10px; /* Perfekter Abstand zwischen Box und Text */
+    width: 100%;
+}
+
+/* Die originale Browser-Checkbox unsichtbar machen, 
+   aber sie MUSS im Layout bleiben, damit sie klickbar ist */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 18px;
+    width: 18px;
+    margin: 0;
+    z-index: 2; /* Liegt unsichtbar über unserer custom Box */
+}
+
+/* Unsere eigene, gestylte Box */
+.custom-checkbox {
+    width: 18px;
+    height: 18px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: inline-block;
+    flex-shrink: 0; /* Verhindert, dass die Box gequetscht wird */
+    position: relative;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Wenn die unsichtbare Checkbox gecheckt ist, färbe unsere Custom-Box gold */
+.checkbox-container input:checked ~ .custom-checkbox {
+    background-color: var(--accent-gold);
+    border-color: var(--accent-gold);
+}
+
+/* Das Häkchen (standardmäßig versteckt) */
+.custom-checkbox::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid #0b131a; /* Dunkles Häkchen auf goldenem Grund */
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Zeige das Häkchen, wenn ausgewählt */
+.checkbox-container input:checked ~ .custom-checkbox::after {
+    display: block;
+}
+
+/* Desktop-Hover */
+@media (hover: hover) and (pointer: fine) {
+    .checkbox-container:hover input ~ .custom-checkbox {
+        border-color: var(--accent-gold);
+    }
+}
+
+
+
+/* ==========================================================================
+   PASSWORT TOGGLE LINK
+   ========================================================================== */
+.password-toggle-link {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-align: left;
+    margin-top: 4px;
+    user-select: none;
+    transition: color 0.2s ease;
+    width: fit-content;
+}
+
+.password-toggle-link:hover,
+.password-toggle-link:active {
+    color: var(--accent-gold);
+    text-decoration: underline;
+}
+
 
 /* Der Toggle-Button (⋯) */
 /* ==========================================================================

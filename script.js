@@ -9,7 +9,7 @@ let currentDeletePersonId = null; // Globale Variable, um die aktuelle Person f�
 let currentDeleteDebtId = null; // Globale Variable, um die aktuelle Schuld für das Löschen zu speichern
 
 document.addEventListener('DOMContentLoaded', () => {
-    const token = localStorage.getItem('token');
+    const token = getToken(); // Nutzt die neue Hilfsfunktion
     if (!token) {
         openModal('AuthModal');
     } else {
@@ -36,7 +36,7 @@ function hideAllSections() {
 
 // Hilfsfunktion: Vereinfacht den API Aufruf
 async function authorizedFetch(endpoint, method = 'GET', body = null) {
-    const token = localStorage.getItem('token');
+    const token = getToken();
 
     if (!token) {
         console.warn('Kein Token gefunden - Weiterleitung zum Login');
@@ -91,6 +91,23 @@ function escapeHtml(text) {
 function formatCurrency(amount) {
     return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(amount);
 }
+
+function togglePasswordVisibility(inputId, linkElement) {
+    const passwordInput = document.getElementById(inputId);
+    
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        linkElement.innerText = "Passwort ausblenden";
+    } else {
+        passwordInput.type = "password";
+        linkElement.innerText = "Passwort anzeigen";
+    }
+}
+
+function getToken() {
+    return localStorage.getItem('token') || sessionStorage.getItem('token');
+}
+
 //#endregion
 
 //#region Navigation
@@ -369,24 +386,51 @@ async function deletePerson(event) {
 //#endregion
 
 //#region SCHULD AKTUALISIEREN
+//#region SCHULD AKTUALISIEREN
 async function updateDebt(event) {
     event.preventDefault();
 
+<<<<<<< HEAD
     const debtId = currentDebtId; // Verwendet die globale Variable, die beim Öffnen des Modals gesetzt wurde
     const updatedAmount = document.getElementById('update-debt-amount').value;
 
     try {
         await authorizedFetch(`Debt/${debtId}`, 'PUT', updatedAmount);
         console.log('Schuld erfolgreich aktualisiert');
+=======
+    // Sende das Objekt (wie dein Service es erwartet)
+    const updateData = {
+        Amount: inputValue
+    };
+
+    console.log("Sende Update-Payload:", JSON.stringify(updateData));
+
+    try {
+        // Jetzt wird der Request nur noch EINMAL und mit den RICHTIGEN Daten gefeuert
+        const result = await authorizedFetch(`Debt/${debtId}`, 'PUT', updateData);
+        console.log('Update erfolgreich:', result);
+        
+        // Modal schließen und Input leeren
+>>>>>>> 58813f5e96fbcf86de694b2cd416071a91887a0f
         closeModal('UpdateDebtModal');
 
         loadPersonDetails(currentPersonId);
         currentDebtId = null;
+<<<<<<< HEAD
         document.getElementById('update-debt-amount').value = '';
+=======
+        
+        // Benutzeroberfläche aktualisieren, falls eine Person aktiv ist
+        if (currentPersonId) {
+            loadPersonDetails(currentPersonId);
+        }
+>>>>>>> 58813f5e96fbcf86de694b2cd416071a91887a0f
     } catch (error) {
         console.error('Fehler beim Aktualisieren:' + error.message);
     }
 }
+//#endregion
+
 
 //#endregion
 
@@ -403,19 +447,58 @@ async function login() {
         });
 
         if (response.ok) {
+<<<<<<< HEAD
             const data = await response.json(); // <-- WICHTIG
             localStorage.setItem('token', data.token);
             closeModal('AuthModal');
+=======
+            const data = await response.json();   
+            
+            // Checkbox für "Angemeldet bleiben" auslesen
+            const rememberMe = document.getElementById('loginRememberMe').checked;
+
+console.log("Checkbox Zustand beim Login:", rememberMe);
+
+
+            // Die Weiche: Entweder dauerhaft (local) oder nur für die Session speichern
+if (rememberMe) {
+
+    localStorage.setItem('token', data.token);
+} else {
+
+    sessionStorage.setItem('token', data.token);
+}
+
+            
+            // Modal schließen
+            closeModal('AuthModal');
+
+            // Formularfelder & Checkbox säubern
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginRememberMe').checked = false;
+
+            // Daten nach erfolgreichem Login laden
+            loadFinancesFromDB();
+
+>>>>>>> 58813f5e96fbcf86de694b2cd416071a91887a0f
         } else {
+            // Fehlerbehandlung, falls Server-Antwort nicht OK (z.B. 401 Unauthorized)
             const errorData = await response.json();
             let errorMsg = errorData.detail || errorData.message || JSON.stringify(errorData);
             alert(`Fehler: ${errorMsg}`);
         }
     } catch (error) {
+        // Netzwerk- oder sonstige Laufzeitfehler abfangen
         alert(`Fehler: ${error.message}`);
     }
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 58813f5e96fbcf86de694b2cd416071a91887a0f
 async function register() {
     const username = document.getElementById('authUsername').value;
     const password = document.getElementById('authPassword').value;
@@ -454,6 +537,7 @@ async function register() {
     }
 }
 
+<<<<<<< HEAD
 function logout() {
     localStorage.removeItem('token');
     openDashboard();
@@ -462,6 +546,26 @@ function logout() {
 
 function start() {
     const token = localStorage.getItem('token');
+=======
+
+function logout(){
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    if(dropdownMenu){
+        dropdownMenu.classList.remove('open');
+    }
+    setTimeout(() => {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        openDashboard();
+        start();
+    }, 5);
+    
+
+}
+
+function start(){
+    const token = getToken(); // Nutzt die neue Hilfsfunktion
+>>>>>>> 58813f5e96fbcf86de694b2cd416071a91887a0f
     if (!token) {
         openModal('AuthModal');
     } else {
