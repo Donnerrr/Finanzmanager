@@ -9,36 +9,28 @@
     <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
-    
-    <!-- #region DropdownMenu -->
-  
-
-    <!-- #endregion DropdownMenu-->
 
     <!-- #region Header -->
- <!-- #region Header -->
-<div class="app-header">
-    <div class="menu-wrapper">
-      <button class="menu-toggle" id="menuToggle">⋯</button>
-      <div class="dropdown-menu" id="dropdownMenu">
-        <button class="dropdown-item">⚙️ Settings</button>
-        <div class="dropdown-divider"></div>
-        <button class="dropdown-item danger" onclick="logout()">Logout</button>
-      </div>
+    <div class="app-header">
+        <div class="menu-wrapper">
+          <button class="menu-toggle" id="menuToggle">⋯</button>
+          <div class="dropdown-menu" id="dropdownMenu">
+            <button class="dropdown-item">⚙️ Settings</button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item danger" onclick="logout()">Logout</button>
+          </div>
+        </div>
+
+        <h1>Finanz Manager</h1>
+        <picture>
+            <source srcset="bilder/applogo.webp" type="image/webp">
+            <img class="logo home-logo" src="bilder/applogo.png" alt="Logo der App" onclick="openDashboard()">
+        </picture>
+
+        <article class="subtitle">
+            <h2>Wähle zwischen Schuldeneinträgen oder eigenen Finanzen.</h2>
+        </article>
     </div>
-
-    <h1>Finanz Manager</h1>
-    <picture>
-        <source srcset="bilder/applogo.webp" type="image/webp">
-        <img class="logo home-logo" src="bilder/applogo.png" alt="Logo der App" onclick="openDashboard()">
-    </picture>
-
-    <article class="subtitle">
-        <h2>Wähle zwischen Schuldeneinträgen oder eigenen Finanzen.</h2>
-    </article>
-</div>
-<!-- #endregion Header -->
-
     <!-- #endregion Header -->
 
     <!-- #region Hauptkacheln -->
@@ -136,7 +128,7 @@
     <!-- #region AddEntryModal -->
     <div id="AddEntryModal" class="modal hidden">
         <div class="modal-content">
-            <h3 id="EntryModalTitle">Neuen Eintrag hinzufügen</h3>
+            <h3>Neuen Eintrag hinzufügen</h3>
             <form id="add-entry-form" onsubmit="saveEntry(event)">
                 <div class="form-group">
                     <label for="entry-purpose">Verwendungszweck:</label>
@@ -159,7 +151,7 @@
     <!-- #region UpdateDebtModal -->
     <div id="UpdateDebtModal" class="modal hidden">
         <div class="modal-content">
-            <h3 id="EntryModalTitle">Schuld bearbeiten</h3>
+            <h3>Schuld bearbeiten</h3>
             <form id="update-entry-form" onsubmit="updateDebt(event)">
                 <div class="form-group">
                     <label for="update-debt-id">Schuld-ID:</label>
@@ -181,7 +173,7 @@
     <!-- #region ConfirmDeletePersonModal -->
     <div id="ConfirmDeletePersonModal" class="confirm-modal hidden">
         <div class="modal-content">
-            <h3 id="EntryModalTitle">Sicher das die Person und alle zugehörigen Einträge gelöscht werden sollen?</h3>
+            <h3>Sicher das die Person und alle zugehörigen Einträge gelöscht werden sollen?</h3>
             
                 <div class="modal-buttons">
                     <button type="button" class="btn-secondary" onclick="closeModal('ConfirmDeletePersonModal')">Abbrechen</button>
@@ -194,7 +186,7 @@
     <!-- #region ConfirmDeleteDebtModal -->
     <div id="ConfirmDeleteDebtModal" class="confirm-modal hidden">
         <div class="modal-content">
-            <h3 id="EntryModalTitle">Sicher das die Schuld gelöscht werden soll?</h3>
+            <h3>Sicher das die Schuld gelöscht werden soll?</h3>
             
                 <div class="modal-buttons">
                     <button type="button" class="btn-secondary" onclick="closeModal('ConfirmDeleteDebtModal')">Abbrechen</button>
@@ -205,42 +197,42 @@
     <!-- #endregion ConfirmDeleteDebtModal -->
 
     <!--#region AuthModal-->
-  <div id="AuthModal" class="modal hidden">
+<div id="AuthModal" class="modal hidden">
     <div class="modal-content">
         <h3>Finanz Manager</h3>
-        
-        <form id="loginForm" onsubmit="handleAuth(event, 'login')">
-            
+
+        <form id="authForm" onsubmit="handleAuthSubmit(event)">
             <div class="form-group">
-                <label for="loginUsername">Username</label>
-                <input type="text" id="loginUsername" placeholder="Username" required>
+                <label for="authUsername">Username</label>
+                <input type="text" id="authUsername" placeholder="Username" required>
             </div>
-            
+
             <div class="form-group">
-                <label for="loginPassword">Passwort</label>
-                <input type="password" id="loginPassword" placeholder="Passwort" required>
-                <span class="password-toggle-link" onclick="togglePasswordVisibility('loginPassword', this)">Passwort anzeigen</span>
+                <label for="authPassword">Passwort</label>
+                <input type="password" id="authPassword" placeholder="Passwort" required>
+                <span class="password-toggle-link" onclick="togglePasswordVisibility('authPassword', this)">Passwort anzeigen</span>
             </div>
-            
+
             <div class="form-group checkbox-group">
                 <label class="checkbox-container">
-                    <input type="checkbox" id="loginRememberMe">
+                    <input type="checkbox" id="authRememberMe">
                     <span class="custom-checkbox"></span>
                     Angemeldet bleiben
                 </label>
             </div>
-            
+
             <div class="modal-buttons">
-                <button type="submit" class="btn-primary">Login</button>
+                <button type="submit" id="authSubmitBtn" class="btn-primary">Login</button>
             </div>
-            
-            <p class="auth-toggle-text">Noch kein Konto? <a href="#" onclick="toggleAuthMode(event, 'register')">Jetzt registrieren</a></p>
-            
+
+            <p class="auth-toggle-text" id="authToggleText">Noch kein Konto? <a href="#" onclick="toggleAuthMode(event)">Jetzt registrieren</a></p>
         </form>
     </div>
 </div>
+<!--#endregion AuthModal-->
 
 
+<<<<<<< HEAD
         </form>
 
         <form id="registerForm" class="hidden" onsubmit="handleAuth(event, 'register')">
@@ -268,6 +260,8 @@
 
     <!--#endregion AuthModal-->
 
+=======
+>>>>>>> ba565f78f558d18f28c5282fa4d99b5747fdf486
 <script src="script.js" defer></script>
 
 </body>
