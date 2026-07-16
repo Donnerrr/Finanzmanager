@@ -423,7 +423,13 @@ async function login() {
 
         if (response.ok) {
             const data = await response.json(); // <-- WICHTIG
-            localStorage.setItem('token', data.token);
+            const rememberMe = document.getElementById('authRememberMe').checked;
+if (rememberMe) {
+    localStorage.setItem('token', data.token);
+} else {
+    sessionStorage.setItem('token', data.token);
+}
+
             closeModal('AuthModal');
         } else {
             // Fehlerbehandlung, falls Server-Antwort nicht OK (z.B. 401 Unauthorized)
@@ -466,7 +472,13 @@ async function register() {
         } else {
             // Erfolg
             currentUserId = data.id;
-            localStorage.setItem('token', data.token);
+            const rememberMe = document.getElementById('authRememberMe').checked;
+if (rememberMe) {
+    localStorage.setItem('token', data.token);
+} else {
+    sessionStorage.setItem('token', data.token);
+}
+
             console.log('Token gespeichert');
             closeModal('AuthModal');
         }
