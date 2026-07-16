@@ -18,13 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('menuToggle').addEventListener('click', () => {
-    document.getElementById('dropdownMenu').classList.toggle('hidden');
+    document.getElementById('dropdownMenu').classList.toggle('open');
 });
 
 document.addEventListener('click', (event) => {
     const menuWrapper = document.querySelector('.menu-wrapper');
     if (!menuWrapper.contains(event.target)) {
-        document.getElementById('dropdownMenu').classList.add('hidden');
+        document.getElementById('dropdownMenu').classList.remove('open');
     }
 });
 
