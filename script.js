@@ -490,4 +490,26 @@ function start() {
     }
 }
 
+let authMode = 'login';
+
+function toggleAuthMode(event) {
+    event.preventDefault();
+    authMode = authMode === 'login' ? 'register' : 'login';
+
+    document.getElementById('authSubmitBtn').textContent = authMode === 'login' ? 'Login' : 'Registrieren';
+    document.getElementById('authToggleText').innerHTML = authMode === 'login'
+        ? 'Noch kein Konto? <a href="#" onclick="toggleAuthMode(event)">Jetzt registrieren</a>'
+        : 'Bereits registriert? <a href="#" onclick="toggleAuthMode(event)">Zum Login</a>';
+}
+
+function handleAuthSubmit(event) {
+    event.preventDefault();
+    if (authMode === 'login') {
+        login();
+    } else {
+        register();
+    }
+}
+
+
 //#endregion
