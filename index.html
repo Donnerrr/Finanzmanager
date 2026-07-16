@@ -197,61 +197,40 @@
     <!-- #endregion ConfirmDeleteDebtModal -->
 
     <!--#region AuthModal-->
-    <div id="AuthModal" class="modal hidden">
-        <div class="modal-content">
-            <h3>Finanz Manager</h3>
+<div id="AuthModal" class="modal hidden">
+    <div class="modal-content">
+        <h3>Finanz Manager</h3>
 
-            <form id="loginForm" onsubmit="handleAuth(event, 'login')">
+        <form id="authForm" onsubmit="handleAuthSubmit(event)">
+            <div class="form-group">
+                <label for="authUsername">Username</label>
+                <input type="text" id="authUsername" placeholder="Username" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="loginUsername">Username</label>
-                    <input type="text" id="loginUsername" placeholder="Username" required>
-                </div>
+            <div class="form-group">
+                <label for="authPassword">Passwort</label>
+                <input type="password" id="authPassword" placeholder="Passwort" required>
+                <span class="password-toggle-link" onclick="togglePasswordVisibility('authPassword', this)">Passwort anzeigen</span>
+            </div>
 
-                <div class="form-group">
-                    <label for="loginPassword">Passwort</label>
-                    <input type="password" id="loginPassword" placeholder="Passwort" required>
-                    <span class="password-toggle-link" onclick="togglePasswordVisibility('loginPassword', this)">Passwort anzeigen</span>
-                </div>
+            <div class="form-group checkbox-group">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="authRememberMe">
+                    <span class="custom-checkbox"></span>
+                    Angemeldet bleiben
+                </label>
+            </div>
 
-                <div class="form-group checkbox-group">
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="loginRememberMe">
-                        <span class="custom-checkbox"></span>
-                        Angemeldet bleiben
-                    </label>
-                </div>
+            <div class="modal-buttons">
+                <button type="submit" id="authSubmitBtn" class="btn-primary">Login</button>
+            </div>
 
-                <div class="modal-buttons">
-                    <button type="submit" class="btn-primary">Login</button>
-                </div>
-
-                <p class="auth-toggle-text">Noch kein Konto? <a href="#" onclick="toggleAuthMode(event, 'register')">Jetzt registrieren</a></p>
-
-            </form>
-
-            <form id="registerForm" class="hidden" onsubmit="handleAuth(event, 'register')">
-                <div class="form-group">
-                    <input type="text" id="registerUsername" placeholder="Username erstellen" required>
-                    <input type="password" id="registerPassword" placeholder="Passwort erstellen" required>
-                    <span class="password-toggle-link" onclick="togglePasswordVisibility('registerPassword', this)">Passwort anzeigen</span>
-                </div>
-                <div class="modal-buttons">
-                    <button type="submit" class="btn-primary">Registrieren</button>
-                </div>
-                <p class="auth-toggle-text">Bereits registriert? <a href="#" onclick="toggleAuthMode(event, 'login')">Zum Login</a></p>
-                <div class="form-group checkbox-group">
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="registerRememberMe">
-                        <span class="custom-checkbox"></span>
-                        Angemeldet bleiben
-                    </label>
-                </div>
-            </form>
-
-        </div>
+            <p class="auth-toggle-text" id="authToggleText">Noch kein Konto? <a href="#" onclick="toggleAuthMode(event)">Jetzt registrieren</a></p>
+        </form>
     </div>
-    <!--#endregion AuthModal-->
+</div>
+<!--#endregion AuthModal-->
+
 
 <script src="script.js" defer></script>
 
