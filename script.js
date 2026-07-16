@@ -439,7 +439,7 @@ if (rememberMe) {
         }
     } catch (error) {
         // Netzwerk- oder sonstige Laufzeitfehler abfangen
-        alert(`Fehler: ${error.message}`);
+        alert(`Fehler: ${error}`);
     }
 }
 
