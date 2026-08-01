@@ -28,7 +28,6 @@ document.addEventListener('click', (event) => {
     }
 });
 
-
 //#region Hilfsfunktionen
 /* ==========================================================================
    0. HILFSFUNKTIONEN
@@ -69,7 +68,7 @@ async function authorizedFetch(endpoint, method = 'GET', body = null) {
     }
 
     try {
-        const response = await fetch(`${API_TEST}/api/Schuldenbuch/${endpoint}`, options);
+        const response = await fetch(`${API_BASE}/api/Schuldenbuch/${endpoint}`, options);
 
         if (!response.ok) {
             let errorMsg = `Fehler ${response.status}`;
@@ -427,7 +426,7 @@ async function login() {
     const password = document.getElementById('authPassword').value;
 
     try {
-        const response = await fetch(`${API_TEST}/api/Auth/login`, {
+        const response = await fetch(`${API_BASE}/api/Auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),
@@ -436,11 +435,11 @@ async function login() {
         if (response.ok) {
             const data = await response.json(); // <-- WICHTIG
             const rememberMe = document.getElementById('authRememberMe').checked;
-if (rememberMe) {
-    localStorage.setItem('token', data.token);
-} else {
-    sessionStorage.setItem('token', data.token);
-}
+            if (rememberMe) {
+                localStorage.setItem('token', data.token);
+            } else {
+                sessionStorage.setItem('token', data.token);
+            }
 
             closeModal('AuthModal');
         } else {
@@ -460,7 +459,7 @@ async function register() {
     const password = document.getElementById('authPassword').value;
 
     try {
-        const response = await fetch(`${API_TEST}/api/Auth/register`, {
+        const response = await fetch(`${API_BASE}/api/Auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),
@@ -485,11 +484,11 @@ async function register() {
             // Erfolg
             currentUserId = data.id;
             const rememberMe = document.getElementById('authRememberMe').checked;
-if (rememberMe) {
-    localStorage.setItem('token', data.token);
-} else {
-    sessionStorage.setItem('token', data.token);
-}
+            if (rememberMe) {
+                localStorage.setItem('token', data.token);
+            } else {
+                sessionStorage.setItem('token', data.token);
+            }
 
             console.log('Token gespeichert');
             closeModal('AuthModal');
@@ -520,10 +519,12 @@ function toggleAuthMode(event) {
     event.preventDefault();
     authMode = authMode === 'login' ? 'register' : 'login';
 
-    document.getElementById('authSubmitBtn').textContent = authMode === 'login' ? 'Login' : 'Registrieren';
-    document.getElementById('authToggleText').innerHTML = authMode === 'login'
-        ? 'Noch kein Konto? <a href="#" onclick="toggleAuthMode(event)">Jetzt registrieren</a>'
-        : 'Bereits registriert? <a href="#" onclick="toggleAuthMode(event)">Zum Login</a>';
+    document.getElementById('authSubmitBtn').textContent =
+        authMode === 'login' ? 'Login' : 'Registrieren';
+    document.getElementById('authToggleText').innerHTML =
+        authMode === 'login'
+            ? 'Noch kein Konto? <a href="#" onclick="toggleAuthMode(event)">Jetzt registrieren</a>'
+            : 'Bereits registriert? <a href="#" onclick="toggleAuthMode(event)">Zum Login</a>';
 }
 
 function handleAuthSubmit(event) {
@@ -534,6 +535,5 @@ function handleAuthSubmit(event) {
         register();
     }
 }
-
 
 //#endregion
