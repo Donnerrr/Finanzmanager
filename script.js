@@ -405,7 +405,7 @@ async function updateDebt(event) {
     const updatedAmount = document.getElementById('update-debt-amount').value;
 
     try {
-        await authorizedFetch(`Debt/${debtId}`, 'PUT', updatedAmount);
+        await authorizedFetch(`Debt/${debtId}`, 'PUT', { Amount: updatedAmount });
         console.log('Schuld erfolgreich aktualisiert');
         closeModal('UpdateDebtModal');
 
