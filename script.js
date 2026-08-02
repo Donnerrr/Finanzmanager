@@ -560,9 +560,8 @@ function logout() {
     showLogoutToast();
 
     setTimeout(() => {
-        openDashboard();
+        start();
     }, 2000); // Verzögerung von 2 Sekunden, um den Toast anzuzeigen
-    start();
 }
 
 function start() {
