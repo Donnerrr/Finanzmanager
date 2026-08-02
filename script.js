@@ -291,7 +291,11 @@ function showLogoutToast() {
     toast.classList.remove('hidden');
 
     setTimeout(() => {
-        toast.classList.add('hidden');
+        toast.classList.add('fade-out');
+        setTimeout(() => {
+            toast.classList.add('hidden');
+            toast.classList.remove('fade-out');
+        }, 500); // Entfernt die Klasse nach der Animation
     }, 2500);
 }
 
