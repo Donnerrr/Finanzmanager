@@ -1,238 +1,310 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finanz Manager</title>
-    <link rel="icon" type="image/x-icon" href="bilder/favicon3.ico">
-    <link rel="stylesheet" href="style2.css">
-    <link rel="manifest" href="manifest.webmanifest">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Finanz Manager</title>
+        <link rel="icon" type="image/x-icon" href="bilder/favicon3.ico" />
+        <link rel="stylesheet" href="style2.css" />
+        <link rel="manifest" href="manifest.webmanifest" />
+    </head>
+    <body>
+        <!-- #region Header -->
+        <div class="app-header">
+            <div class="menu-wrapper">
+                <button class="menu-toggle" id="menuToggle">⋯</button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <button class="dropdown-item">⚙️ Settings</button>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item danger" onclick="logout()">Logout</button>
+                </div>
+            </div>
 
-    <!-- #region Header -->
-    <div class="app-header">
-        <div class="menu-wrapper">
-          <button class="menu-toggle" id="menuToggle">⋯</button>
-          <div class="dropdown-menu" id="dropdownMenu">
-            <button class="dropdown-item">⚙️ Settings</button>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item danger" onclick="logout()">Logout</button>
-          </div>
-        </div>
-
-        <h1>Finanz Manager</h1>
-        <picture>
-            <source srcset="bilder/applogo.webp" type="image/webp">
-            <img class="logo home-logo" src="bilder/applogo.png" alt="Logo der App" onclick="openDashboard()">
-        </picture>
-
-        <article class="subtitle">
-            <h2>Wähle zwischen Schuldeneinträgen oder eigenen Finanzen.</h2>
-        </article>
-    </div>
-    <!-- #endregion Header -->
-
-    <!-- #region Hauptkacheln -->
-    <section class="app-container grid">
-        <div class="app" onclick="openDebts()">
-            <h3>Schuldenbuch</h3>
+            <h1>Finanz Manager</h1>
             <picture>
-                <source srcset="bilder/Schulden-Logo.webp" type="image/webp">
-                <img  src="bilder/Schulden-Logo.png" alt="Link zu der Schuldner Seite">
-            </picture> 
-            
-
-        </div>
-
-        <div class="app" onclick="openFinances()">
-            <h3>Finanzen</h3>
-            <picture>
-                <source srcset="bilder/DauerRate-Logo.webp" type="image/webp">
-                <img  src="bilder/DauerRate-Logo.png" alt="Link zu der Finanzen Seite">
+                <source srcset="bilder/applogo.webp" type="image/webp" />
+                <img
+                    class="logo home-logo"
+                    src="bilder/applogo.png"
+                    alt="Logo der App"
+                    onclick="openDashboard()"
+                />
             </picture>
+
+            <article class="subtitle">
+                <h2>Wähle zwischen Schuldeneinträgen oder eigenen Finanzen.</h2>
+            </article>
         </div>
-    </section>
+        <!-- #endregion Header -->
 
-    
-    <!-- #endregion Hauptkacheln -->
-
-    <!-- #region Schuldenbuch -->
-    <section id="SchuldenSection" class="app-container  hidden">
-        <div class="view-header">
-            <button class="btn-primary" onclick="openDashboard()" >&#8962; Home</button>
-            
-            <h3>Schuldenbuch</h3>
-            <button class="btn-primary" id="add-person-btn" type="button" onclick="openModal('AddPersonModal')">Person hinzufügen</button>
-        </div>
-
-        <div id="Schulden-Container" class="grid">
-
-        </div>
-    </section>
-
-
-    <section id="SchuldenDetailSection" class="app-container  hidden">
-        <div class="view-header">
-            
-            <button class="btn-primary" onclick="openDebts()">&larr; Zurück</button>
-            <h3 id="CurrentPersonName">Schulden von ...</h3>
-            <button class="btn-primary" id="add-entry-btn" type="button" onclick="openModal('AddEntryModal')">Schuld hinzufügen</button>
-        </div>
-
-        <div id="Personen-Schulden-Container" class="grid">
-
-        </div>
-    </section>
-    <!-- #endregion Schuldenbuch -->
-
-    <!-- #region Finanzen -->
-    <section id="FinanzSection" class="app-container hidden">
-        <div class="view-header">
-            <button class="btn-primary" onclick="openDashboard()" >&#8962; Zurück</button>
-            <h3>Finanzen</h3>
-            <button class="btn-primary" id="add-finance-btn" type="submit">Eintrag hinzufügen</button>
-        </div>
-
-        <div id="Finanzen-Container" class="grid">
-            
-        </div>
-    </section>
-    <!-- #endregion Finanzen -->
-
-    <!-- #region AddPersonModal -->
-    <div id="AddPersonModal" class="modal hidden">
-        <div class="modal-content">
-            <h3>Neue Person hinzufügen</h3>
-            <form id="add-person-form" onsubmit="savePerson(event)">
-                <div class="form-group">
-                    <label for="person-name">Name der Person:</label>
-                    <input type="text" id="person-name" required placeholder="z.B. Max Mustermann">
-                    <label for="street">Straße und Hausnummer:</label>
-                    <input type="text" id="street" required placeholder="z.B. Musterstraße 1">
-                    
-                    <label for="ZipCode">Postleitzahl:</label>
-                    <input type="text" id="ZipCode" required placeholder="z.B. 12345">
-                    <label for="city">Stadt:</label>
-                    <input type="text" id="city" required placeholder="z.B. Musterstadt">
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-secondary" onclick="closeModal('AddPersonModal')">Abbrechen</button>
-                    <button type="submit" class="btn-success">Speichern</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- #endregion AddPersonModal -->
-
-    <!-- #region AddEntryModal -->
-    <div id="AddEntryModal" class="modal hidden">
-        <div class="modal-content">
-            <h3>Neuen Eintrag hinzufügen</h3>
-            <form id="add-entry-form" onsubmit="saveEntry(event)">
-                <div class="form-group">
-                    <label for="entry-purpose">Verwendungszweck:</label>
-                    <input type="text" id="entry-purpose" required placeholder="z.B. Kasten Bier, Monatsbeitrag">
-                </div>
-                <div class="form-group">
-                    <label for="entry-amount">Betrag in €:</label>
-                    <input type="number" id="entry-amount" step="0.01" required placeholder="0,00">
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-secondary" onclick="closeModal('AddEntryModal')">Abbrechen</button>
-                    <button type="submit" class="btn-success">Speichern</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- #endregion AddEntryModal -->
-
-    <!-- #region UpdateDebtModal -->
-    <div id="UpdateDebtModal" class="modal hidden">
-        <div class="modal-content">
-            <h3>Schuld bearbeiten</h3>
-            <form id="update-entry-form" onsubmit="updateDebt(event)">
-                <div class="form-group">
-                    <label for="update-debt-id">Schuld-ID:</label>
-                    <input type="text" id="update-debt-id" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="update-debt-amount">Differenz eingeben:</label>
-                    <input type="number" id="update-debt-amount" step="0.01" required placeholder="5,00 oder -5,00">
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-secondary" onclick="closeModal('UpdateDebtModal')">Abbrechen</button>
-                    <button type="submit" class="btn-success">Speichern</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- #endregion UpdateDebtModal -->
-     
-    <!-- #region ConfirmDeletePersonModal -->
-    <div id="ConfirmDeletePersonModal" class="confirm-modal hidden">
-        <div class="modal-content">
-            <h3>Sicher das die Person und alle zugehörigen Einträge gelöscht werden sollen?</h3>
-            
-                <div class="modal-buttons">
-                    <button type="button" class="btn-secondary" onclick="closeModal('ConfirmDeletePersonModal')">Abbrechen</button>
-                    <button type="button" class="btn-danger" onclick="deletePerson(event)">Bestätigen</button>
-                </div>
-        </div>
-    </div>
-    <!-- #endregion ConfirmDeletePersonModal -->
-
-    <!-- #region ConfirmDeleteDebtModal -->
-    <div id="ConfirmDeleteDebtModal" class="confirm-modal hidden">
-        <div class="modal-content">
-            <h3>Sicher das die Schuld gelöscht werden soll?</h3>
-            
-                <div class="modal-buttons">
-                    <button type="button" class="btn-secondary" onclick="closeModal('ConfirmDeleteDebtModal')">Abbrechen</button>
-                    <button type="button" class="btn-danger" onclick="deleteDebt()">Bestätigen</button>
-                </div>
-        </div>
-    </div>
-    <!-- #endregion ConfirmDeleteDebtModal -->
-
-    <!--#region AuthModal-->
-<div id="AuthModal" class="modal hidden">
-    <div class="modal-content">
-        <h3>Finanz Manager</h3>
-
-        <form id="authForm" onsubmit="handleAuthSubmit(event)">
-            <div class="form-group">
-                <label for="authUsername">Username</label>
-                <input type="text" id="authUsername" placeholder="Username" required>
+        <!-- #region Hauptkacheln -->
+        <section class="app-container grid">
+            <div class="app" onclick="openDebts()">
+                <h3>Schuldenbuch</h3>
+                <picture>
+                    <source srcset="bilder/Schulden-Logo.webp" type="image/webp" />
+                    <img src="bilder/Schulden-Logo.png" alt="Link zu der Schuldner Seite" />
+                </picture>
             </div>
 
-            <div class="form-group">
-                <label for="authPassword">Passwort</label>
-                <input type="password" id="authPassword" placeholder="Passwort" required>
-                <span class="password-toggle-link" onclick="togglePasswordVisibility('authPassword', this)">Passwort anzeigen</span>
+            <div class="app" onclick="openFinances()">
+                <h3>Finanzen</h3>
+                <picture>
+                    <source srcset="bilder/DauerRate-Logo.webp" type="image/webp" />
+                    <img src="bilder/DauerRate-Logo.png" alt="Link zu der Finanzen Seite" />
+                </picture>
+            </div>
+        </section>
+
+        <!-- #endregion Hauptkacheln -->
+
+        <!-- #region Schuldenbuch -->
+        <section id="SchuldenSection" class="app-container hidden">
+            <div class="view-header">
+                <button class="btn-primary" onclick="openDashboard()">&#8962; Home</button>
+
+                <h3>Schuldenbuch</h3>
+                <button
+                    class="btn-primary"
+                    id="add-person-btn"
+                    type="button"
+                    onclick="openModal('AddPersonModal')"
+                >
+                    Person hinzufügen
+                </button>
             </div>
 
-            <div class="form-group checkbox-group">
-                <label class="checkbox-container">
-                    <input type="checkbox" id="authRememberMe">
-                    <span class="custom-checkbox"></span>
-                    Angemeldet bleiben
-                </label>
+            <div id="Schulden-Container" class="grid"></div>
+        </section>
+
+        <section id="SchuldenDetailSection" class="app-container hidden">
+            <div class="view-header">
+                <button class="btn-primary" onclick="openDebts()">&larr; Zurück</button>
+                <h3 id="CurrentPersonName">Schulden von ...</h3>
+                <button
+                    class="btn-primary"
+                    id="add-entry-btn"
+                    type="button"
+                    onclick="openModal('AddEntryModal')"
+                >
+                    Schuld hinzufügen
+                </button>
             </div>
 
-            <div class="modal-buttons">
-                <button type="submit" id="authSubmitBtn" class="btn-primary">Login</button>
+            <div id="Personen-Schulden-Container" class="grid"></div>
+        </section>
+        <!-- #endregion Schuldenbuch -->
+
+        <!-- #region Finanzen -->
+        <section id="FinanzSection" class="app-container hidden">
+            <div class="view-header">
+                <button class="btn-primary" onclick="openDashboard()">&#8962; Zurück</button>
+                <h3>Finanzen</h3>
+                <button class="btn-primary" id="add-finance-btn" type="submit">
+                    Eintrag hinzufügen
+                </button>
             </div>
 
-            <p class="auth-toggle-text" id="authToggleText">Noch kein Konto? <a href="#" onclick="toggleAuthMode(event)">Jetzt registrieren</a></p>
-        </form>
-    </div>
-</div>
-<!--#endregion AuthModal-->
+            <div id="Finanzen-Container" class="grid"></div>
+        </section>
+        <!-- #endregion Finanzen -->
 
+        <!-- #region AddPersonModal -->
+        <div id="AddPersonModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>Neue Person hinzufügen</h3>
+                <form id="add-person-form" onsubmit="savePerson(event)">
+                    <div class="form-group">
+                        <label for="person-name">Name der Person:</label>
+                        <input
+                            type="text"
+                            id="person-name"
+                            required
+                            placeholder="z.B. Max Mustermann"
+                        />
+                        <label for="street">Straße und Hausnummer:</label>
+                        <input type="text" id="street" required placeholder="z.B. Musterstraße 1" />
 
-<script src="script.js" defer></script>
+                        <label for="ZipCode">Postleitzahl:</label>
+                        <input type="text" id="ZipCode" required placeholder="z.B. 12345" />
+                        <label for="city">Stadt:</label>
+                        <input type="text" id="city" required placeholder="z.B. Musterstadt" />
+                    </div>
+                    <div class="modal-buttons">
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            onclick="closeModal('AddPersonModal')"
+                        >
+                            Abbrechen
+                        </button>
+                        <button type="submit" class="btn-success">Speichern</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- #endregion AddPersonModal -->
 
-</body>
+        <!-- #region AddEntryModal -->
+        <div id="AddEntryModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>Neuen Eintrag hinzufügen</h3>
+                <form id="add-entry-form" onsubmit="saveEntry(event)">
+                    <div class="form-group">
+                        <label for="entry-purpose">Verwendungszweck:</label>
+                        <input
+                            type="text"
+                            id="entry-purpose"
+                            required
+                            placeholder="z.B. Kasten Bier, Monatsbeitrag"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="entry-amount">Betrag in €:</label>
+                        <input
+                            type="number"
+                            id="entry-amount"
+                            step="0.01"
+                            required
+                            placeholder="0,00"
+                        />
+                    </div>
+                    <div class="modal-buttons">
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            onclick="closeModal('AddEntryModal')"
+                        >
+                            Abbrechen
+                        </button>
+                        <button type="submit" class="btn-success">Speichern</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- #endregion AddEntryModal -->
+
+        <!-- #region UpdateDebtModal -->
+        <div id="UpdateDebtModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>Schuld bearbeiten</h3>
+                <form id="update-entry-form" onsubmit="updateDebt(event)">
+                    <div class="form-group">
+                        <label for="update-debt-id">Schuld-ID:</label>
+                        <input type="text" id="update-debt-id" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="update-debt-amount">Differenz eingeben:</label>
+                        <input
+                            type="number"
+                            id="update-debt-amount"
+                            step="0.01"
+                            required
+                            placeholder="5,00 oder -5,00"
+                        />
+                    </div>
+                    <div class="modal-buttons">
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            onclick="closeModal('UpdateDebtModal')"
+                        >
+                            Abbrechen
+                        </button>
+                        <button type="submit" class="btn-success">Speichern</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- #endregion UpdateDebtModal -->
+
+        <!-- #region ConfirmDeletePersonModal -->
+        <div id="ConfirmDeletePersonModal" class="confirm-modal hidden">
+            <div class="modal-content">
+                <h3>Sicher das die Person und alle zugehörigen Einträge gelöscht werden sollen?</h3>
+
+                <div class="modal-buttons">
+                    <button
+                        type="button"
+                        class="btn-secondary"
+                        onclick="closeModal('ConfirmDeletePersonModal')"
+                    >
+                        Abbrechen
+                    </button>
+                    <button type="button" class="btn-danger" onclick="deletePerson(event)">
+                        Bestätigen
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion ConfirmDeletePersonModal -->
+
+        <!-- #region ConfirmDeleteDebtModal -->
+        <div id="ConfirmDeleteDebtModal" class="confirm-modal hidden">
+            <div class="modal-content">
+                <h3>Sicher das die Schuld gelöscht werden soll?</h3>
+
+                <div class="modal-buttons">
+                    <button
+                        type="button"
+                        class="btn-secondary"
+                        onclick="closeModal('ConfirmDeleteDebtModal')"
+                    >
+                        Abbrechen
+                    </button>
+                    <button type="button" class="btn-danger" onclick="deleteDebt()">
+                        Bestätigen
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion ConfirmDeleteDebtModal -->
+
+        <!--#region AuthModal-->
+        <div id="AuthModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>Finanz Manager</h3>
+
+                <form id="authForm" onsubmit="handleAuthSubmit(event)">
+                    <div class="form-group">
+                        <label for="authUsername">Username</label>
+                        <input type="text" id="authUsername" placeholder="Username" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="authPassword">Passwort</label>
+                        <input type="password" id="authPassword" placeholder="Passwort" required />
+                        <span
+                            class="password-toggle-link"
+                            onclick="togglePasswordVisibility('authPassword', this)"
+                            >Passwort anzeigen</span
+                        >
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="authRememberMe" />
+                            <span class="custom-checkbox"></span>
+                            Angemeldet bleiben
+                        </label>
+                    </div>
+
+                    <div class="modal-buttons">
+                        <button type="submit" id="authSubmitBtn" class="btn-primary">Login</button>
+                    </div>
+
+                    <p class="auth-toggle-text" id="authToggleText">
+                        Noch kein Konto?
+                        <a href="#" onclick="toggleAuthMode(event)">Jetzt registrieren</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <!--#endregion AuthModal-->
+
+        <div id="rate-limit-toast" class="rate-limit-toast hidden"></div>
+
+        <script src="script.js" defer></script>
+    </body>
 </html>

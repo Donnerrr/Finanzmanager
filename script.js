@@ -7,6 +7,7 @@ let currentPersonName = null; // Globale Variable, um den aktuellen Personenname
 let currentDebtId = null; // Globale Variable, um die aktuelle Schuld zu speichern
 let currentDeletePersonId = null; // Globale Variable, um die aktuelle Person für das Löschen zu speichern
 let currentDeleteDebtId = null; // Globale Variable, um die aktuelle Schuld für das Löschen zu speichern
+let rateLimitInterval = null; // Globale Variable für das Rate-Limit-Intervall
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = getToken(); // Nutzt die neue Hilfsfunktion
@@ -69,6 +70,17 @@ async function authorizedFetch(endpoint, method = 'GET', body = null) {
 
     try {
         const response = await fetch(`${API_BASE}/api/Schuldenbuch/${endpoint}`, options);
+
+        if (response.status === 429) {
+            const retryAfter = response.headers.get('Retry-After');
+            const seconds = retryAfter ? parseInt(retryAfter, 10) : null;
+
+            const message = seconds
+                ? `Zu viele Anfragen. Bitte warte noch ${seconds} Sekunden.`
+                : 'Zu viele Anfragen. Bitte warte kurz und versuch es erneut.';
+
+            throw new Error(message);
+        }
 
         if (!response.ok) {
             let errorMsg = `Fehler ${response.status}`;
@@ -274,6 +286,32 @@ function loadFinancesFromDB() {
 
 //#region MODAL-FUNKTIONEN
 
+function showRateLimitCountdown(seconds) {
+    const toast = document.getElementById('rate-limit-toast');
+    let remaining = seconds;
+
+    if (rateLimitInterval) {
+        clearInterval(rateLimitInterval);
+    }
+
+    const updateText = () => {
+        toast.textContent = `Zu viele Anfragen. Bitte warte noch ${remaining} Sekunden.`;
+    };
+
+    toast.classList.remove('hidden');
+    updateText();
+
+    rateLimitInterval = setInterval(() => {
+        remaining--;
+        if (remaining <= 0) {
+            clearInterval(rateLimitInterval);
+            toast.classList.add('hidden');
+        } else {
+            updateText();
+        }
+    }, 1000);
+}
+
 function openModal(modalId) {
     document.getElementById(modalId).classList.remove('hidden');
 }
@@ -444,6 +482,10 @@ async function login() {
             closeModal('AuthModal');
             document.getElementById('authUsername').value = '';
             document.getElementById('authPassword').value = '';
+        } else if (response.status === 429) {
+            const retryAfter = response.headers.get('Retry-After');
+            const seconds = retryAfter ? parseInt(retryAfter, 10) : 60;
+            showRateLimitCountdown(seconds);
         } else {
             // Fehlerbehandlung, falls Server-Antwort nicht OK (z.B. 401 Unauthorized)
             const errorData = await response.json();

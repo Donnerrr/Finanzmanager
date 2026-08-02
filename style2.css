@@ -2,7 +2,7 @@
    1. FARBPALETTE & BASIS-SETUP
    ========================================================================== */
 :root,
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
     --bg-color: #0b131a;
     --card-bg: #11222c;
     --border-color: #1a3a4b;
@@ -18,7 +18,7 @@
     --app-hover-box-shadow: rgba(204, 164, 59, 0.15);
     --app-img-dropshadow: rgba(0, 0, 0, 0.2);
     --btn-primary-hover-shadow: rgba(204, 164, 59, 0.15);
-    --btn-danger-hover-shadow: rgba(255,76,76, 0.15);
+    --btn-danger-hover-shadow: rgba(255, 76, 76, 0.15);
     --danger-tint: rgba(224, 92, 92, 0.1);
     --success-tint: rgba(76, 199, 122, 0.1);
     --secondary-text-color: rgba(255, 255, 255, 0.7);
@@ -71,7 +71,6 @@ body {
     min-height: 100vh;
 }
 
-
 /* ==========================================================================
    LOGO
    ========================================================================== */
@@ -79,7 +78,9 @@ body {
     width: 90px;
     height: auto;
     margin-bottom: 35px;
-    transition: transform 0.2s ease, filter 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
 }
 
 /* Gilt NUR für Desktop-Geräte mit einer echten Maus.
@@ -99,7 +100,6 @@ body {
 .home-logo:active {
     transform: scale(0.96);
 }
-
 
 /* ==========================================================================
    HEADER
@@ -158,7 +158,10 @@ h1 {
     padding: 35px 24px;
     cursor: pointer;
     user-select: none;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -201,7 +204,7 @@ h1 {
     color: var(--text-muted);
     grid-column: 1 / -1;
     opacity: 0;
-    animation: 
+    animation:
         fadeIn 1.5s ease forwards 0.15s,
         pulse 1.5s ease-in-out infinite 0.4s;
 }
@@ -214,12 +217,19 @@ h1 {
 }
 
 @keyframes fadeIn {
-    to { opacity: 1; }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 #Schulden-Container .app,
@@ -239,7 +249,10 @@ h1 {
     font-size: 16px;
     border: 1px solid var(--border-color);
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
 }
 
 .btn-primary:hover {
@@ -257,7 +270,10 @@ h1 {
     border: 1px solid var(--border-color);
     font-size: 16px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
 }
 
 .btn-danger {
@@ -269,7 +285,10 @@ h1 {
     font-size: 16px;
     border: 1px solid var(--danger-accent);
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
 }
 
 .btn-danger:hover {
@@ -288,7 +307,10 @@ h1 {
     font-size: 16px;
     border: 1px solid var(--success-accent);
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
 }
 
 .btn-success:hover {
@@ -306,7 +328,10 @@ h1 {
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
 }
 
 .btn-secondary:hover {
@@ -455,7 +480,7 @@ h1 {
 }
 
 /* Lässt die Abstände innerhalb des Login-Formulars zusammenschrumpfen */
-#loginForm .form-group, 
+#loginForm .form-group,
 #registerForm .form-group {
     margin-bottom: 12px;
     gap: 4px; /* Verringert den Abstand zwischen Label und Input */
@@ -493,6 +518,27 @@ h1 {
 #loginForm .auth-toggle-text,
 #registerForm .auth-toggle-text {
     margin-top: 15px;
+}
+
+/* ==========================================================================
+   TOAST (RATE LIMIT / FEHLER)
+   ========================================================================== */
+
+.rate-limit-toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #e05c5c;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    font-size: 14px;
+}
+
+.rate-limit-toast.hidden {
+    display: none;
 }
 
 /* ==========================================================================
@@ -541,7 +587,9 @@ h1 {
     display: inline-block;
     flex-shrink: 0; /* Verhindert, dass die Box gequetscht wird */
     position: relative;
-    transition: background-color 0.2s, border-color 0.2s;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s;
 }
 
 /* Wenn die unsichtbare Checkbox gecheckt ist, färbe unsere Custom-Box gold */
@@ -552,7 +600,7 @@ h1 {
 
 /* Das Häkchen (standardmäßig versteckt) */
 .custom-checkbox::after {
-    content: "";
+    content: '';
     position: absolute;
     display: none;
     left: 5px;
@@ -576,8 +624,6 @@ h1 {
     }
 }
 
-
-
 /* ==========================================================================
    PASSWORT TOGGLE LINK
    ========================================================================== */
@@ -599,7 +645,6 @@ h1 {
     text-decoration: underline;
 }
 
-
 /* Der Toggle-Button (⋯) */
 /* ==========================================================================
    DROPDOWN MENÜ (SMOOTH BUBBLE DELAY)
@@ -607,50 +652,52 @@ h1 {
 
 /* Der Toggle-Button (⋯) */
 .menu-toggle {
-  background: none !important;
-  border: none;
-  color: #c8a96e;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 8px;
-  transition: background 0.15s ease, transform 0.15s ease;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
+    background: none !important;
+    border: none;
+    color: #c8a96e;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Klick-Effekt (Mobile & Desktop): Drückt sich ein und leuchtet kurz auf */
 .menu-toggle.clicked {
-  background: rgba(200, 169, 110, 0.25) !important;
-  transform: scale(0.92);
+    background: rgba(200, 169, 110, 0.25) !important;
+    transform: scale(0.92);
 }
 
 /* Hover-Effekt: Gilt AUSSCHLIESSLICH für Desktop mit Maus */
 @media (hover: hover) and (pointer: fine) {
-  .menu-toggle:hover {
-    background: rgba(200, 169, 110, 0.1) !important;
-  }
+    .menu-toggle:hover {
+        background: rgba(200, 169, 110, 0.1) !important;
+    }
 }
 
 /* Das Dropdown im Gemini-Look */
 .dropdown-menu {
     position: absolute;
-    top: -6px; 
+    top: -6px;
     right: -6px;
     min-width: 170px;
-    
+
     /* Transparentes Design */
-    background: rgba(11, 19, 26, 0.05); 
+    background: rgba(11, 19, 26, 0.05);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    
+
     border: 1px solid rgba(200, 169, 110, 0.25);
     border-radius: 14px;
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
     overflow: hidden;
     padding: 6px;
     z-index: 999;
-  
+
     /* Ausgangszustand vor der Animation */
     opacity: 0;
     visibility: hidden;
@@ -660,68 +707,69 @@ h1 {
 
 /* Offener Zustand mit kontrollierter Verzögerung */
 .dropdown-menu.open {
-  visibility: visible;
-  /* animation-delay: 0.12s wartet, bis der Button-Klick vorbei ist, 
+    visibility: visible;
+    /* animation-delay: 0.12s wartet, bis der Button-Klick vorbei ist, 
      bevor die Blase explodiert */
-  animation: bubblePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards;
+    animation: bubblePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards;
 }
 
 /* Die Seifenblasen-Animation */
 @keyframes bubblePop {
-  0% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-  70% {
-    transform: scale(1.03);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    70% {
+        transform: scale(1.03);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Schließ-Animation: Schließt ohne Verzögerung sofort und weich */
 .dropdown-menu:not(.open) {
-  transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s;
+    transition:
+        opacity 0.12s ease,
+        transform 0.12s ease,
+        visibility 0.12s;
 }
-
 
 /* Einzelne Menüpunkte */
 .dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 10px 12px;
-  background: none;
-  border: none;
-  border-radius: 8px;
-  color: #e8e8e8;
-  font-size: 15px;
-  text-align: left;
-  cursor: pointer;
-  transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    color: #e8e8e8;
+    font-size: 15px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
 }
 
 .dropdown-item:hover {
-  background: rgba(62, 184, 192, 0.1);
+    background: rgba(62, 184, 192, 0.1);
 }
 
 .dropdown-item.danger {
-  color: #e05c5c;
+    color: #e05c5c;
 }
 
 .dropdown-item.danger:hover {
-  background: rgba(224, 92, 92, 0.1);
+    background: rgba(224, 92, 92, 0.1);
 }
 
 .dropdown-divider {
-  height: 1px;
-  background: rgba(200, 169, 110, 0.15);
-  margin: 6px 4px;
+    height: 1px;
+    background: rgba(200, 169, 110, 0.15);
+    margin: 6px 4px;
 }
-
 
 /* ==========================================================================
    VIEW HEADER (STANDARD / MOBIL BASIS)
@@ -773,14 +821,14 @@ h1 {
    ========================================================================== */
 
 /* Für Microsoft Edge */
-input[type="password"]::-ms-reveal {
+input[type='password']::-ms-reveal {
     filter: invert(1) brightness(2); /* Dreht Schwarz zu Weiß um und macht es maximal hell */
     cursor: pointer;
 }
 
 /* Für Google Chrome, Opera und Safari */
-input[type="password"]::-webkit-credentials-automfill-button,
-input[type="password"]::-webkit-contacts-auto-fill-button {
+input[type='password']::-webkit-credentials-automfill-button,
+input[type='password']::-webkit-contacts-auto-fill-button {
     filter: invert(1) brightness(2);
 }
 
@@ -790,7 +838,6 @@ input[type="password"]::-webkit-contacts-auto-fill-button {
     opacity: 0.9;
     cursor: pointer;
 }
-
 
 /* ==========================================================================
    DESKTOP ERWEITERUNGEN (AB 769px)
