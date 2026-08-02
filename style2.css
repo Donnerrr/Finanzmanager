@@ -524,20 +524,17 @@ h1 {
    TOAST (RATE LIMIT / FEHLER)
    ========================================================================== */
 
-.rate-limit-toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+.rate-limit-inline {
     background-color: #e05c5c;
     color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 9999;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
     font-size: 14px;
+    text-align: center;
 }
 
-.rate-limit-toast.hidden {
+.rate-limit-inline.hidden {
     display: none;
 }
 

@@ -288,6 +288,7 @@ function loadFinancesFromDB() {
 
 function showRateLimitCountdown(seconds) {
     const toast = document.getElementById('rate-limit-toast');
+    const submitBtn = document.getElementById('authSubmitBtn');
     let remaining = seconds;
 
     if (rateLimitInterval) {
@@ -299,6 +300,7 @@ function showRateLimitCountdown(seconds) {
     };
 
     toast.classList.remove('hidden');
+    submitBtn.disabled = true;
     updateText();
 
     rateLimitInterval = setInterval(() => {
@@ -306,6 +308,7 @@ function showRateLimitCountdown(seconds) {
         if (remaining <= 0) {
             clearInterval(rateLimitInterval);
             toast.classList.add('hidden');
+            submitBtn.disabled = false;
         } else {
             updateText();
         }
@@ -435,7 +438,6 @@ async function deletePerson(event) {
 //#endregion
 
 //#region SCHULD AKTUALISIEREN
-//#region SCHULD AKTUALISIEREN
 async function updateDebt(event) {
     event.preventDefault();
 
@@ -454,8 +456,6 @@ async function updateDebt(event) {
         console.error('Fehler beim Aktualisieren:' + error.message);
     }
 }
-//#endregion
-
 //#endregion
 
 //#region Authentifizieren
