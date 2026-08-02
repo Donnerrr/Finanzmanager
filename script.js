@@ -555,13 +555,12 @@ async function register() {
 }
 
 function logout() {
+    document.getElementById('dropdownMenu').classList.remove('open');
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
-    showLogoutToast();
 
-    setTimeout(() => {
-        start();
-    }, 2000); // Verzögerung von 2 Sekunden, um den Toast anzuzeigen
+    start();
+    showLogoutToast();
 }
 
 function start() {
