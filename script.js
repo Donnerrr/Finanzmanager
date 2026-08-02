@@ -288,11 +288,10 @@ function loadFinancesFromDB() {
 
 function showLogoutToast() {
     const toast = document.getElementById('logout-toast');
-    toast.classList.remove('hidden', 'fade-out');
+    toast.classList.remove('hidden');
 
     setTimeout(() => {
-        toast.classList.add('fade-out');
-        setTimeout(() => toast.classList.add('hidden'), 400); // wartet auf CSS-Transition
+        toast.classList.add('hidden');
     }, 2500);
 }
 

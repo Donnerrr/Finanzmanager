@@ -266,6 +266,13 @@
             <div class="modal-content">
                 <h3>Finanz Manager</h3>
                 <div id="rate-limit-toast" class="rate-limit-inline hidden"></div>
+                <div
+                    id="logout-toast"
+                    class="rate-limit-inline hidden"
+                    style="background-color: #3eb8c0"
+                >
+                    Erfolgreich ausgeloggt.
+                </div>
 
                 <form id="authForm" onsubmit="handleAuthSubmit(event)">
                     <div class="form-group">
@@ -303,8 +310,6 @@
             </div>
         </div>
         <!--#endregion AuthModal-->
-
-        <div id="logout-toast" class="logout-toast hidden">Erfolgreich ausgeloggt.</div>
 
         <script src="script.js" defer></script>
     </body>
