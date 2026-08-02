@@ -442,6 +442,8 @@ async function login() {
             }
 
             closeModal('AuthModal');
+            document.getElementById('authUsername').value = '';
+            document.getElementById('authPassword').value = '';
         } else {
             // Fehlerbehandlung, falls Server-Antwort nicht OK (z.B. 401 Unauthorized)
             const errorData = await response.json();
@@ -492,6 +494,8 @@ async function register() {
 
             console.log('Token gespeichert');
             closeModal('AuthModal');
+            document.getElementById('authUsername').value = '';
+            document.getElementById('authPassword').value = '';
         }
     } catch (error) {
         alert('Netzwerk-Fehler: ' + error.message);
