@@ -288,15 +288,12 @@ function loadFinancesFromDB() {
 
 function showLogoutToast() {
     const toast = document.getElementById('logout-toast');
-    toast.classList.remove('hidden');
+    toast.classList.remove('hidden', 'fade-out');
 
     setTimeout(() => {
         toast.classList.add('fade-out');
-        setTimeout(() => {
-            toast.classList.add('hidden');
-            toast.classList.remove('fade-out');
-        }, 500); // Entfernt die Klasse nach der Animation
-    }, 2500);
+        setTimeout(() => toast.classList.add('hidden'), 400);
+    }, 2000);
 }
 
 function showRateLimitCountdown(seconds) {
