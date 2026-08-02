@@ -286,6 +286,16 @@ function loadFinancesFromDB() {
 
 //#region MODAL-FUNKTIONEN
 
+function showLogoutToast() {
+    const toast = document.getElementById('logout-toast');
+    toast.classList.remove('hidden', 'fade-out');
+
+    setTimeout(() => {
+        toast.classList.add('fade-out');
+        setTimeout(() => toast.classList.add('hidden'), 400); // wartet auf CSS-Transition
+    }, 2500);
+}
+
 function showRateLimitCountdown(seconds) {
     const toast = document.getElementById('rate-limit-toast');
     const submitBtn = document.getElementById('authSubmitBtn');
@@ -546,7 +556,12 @@ async function register() {
 
 function logout() {
     localStorage.removeItem('token');
-    openDashboard();
+    sessionStorage.removeItem('token');
+    showLogoutToast();
+
+    setTimeout(() => {
+        openDashboard();
+    }, 2000); // Verzögerung von 2 Sekunden, um den Toast anzuzeigen
     start();
 }
 
